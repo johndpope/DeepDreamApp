@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Psychic VRラボの殴り書き &#187; Asset</title>
+	<atom:link href="http://psychic-vr-lab.com/blog/tag/asset/feed/" rel="self" type="application/rss+xml" />
+	<link>http://psychic-vr-lab.com/blog</link>
+	<description>Unity, Oculus rift, Leap motion, Kinect技術メモ</description>
+	<lastBuildDate>Fri, 03 Jul 2015 00:39:36 +0000</lastBuildDate>
+	<language>ja</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1.5</generator>
+	<item>
+		<title>Final IKアセットでキャラクターのぶら下げ方（Unity）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/#comments</comments>
+		<pubDate>Thu, 13 Nov 2014 09:54:36 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Leap motion]]></category>
+		<category><![CDATA[Unity]]></category>
+		<category><![CDATA[Asset]]></category>
+		<category><![CDATA[Final IK]]></category>
+		<category><![CDATA[Leapmotion]]></category>
+		<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[アセット]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=189</guid>
+		<description><![CDATA[今日はInverse Kinematics (IK)を使って、ユニティちゃんを上からぶら下げてみたいと思います。 &#160; Inverse Kinematics (IK)とは 引用元：Unityユーザーズガイド ジョ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>今日はInverse Kinematics (IK)を使って、ユニティちゃんを上からぶら下げてみたいと思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK9.png"><img class="alignnone size-full wp-image-198" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK9.png" alt="FinalIK9" width="1045" height="840" /></a></p>
+<p>&nbsp;</p>
+<blockquote><p>Inverse Kinematics (IK)とは<br />
+引用元：<a href="http://docs-jp.unity3d.com/Documentation/Manual/InverseKinematics.html">Unityユーザーズガイド</a></p>
+<p>ジョインのポージングを行うタスクを別の視点からとらえることが重要です。空間で特定の点を決めて、そこから逆算してジョイントの向きを、終了点がその位置に到着するような、有効な方法を見つけることです。オブジェクトをユーザにより選択された点をタッチさせる、または平らでない地面に足をつける、といったことをキャラクターにしてほしいときに、これは便利です。このアプローチは Inverse Kinematics (IK)と呼ばれ、メカニムで 正しく設定されたアバターのある ヒューマノイド キャラクターにおいてサポートされます。</p>
+<p>&nbsp;</p></blockquote>
+<p>Unity Proではスクリプトを使いIKを実現することができます。<br />
+<a href="http://docs-jp.unity3d.com/Documentation/Manual/InverseKinematics.html">インバースキネマティクス (Unity Proのみ) / Inverse Kinematics (Pro only)</a></p>
+<p>今回は<a href="http://u3d.as/content/root-motion/final-ik/6ec">Final IKアセット</a>を使って遊んでみましょう。</p>
+<p><span id="more-189"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK1.png"><img class="alignnone size-full wp-image-190" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK1.png" alt="Final IKアセット" width="814" height="431" /></a></p>
+<p>&nbsp;</p>
+<p>Final IKでどういったことができるかはこちらのデモビデオを見てみましょう。ワクワクします。</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/mNvtZCboy7w?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>&nbsp;</p>
+<p>Final IKを利用して実に様々なことを簡単に実現することができるのですが、今回はDemoシーンを改造して、Unityちゃんを上から吊るすことを実現してみたいと思います。</p>
+<p>_DEMOS &#8211; FBBIKフォルダ内のPendulumシーンを開いて実行してみましょう。お人形さんがぶら下がっている動きを確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK2.png"><img class="alignnone size-full wp-image-191" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK2.png" alt="FinalIK2" width="1351" height="983" /></a></p>
+<p>このサンプルは面白い実装をしていて、モデル本体の動きをぶら下げたラグドールの動きに追従させることで、ボクシングしながらぶら下がるアニメーションなどを実現しています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK3.png"><img class="alignnone size-full wp-image-192" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK3.png" alt="FinalIK3" width="230" height="333" /></a></p>
+<p>&nbsp;</p>
+<p>（ラグドールの一部をIs Kinematicで固定するという実装も試してみたのですが、力を加えると体が伸びたりしてしまいます。なにか解決方法あるのだろうか。。。）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK5.png"><img class="alignnone size-full wp-image-194" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK5.png" alt="FinalIK5" width="289" height="280" /></a></p>
+<p>今回は本体のモデルをUnityちゃんに置き換える方法でUnityちゃんを吊るしてみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK4.png"><img class="alignnone size-full wp-image-193" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK4.png" alt="FinalIK4" width="505" height="307" /></a></p>
+<p>&nbsp;</p>
+<p>Dummyモデルを削除し、unitychan_dynamicをインポートし、下記の画像のように設定を変更します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK6.png"><img class="alignnone size-full wp-image-195" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK6.png" alt="FinalIK6" width="1421" height="913" /></a></p>
+<p>実行するとユニティーちゃんがぶら下がるのが確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK7.png"><img class="alignnone size-full wp-image-196" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK7.png" alt="FinalIK7" width="285" height="284" /></a></p>
+<p>半透明のDummyを消すにはDummyRagdoll以下のDummyオブジェクトのSkinned Mesh Rendererのチェックを外しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK8.png"><img class="alignnone size-full wp-image-197" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK8.png" alt="FinalIK8" width="1103" height="419" /></a></p>
+<p>Leap motionを使って触ってみましょう。</p>
+<p>&nbsp;</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/CzHTijGNyQM?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

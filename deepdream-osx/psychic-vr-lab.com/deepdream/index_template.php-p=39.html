@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Deep Dream web interface</title>
+<meta charset="utf-8">
+<meta name="description" content="This is web interface for Google Deep Dream. Photos are processed with Google Deep Dream python code with BVLC GoogleNet Model on deep learning framework Caffe on cloud servers. Experiments for deep learning algorithm.">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="ディープラーニング,深層学習,人工知能">
+
+
+<meta property="fb:app_id" content="674823895981351" />
+<meta property="og:type"   content="article" />
+<meta property="og:title"  content="Deap dream web interface" />
+<meta property="og:url"    content="http://psychic-vr-lab.com/deepdream/" />
+<!--<meta property="og:image"  content="http://psychic-vr-lab.com/deepdream/img_dreamed/140.jpg" />-->
+<meta property="og:description"  content="This is web interface for Google Deep Dream. Photos are processed with Google Deep Dream python code with BVLC GoogleNet Model on deep learning framework Caffe on cloud servers." />
+<meta property="og:site_name"  content="Deep dream web interface" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@from2001vr">
+<meta name="twitter:title" content="Deep dream">
+<meta name="twitter:description" content="This is web interface for Google Deep Dream. Photos are processed with Google Deep Dream python code with BVLC GoogleNet Model on deep learning framework Caffe on cloud servers.">
+<!--<meta name="twitter:image" content="http://psychic-vr-lab.com/deepdream/img_dreamed/140.jpg">-->
+
+
+
+<!--[if lt IE 9]>
+<script src="http://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="lib/jquery.lazyload.min.js"></script>
+<style>
+img.lazy{width:100%;max-width:300px;border:none;}
+</style>
+
+<script>
+$(document).ready(function(){$("img.lazy").lazyload({effect : "fadeIn"});});
+</script>
+
+</head>
+<body>
+<!--	Google Analytics	-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63550884-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!--	Google Analytics end	-->
+
+<!-- facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.3&appId=674823895981351";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- facebook end	-->
+
+<div>
+<!--	Twitter bot follow	-->
+<!--	https://about.twitter.com/ja/resources/buttons#tweet	-->
+<a href="https://twitter.com/DeepdreamBot" class="twitter-follow-button" data-show-count="false">Follow @DeepdreamBot</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<!--	Twitter bot follow end	-->
+
+<!--	Tweet share	-->
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://psychic-vr-lab.com/deepdream/" data-text="Deep dream web interface">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<!--	Tweet end	-->
+
+<!--	Facebook share button	-->
+<!--	https://developers.facebook.com/docs/plugins/share-button	-->
+<div class="fb-share-button" data-href="http://psychic-vr-lab.com/deepdream/" data-layout="button_count"></div>
+<!--	Facebook share button end	-->	
+
+</div>
+
+
+
+<div>
+Web interface for Google Deep Dream<br>
+<font color="gray">(32128 photos have been uploaded.</font>)<br>
+　<br>
+
+
+
+
+
+Photo upload is now unavailable<br>
+Many photos are on the machine dream waiting list. <br>
+
+
+<!--
+<form method=POST action="http://ozmiq.com/deepdream_redirect/imageresize.php" enctype="multipart/form-data">
+Upload jpg image. The image will be listed on this website.<br />
+<font color=red>Many photos are on a machine dream waiting list. It may take long time to wakeup. <br />
+</font>
+
+<input type="file" name="imagefile" accept="image/jpeg" /><br />
+<input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+<input type=submit value="Deep dream" />
+</form>
+-->
+
+</div>
+<p>　</p>
+
+
+<!--<a href='pics/3256.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3256.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3142.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3142.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3180.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3180.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3219.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3219.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2992.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2992.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3194.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3194.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3301.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3301.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3141.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3141.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3238.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3238.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3226.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3226.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3063.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3063.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3229.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3229.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3217.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3217.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3207.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3207.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3183.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3183.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3167.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3167.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3240.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3240.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3197.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3197.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3008.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3008.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3198.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3198.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3159.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3159.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3178.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3178.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3210.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3210.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3185.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3185.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3125.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3125.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3122.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3122.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3094.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3094.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3154.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3154.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3307.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3307.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2492.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2492.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3112.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3112.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3129.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3129.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3065.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3065.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2933.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2933.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2985.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2985.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2791.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2791.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2981.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2981.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2961.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2961.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2919.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2919.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2699.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2699.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3457.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3457.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3460.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3460.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3133.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3133.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3452.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3452.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3458.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3458.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3128.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3128.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3454.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3454.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3459.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3459.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3305.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3305.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3297.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3297.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3132.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3132.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3303.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3303.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3447.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3447.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3290.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3290.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3444.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3444.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3445.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3445.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3456.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3456.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3451.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3451.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3273.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3273.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3277.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3277.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3443.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3443.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3288.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3288.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3433.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3433.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/2927.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/2927.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3446.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3446.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3298.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3298.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3431.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3431.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3438.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3438.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3432.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3432.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3423.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3423.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3120.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3120.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3442.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3442.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3121.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3121.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3116.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3116.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3270.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3270.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3439.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3439.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3428.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3428.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3435.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3435.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3267.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3267.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3430.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3430.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3276.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3276.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3414.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3414.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3262.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3262.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3105.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3105.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3426.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3426.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3419.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3419.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3416.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3416.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3396.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3396.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3418.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3418.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3401.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3401.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3269.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3269.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3413.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3413.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3392.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3392.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3410.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3410.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3248.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3248.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3258.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3258.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3095.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3095.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3412.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3412.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3408.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3408.jpg' src='dummy.gif'><!--</a>-->
+<!--<a href='pics/3253.html'>--><img class='lazy' data-original='http://d11cbnttr0b724.cloudfront.net/img_dreamed/3253.jpg' src='dummy.gif'><!--</a>-->
+
+<!--
+<img class="lazy" data-original="img/0001.jpg" src="dummy.gif">
+<img class="lazy" data-original="img/0002.jpg" src="dummy.gif">
+<img class="lazy" data-original="img/0003.jpg" src="dummy.gif">
+<img class="lazy" data-original="img/0004.jpg" src="dummy.gif">
+<img class="lazy" data-original="img/0001.jpg" src="dummy.gif">
+<img class="lazy" data-original="img/0002.jpg" src="dummy.gif">
+<img class="lazy" data-original="img/0003.jpg" src="dummy.gif">
+<img class="lazy" data-original="img/0004.jpg" src="dummy.gif">
+-->
+
+<div>
+<a href="index_template.php-p=40.html">Next 100 images</a>
+</div>
+
+
+<!--	Footer	-->
+<hr>
+<div>
+Notice<br>
+This is web interface for Google Deep Dream. Photos are processed with Google Deep Dream python code with BVLC GoogleNet Model on deep learning framework Caffe on cloud servers. <br>
+　<br>
+<a href="https://github.com/google/deepdream">Deep dream code</a> is licensed under <a href="https://github.com/google/deepdream/blob/master/LICENSE">Apache License 2.0</a>.<br>
+<a href="https://github.com/BVLC/caffe/tree/master/models/bvlc_googlenet">BVLC GoogleNet Mode</a> is released for unrestricted use.<br>
+<a href="http://caffe.berkeleyvision.org/">Caffe</a> is released under the <a href="https://github.com/BVLC/caffe/blob/master/LICENSE">BSD 2-Clause license</a>.<br>
+</div>
+<div style="float:right">
+<a href="../index.html">Psychic VR Lab</a>, <a href="http://www.ozmiq.com/">ozmiq inc</a>&amp;<a href="http://intronworks.jp/">intronworks Ltd.</a><br>
+Email: info at psychic-vr-lab.com
+</div>
+<!--	Footer end	-->
+
+
+</body>
+</html>
+
+

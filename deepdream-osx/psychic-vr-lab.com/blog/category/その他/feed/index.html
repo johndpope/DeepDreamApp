@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Psychic VRラボの殴り書き &#187; その他</title>
+	<atom:link href="http://psychic-vr-lab.com/blog/category/%E3%81%9D%E3%81%AE%E4%BB%96/feed/" rel="self" type="application/rss+xml" />
+	<link>http://psychic-vr-lab.com/blog</link>
+	<description>Unity, Oculus rift, Leap motion, Kinect技術メモ</description>
+	<lastBuildDate>Fri, 03 Jul 2015 00:39:36 +0000</lastBuildDate>
+	<language>ja</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1.5</generator>
+	<item>
+		<title>接続モニタより高解像度でPCを利用する</title>
+		<link>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/</link>
+		<comments>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/#comments</comments>
+		<pubDate>Tue, 23 Dec 2014 05:29:36 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[その他]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=284</guid>
+		<description><![CDATA[from2001vrです。 アプリやWEBのスクリーンショットを大きな画面で撮りたいがPCに接続されているモニタの解像度が低いので大きなサイズのスクリーンショットを撮れないということがあります。私は今回4Kより大きな解像<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>from2001vrです。</p>
+<p>アプリやWEBのスクリーンショットを大きな画面で撮りたいがPCに接続されているモニタの解像度が低いので大きなサイズのスクリーンショットを撮れないということがあります。私は今回4Kより大きな解像度でスクリーンショットを取る必要があったのですが（正確にはUnityを4k＋α解像度で利用したかった）、手元にある一番大きなモニタが2560&#215;1440だったので困ってました。Windowsでは接続しているモニタより大きな解像度を選択することができません。</p>
+<p>今回、良い解決策を思いついたのでメモしておきます。</p>
+<p>方法は単純で、Microsoftのリモートデスクトップ接続を利用し、利用したいマシンに高い解像度で接続を行い利用するだけです。MicrosoftのRDPプロトコルは、VNCやTeam Viewerなどのリモートデスクトップソフトとは異なり、画面に表示された映像をリモートに転送するのではなく、リモートに接続されたゲストを接続されたモニタのように描画に利用するプロトコルです。ですので、接続元のホストPCの環境に依存せず、任意の解像度で利用することが可能です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-01.33.09-pm.png"><img class="alignnone size-full wp-image-280" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-01.33.09-pm.png" alt="2014-12-23 01.33.09 pm" width="1042" height="538" /></a></p>
+<p>&nbsp;</p>
+<p>まずは、ホストWindowsの設定を行います。Windows7,8ではPro版でしかホストになることができませんので注意が必要です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/1.png"><img class="alignnone size-full wp-image-281" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/1.png" alt="1" width="623" height="674" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2.png"><img class="alignnone size-full wp-image-282" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2.png" alt="2" width="494" height="442" /></a></p>
+<p>次のゲスト側の設定を行います。今回はゲストをMacで行ってみました。</p>
+<p>Mac App Storeから<a href="https://itunes.apple.com/jp/app/microsoft-remote-desktop/id715768417?mt=12" target="_blank">Microsoft Remote Desktop（無料）</a>をインストールし実行します。<br />
+Windowsの場合はスタートメニューから標準でインストールされているリモート デスクトップ接続を起動します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.16.07-pm.png"><img class="alignnone size-full wp-image-285" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.16.07-pm.png" alt="2014-12-23 02.16.07 pm" width="527" height="688" /></a></p>
+<p>ホストのIPアドレスなどの情報を指定し、接続先情報を作成します。ここで、Resolution(解像度)に利用したい解像度を設定します。もし、ここで大きな解像度を設定できない場合は適当な値を選択肢ます。</p>
+<p>作成した接続情報をエクスポートします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/Screen-Shot-2014-12-23-at-2.21.43-PM.png"><img class="alignnone size-full wp-image-286" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/Screen-Shot-2014-12-23-at-2.21.43-PM.png" alt="Screen Shot 2014-12-23 at 2.21.43 PM" width="513" height="316" /></a></p>
+<p>テキストエディタで開くと、内容を編集できるのでdesktopwidth及びdesktopheightを利用したい解像度の値に変更します。</p><pre class="crayon-plain-tag">screen mode id:i:2
+desktopwidth:i:640
+desktopheight:i:480
+use multimon:i:1
+session bpp:i:32
+full address:s:192.99.99.99
+audiomode:i:0
+username:s:
+disable wallpaper:i:0
+disable full window drag:i:0
+disable menu anims:i:0
+disable themes:i:0
+alternate shell:s:
+shell working directory:s:
+authentication level:i:2
+connect to console:i:0
+gatewayusagemethod:i:0
+disable cursor setting:i:0
+allow font smoothing:i:1
+allow desktop composition:i:1
+redirectprinters:i:0
+bookmarktype:i:3
+use redirection server name:i:0</pre><p>保存してダブルクリックすれば、設定した解像度でリモートデスクトップを利用できます。</p>
+<p>下記は4500&#215;2500の超高解像度でWindows上で動作するUnityをMacから接続している例です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.25.01-pm.png"><img class="alignnone size-full wp-image-287" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.25.01-pm.png" alt="2014-12-23 02.25.01 pm" width="1920" height="1080" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>デジタルで絵を描いてみた</title>
+		<link>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/</link>
+		<comments>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/#comments</comments>
+		<pubDate>Sat, 08 Nov 2014 09:04:54 +0000</pubDate>
+		<dc:creator><![CDATA[go05sato]]></dc:creator>
+				<category><![CDATA[その他]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=131</guid>
+		<description><![CDATA[こんにちは、ごーです。 ここ最近でOculusやKinect、LeapMotionなどのHMDやセンサーデバイスが比較的安価で一般の人でも容易に購入できるようになりましたね。 一昔前なら一部の研究者やかなりコアなエンジニ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>こんにちは、ごーです。</p>
+<p>ここ最近でOculusやKinect、LeapMotionなどのHMDやセンサーデバイスが比較的安価で一般の人でも容易に購入できるようになりましたね。</p>
+<p>一昔前なら一部の研究者やかなりコアなエンジニアしか使えなかったようなものが手に入りやすくなったというのは素晴らしいことだと思います。</p>
+<p>私もOculusやKinectを使って「時代の進歩すげえ！」とか言いながら遊んでいるわけですが、今日は最先端のデバイスの紹介ではなく前からあったんだけど持って無かった、使ったことがなかったあるものを紹介します。</p>
+<p>&nbsp;</p>
+<p>これです↓</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/B156dhFCAAAW8Q8.jpg"><img class="alignnone size-medium wp-image-133" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/B156dhFCAAAW8Q8-300x225.jpg" alt="B156dhFCAAAW8Q8" width="300" height="225" /></a></p>
+<p>&nbsp;</p>
+<p>Wacomから出ているIntuos penという一番安いペンタブです。</p>
+<p>いままで何となく気になっていて、いつか買おうと思っていたのですが買わないで数年が経っていました。</p>
+<p>このたび周りの忙しい色々なことが一区切り着いたのでふと思い立ってAmazonで購入しました。</p>
+<p>&nbsp;</p>
+<p>これ、凄いです。</p>
+<p>いままで何か作る際に画像が必要になった時はイラレで簡単に図形組み合わて作ったり、フリー素材を使っていたんですけどこれがあれば思い描いたイメージをそのままアウトプットできます！素晴らしい！</p>
+<p>マウスじゃ実現できなかった紙に描いたようなタッチが実現できます。</p>
+<p>ちなみにドローイングソフトは「<a title="FireAlpaca" href="http://firealpaca.com/" target="_blank">FireAlpaca</a>」というものを使っています。</p>
+<p>MacでもWindowsでも使用できるフリーで使えるソフトです。</p>
+<p>&nbsp;</p>
+<p>1時間ほど手を動かしてみました。</p>
+<p>紙に描いてスマホのカメラで取り込んだこの絵が↓</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/IMG_2694.jpg"><img class="alignnone size-medium wp-image-135" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/IMG_2694-225x300.jpg" alt="IMG_2694" width="225" height="300" /></a></p>
+<p>&nbsp;</p>
+<p>ペンタブの力によって</p>
+<p>こうなります↓</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/シモン_1.jpg"><img class="alignnone size-medium wp-image-136" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/シモン_1-225x300.jpg" alt="シモン_1" width="225" height="300" /></a></p>
+<p>&nbsp;</p>
+<p>今回かかった費用</p>
+<p>ペンタブ(¥6,697) + ソフト(¥0) + 絵を描きたいという気持ち(¥0)</p>
+<p>つまりペンタブ代しかかかっていないのです！しかも1万円もかからない。</p>
+<p>これからはこんな素材がほしいな〜ってなったら自分で作りたいと思います。</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Unity, Oculus rift, Leap motion, Kinectなどに関するBlog開始</title>
+		<link>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/unity-oculus-rift-leap-motion-kinect%e3%81%aa%e3%81%a9%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8bblog%e9%96%8b%e5%a7%8b/</link>
+		<comments>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/unity-oculus-rift-leap-motion-kinect%e3%81%aa%e3%81%a9%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8bblog%e9%96%8b%e5%a7%8b/#comments</comments>
+		<pubDate>Tue, 28 Oct 2014 04:37:42 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[その他]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=7</guid>
+		<description><![CDATA[Unity, Oculus rift, Leap motion, Kinectなどバーチャルリアリティーを実現するツールは便利なものが増えてきました。このブログでは、これらを使って開発を行う際の備忘録を兼ねて関連情報を公<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/unity-oculus-rift-leap-motion-kinect%e3%81%aa%e3%81%a9%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8bblog%e9%96%8b%e5%a7%8b/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>Unity, Oculus rift, Leap motion, Kinectなどバーチャルリアリティーを実現するツールは便利なものが増えてきました。このブログでは、これらを使って開発を行う際の備忘録を兼ねて関連情報を公開していこうと思います。</p>
+<p><span id="more-7"></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/unity-oculus-rift-leap-motion-kinect%e3%81%aa%e3%81%a9%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8bblog%e9%96%8b%e5%a7%8b/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

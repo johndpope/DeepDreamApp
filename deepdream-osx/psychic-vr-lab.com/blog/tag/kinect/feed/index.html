@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Psychic VRラボの殴り書き &#187; Kinect</title>
+	<atom:link href="http://psychic-vr-lab.com/blog/tag/kinect/feed/" rel="self" type="application/rss+xml" />
+	<link>http://psychic-vr-lab.com/blog</link>
+	<description>Unity, Oculus rift, Leap motion, Kinect技術メモ</description>
+	<lastBuildDate>Fri, 03 Jul 2015 00:39:36 +0000</lastBuildDate>
+	<language>ja</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1.5</generator>
+	<item>
+		<title>[続]Kinect v2でユニティちゃんを動かす（Kinect v2withMS-SDKアセット）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/#comments</comments>
+		<pubDate>Sun, 02 Nov 2014 09:49:11 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Kinect]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=58</guid>
+		<description><![CDATA[Kinect v2 withMS-SDKが大幅にバージョンアップし、Kinect v2で取得したモーションを簡単に人型モデルにアプライ出来るようになりました。ものすごく簡単です。 Kinect v2 withMS-SDK<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>Kinect v2 withMS-SDKが大幅にバージョンアップし、Kinect v2で取得したモーションを簡単に人型モデルにアプライ出来るようになりました。ものすごく簡単です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/A1.png"><img class="alignnone size-full wp-image-59" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/A1.png" alt="A1" width="1911" height="877" /></a></p>
+<p>Kinect v2 withMS-SDKをアセットストアからインポートします。無料です。</p>
+<p><span id="more-58"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a2.png"><img class="alignnone size-full wp-image-60" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a2.png" alt="a2" width="819" height="427" /></a></p>
+<p>「Assets」-「AvatarsDemo」内のKinectAvatarsDemoシーンを開きます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a3.png"><img class="alignnone size-full wp-image-61" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a3.png" alt="a3" width="1174" height="928" /></a></p>
+<p>実行してみましょう。骨人間（CubeMan）とモーションのアプライされたアバターが動きます。感動！！</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a4.png"><img class="alignnone size-full wp-image-62" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a4.png" alt="a4" width="862" height="682" /></a></p>
+<p>では、次にこの動きをユニティーちゃんに適用してみます。<br />
+ユニティーちゃんモデルをプロジェクトにインポートします。<br />
+「KinectScripts」内のAvatarControllarを適用します。</p>
+<p>AnimatorのControllerがNoneに設定してください。ここにコントローラーが設定されていると動作しません。<br />
+Vertical Movementにチェックが入っていると縦方向の動きも適用でき、ジャンプできるようになります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/s5.png"><img class="alignnone size-full wp-image-63" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/s5.png" alt="s5" width="1381" height="982" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>ユニティーちゃんを180度回転させて完成！！簡単です。</p>
+<p><img class="alignnone size-full wp-image-64" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/s6.png" alt="s6" width="1063" height="637" /></p>
+<p>&nbsp;</p>
+<p>キャラクターを追加して、背景も変更してみるとこんな感じ。</p>
+<p>ユニティーちゃんとニコニコ立体ちゃんです。40代のオッサンがおどってもこんなにかわいくなるよ。</p>
+<p>&nbsp;</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/VdkQCWYWyaM?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Kinect v2でユニティちゃんを動かす（Kinect v2withMS-SDKアセット）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%ef%bc%89/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%ef%bc%89/#comments</comments>
+		<pubDate>Tue, 28 Oct 2014 17:39:07 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+		<category><![CDATA[Kinect]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=33</guid>
+		<description><![CDATA[追記：2014/11/2　プラグインのバージョンアップによりこの記事の内容は必要なくなりました。 [続]Kinect v2でユニティちゃんを動かす（Kinect v2withMS-SDKアセット）を参照ください。 &#038;nb<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%ef%bc%89/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>追記：2014/11/2　プラグインのバージョンアップによりこの記事の内容は必要なくなりました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/2014/11/02/%E7%B6%9Akinect-v2%E3%81%A7%E3%83%A6%E3%83%8B%E3%83%86%E3%82%A3%E3%81%A1%E3%82%83%E3%82%93%E3%82%92%E5%8B%95%E3%81%8B%E3%81%99%EF%BC%88kinect-v2withms-sdk%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88/">[続]Kinect v2でユニティちゃんを動かす（Kinect v2withMS-SDKアセット）</a>を参照ください。</p>
+<p>&nbsp;</p>
+<p>UnityでKinectをつかいアバターを簡単に動作させることができるアセット「<a title="Kinect v2withMS-SDK" href="http://u3d.as/content/rf-solutions/kinect-v2-with-ms-sdk/84g">Kinect v2withMS-SDK</a>」がついに再公開されました。（一時諸事情により公開を取り下げていたようです）</p>
+<p>このアセットを使ってUnity-chanを動かしてみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/sdk1.png"><img class="alignnone size-full wp-image-34" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/sdk1.png" alt="Kinect v2 with MS-SDK" width="826" height="476" /></a></p>
+<p>Asset StoreからKinect v2withMS-SDKをインポートします。<br />
+インポートが完了したら「Assets」-「AvatarsDemo」内のKinectAvatarsDemoシーンを開きます。</p>
+<p><span id="more-33"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk21.png"><img class="alignnone size-full wp-image-36" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk21.png" alt="Kinect-sdk2" width="1459" height="900" /></a></p>
+<p>まずは実行してみます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk3.png"><img class="alignnone size-full wp-image-37" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk3.png" alt="Kinect-sdk3" width="1917" height="1021" /></a></p>
+<p>左から、画面奥を向いたアバター、スケルトン、画面手前を向いたアバター<br />
+そして右下に、加工済みカメラキャプチャ映像<br />
+が表示されます。</p>
+<p>体を動かすとアバターが同じように動作します。Kinectによる関節キャプチャが乱れても、アバターの動作はスムーズになるように動きを補完してくれています。（他のライブラリでは、手が一気に違う場所に移動したりして不自然だった）</p>
+<p>&nbsp;</p>
+<p>では、ここで動かしたいユニティちゃんをアセットストアからインポートします。<br />
+「Assets」-「UnityChan」-「Models」内のunitychanをシーンに追加します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk4.png"><img class="alignnone size-full wp-image-39" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk4.png" alt="Kinect-sdk4" width="1480" height="990" /></a></p>
+<p>初期状態では画面奥を向いているので、Rotationを変更してこちらを向いてもらいましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk5.png"><img class="alignnone size-full wp-image-40" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk5.png" alt="Kinect-sdk5" width="1608" height="572" /></a></p>
+<p>Unity-chanに「Assets」-「KinectScripts」内のAvatarControllerスクリプトをアタッチします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk7.png"><img class="alignnone size-full wp-image-42" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk7.png" alt="Kinect-sdk7" width="1920" height="1040" /></a></p>
+<p>AvatarControllerの関節とユニティちゃんの関節の関連付けを行います。（関節の関連付けもっと良い対応付けがあったら教えてください）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk8.png"><img class="alignnone size-full wp-image-43" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk8.png" alt="Kinect-sdk8" width="434" height="530" /></a></p>
+<p>実行するとみんな仲良くダンスできます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk6.png"><img class="alignnone size-full wp-image-41" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/10/Kinect-sdk6.png" alt="Kinect-sdk6" width="1466" height="709" /></a></p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%ef%bc%89/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

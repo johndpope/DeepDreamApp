@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Psychic VRラボの殴り書き &#187; Blender</title>
+	<atom:link href="http://psychic-vr-lab.com/blog/category/unity/blender/feed/" rel="self" type="application/rss+xml" />
+	<link>http://psychic-vr-lab.com/blog</link>
+	<description>Unity, Oculus rift, Leap motion, Kinect技術メモ</description>
+	<lastBuildDate>Fri, 03 Jul 2015 00:39:36 +0000</lastBuildDate>
+	<language>ja</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1.5</generator>
+	<item>
+		<title>360度カメラTHETAで撮った写真・動画をUnityで使う</title>
+		<link>http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/#comments</comments>
+		<pubDate>Tue, 18 Nov 2014 12:11:33 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Blender]]></category>
+		<category><![CDATA[Unity]]></category>
+		<category><![CDATA[360度カメラ]]></category>
+		<category><![CDATA[RICOH THETA m15]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=210</guid>
+		<description><![CDATA[from2001vrです。 先日、RICOHから発売された全天球撮影デバイスTHETA、早速買ってみました。デザインもかっこいいですね。 DMMが360度動画の配信を始めたり、Oculusを使って360度見回す環境が出て<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>from2001vrです。</p>
+<p>先日、RICOHから発売された全天球撮影デバイスTHETA、早速買ってみました。デザインもかっこいいですね。 <a href="http://www.dmm.com/digital/vr/" target="_blank">DMMが360度動画の配信</a>を始めたり、Oculusを使って360度見回す環境が出てきたこともあり、何かと最近360度カメラの話題をよく見るようになりました。</p>
+<p>発売元のRICOHよりiOS、Android用の<a href="https://developers.theta360.com/ja/" target="_blank">SDKが公開</a>されておりますが、Unityで利用するためのライブラリなどはまだ公開されていません。今回はTHETAで撮影した画像をUnityの中で利用してみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/THETA_RICOH.png"><img class="alignnone size-full wp-image-213" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/THETA_RICOH.png" alt="THETA_RICOH" width="800" height="1067" /></a></p>
+<p><span id="more-210"></span></p>
+<p>THETAで撮影された写真は下記のような通常のJPGデータになります。このデータの表示方法を工夫することにより360度見渡せるようになります。<a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/ThetaImage.jpg"><img class="alignnone size-full wp-image-214" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/ThetaImage.jpg" alt="ThetaImage" width="2048" height="1024" /></a></p>
+<p>内側にメッシュのある球を用意し、その中にTHETAで撮影した画像をテクスチャとしてはることで360度映像を実現します。</p>
+<p>まずは、BlenderでUV Sphereを作成します。サイズは少し大きめに作っておきましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta1.png"><img class="alignnone size-full wp-image-227" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta1.png" alt="Theta1" width="1770" height="1080" /></a></p>
+<p>メッシュをSmoothにしておきましょう。これをしないと貼り付けた画像にメッシュの四角がうつります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta2.png"><img class="alignnone size-full wp-image-228" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta2.png" alt="Theta2" width="1770" height="1080" /></a></p>
+<p>綺麗にUVマップを貼り付けるために、球の上下の極部分をUVテクスチャの貼り付け部分から除外しておきましょう。<br />
+極部分を面選択します。（上下両方の極を選択します。）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta4.png"><img class="alignnone size-full wp-image-223" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta4.png" alt="Theta4" width="1770" height="1080" /></a></p>
+<p>CTRL+Iショートカットで選択領域を反転させます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta5.png"><img class="alignnone size-full wp-image-224" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta5.png" alt="Theta5" width="1770" height="1080" /></a></p>
+<p>UV UnwrapをCylinder Projection形式で行います。この際、「Correct Aspect」と「Scale to Bounds」にチェックを入れておいてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta6.png"><img class="alignnone size-full wp-image-225" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta6.png" alt="Theta6" width="1770" height="1080" /></a></p>
+<p>ここまで出来たら、Blenderファイルを保存します。</p>
+<p>保存したBlenderファイルをUnityで読み込み、THETAで撮影した画像をテクスチャとして貼ってあげれば完成です。<br />
+画面が暗い場合はPoint Lightを設置して明るくしてあげましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta7.png"><img class="alignnone size-full wp-image-226" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta7.png" alt="Theta7" width="1770" height="1080" /></a></p>
+<p>Oculusカメラを設置してみるのもいいかと思います。</p>
+<p>また、Blenderで上記手順をやるのがめんどくさい人向けに、UnityのProjectファイルをアップしておきますので、360度画像だけ張り替えて利用してください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta360_blog.zip">360度画像用Unityプロジェクト（静止画用）</a></p>
+<p>&nbsp;</p>
+<p>THETAは動画撮影にも対応しているので、ムービングテクスチャとして貼り付けようとしたら、動画版はマッピングが違うのよね。リコーさん、なんでこの仕様なの。。。ということで動画版はまたあらためて作成して公開します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta_Movie.png"><img class="alignnone size-full wp-image-231" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta_Movie.png" alt="Theta_Movie" width="1748" height="919" /></a></p>
+<p>2014/11/22 追記</p>
+<p>動画の形式を変換できることを教えていただきました。ありがとうございます。</p>
+<blockquote class="twitter-tweet" lang="ja" data-conversation="none"><p><a href="https://twitter.com/from2001vr">@from2001vr</a> <a href="https://twitter.com/z_zabaglione">@z_zabaglione</a> 動画(MOV)の方はTHETAのWindowsビューワーにD&amp;Dすればステッチされたmp4が出力できます。</p>
+<p>— GOROman (@GOROman) <a href="https://twitter.com/GOROman/status/534863870666752001">2014, 11月 19</a></p></blockquote>
+<p><script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet" lang="ja" data-cards="hidden"><p>
+<a href="https://twitter.com/from2001vr">@from2001vr</a> さんの<a href="http://t.co/KVaD1mEX0m">http://t.co/KVaD1mEX0m</a> にTHETA m15の動画ファイルをセットして、MovieTexture用のスクリプトとOculusカメラをセットするだけで全天球動画完成♪ <a href="http://t.co/UtquJqNiKt">pic.twitter.com/UtquJqNiKt</a></p>
+<p>— ザバイオーネ (@z_zabaglione) <a href="https://twitter.com/z_zabaglione/status/535587299862388736">2014, 11月 21</a>
+</p></blockquote>
+<p><script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script></p>
+<p>&nbsp;</p>
+<p>動画データの利用方法も紹介しておきたいと思います。</p>
+<p><a href="https://theta360.com/ja/support/download/" target="_blank">THETAのページ</a>よりパソコン用アプリケーションをダウンロードし、インストールします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img1.png"><img class="alignnone size-full wp-image-237" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img1.png" alt="img1" width="816" height="639" /></a></p>
+<p>THETAで撮影した動画ファイルをドラッグするとマッピングが変換されたMP4形式の動画ファイルが出来上がります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img2.png"><img class="alignnone size-full wp-image-238" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img2.png" alt="img2" width="434" height="350" /></a></p>
+<p>変換されたMP4ファイルをUnityのプロジェクトファイルにドラッグしてインポートします。<br />
+Unityで利用できる動画形式に変換されます。（要QuickTimeインストール）</p>
+<p>静止画の時と同様にMP4ファイルをテクスチャとして貼り付けてあげます。<br />
+また動画音声再生のため、空のAudio Sourceを球体に作成します。<br />
+なお、ムービーテクスチャはUnity Pro版のみの対応です。</p>
+<p>動画を再生するには、ムービーテクスチャをスクリプトから再生する必要があります。</p>
+<p>下記のC#スクリプトを作成し、球体にアタッチします。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class PlayMovieTexture : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		MovieTexture movieTexture = renderer.material.mainTexture as MovieTexture;
+		movieTexture.loop = true;
+		audio.clip = movieTexture.audioClip;
+		movieTexture.Play();
+		audio.Play();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}</pre><p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img.png"><img class="alignnone size-full wp-image-243" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img.png" alt="img" width="1718" height="1080" /></a></p>
+<p>実行するとTHETAで撮った動画が再生されます。</p>
+<p>プロジェクトファイルアップしましたのでご利用ください。</p>
+<p><a href="https://www.dropbox.com/s/5b9tmsy2c8wvaba/Theta360_blog_movie.zip?dl=0" target="_blank">360度画像用Unityプロジェクト（動画用）</a></p>
+<p>追記　2014/11/23</p>
+<p>動画の音声の再生。動画のループ再生を追加しました。</p>
+<p>追記　2015/01/31</p>
+<p><a href="http://psychic-vr-lab.com/blog/unity/%E5%85%A8%E5%A4%A9%E7%90%83%E5%8B%95%E7%94%BB%E5%86%8D%E7%94%9F%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9/" target="_blank">全天球動画（外部mp4ファイル）再生環境の作り方-AVProアセット利用</a><br />
+も合わせて御覧ください。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="amazlet-box" style="margin-bottom: 0px;">
+<div class="amazlet-image" style="float: left; margin: 0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00F9VSJ7Q" target="_blank" name="amazletlink"><img style="border: none;" src="http://ecx.images-amazon.com/images/I/21JGSKybGyL._SL160_.jpg" alt="RICOH デジタルカメラ RICOH THETA 360°全天球イメージ撮影デバイス 0175760" /></a></div>
+<div class="amazlet-info" style="line-height: 120%; margin-bottom: 10px;">
+<div class="amazlet-name" style="margin-bottom: 10px; line-height: 120%;">
+<p><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00F9VSJ7Q" target="_blank" name="amazletlink">RICOH デジタルカメラ RICOH THETA 360°全天球イメージ撮影デバイス 0175760</a></p>
+<div class="amazlet-powered-date" style="font-size: 80%; margin-top: 5px; line-height: 120%;">posted with <a title="amazlet" href="http://www.amazlet.com/" target="_blank">amazlet</a> at 14.11.18</div>
+</div>
+<div class="amazlet-detail">リコー (2013-11-08)<br />
+売り上げランキング: 11,967</div>
+<div class="amazlet-sub-info" style="float: left;">
+<div class="amazlet-link" style="margin-top: 5px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00F9VSJ7Q" target="_blank" name="amazletlink">Amazon.co.jpで詳細を見る</a></div>
+</div>
+</div>
+<div class="amazlet-footer" style="clear: left;"></div>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>円柱の内側に繋ぎ目のないテクスチャを貼る（Unity+Blender）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/#comments</comments>
+		<pubDate>Sun, 09 Nov 2014 09:03:53 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Blender]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=142</guid>
+		<description><![CDATA[こんにちはfrom2001vrです。 3次元空間上の背景として円柱（Cylinder）や球（Sphere）の内側にテクスチャを貼り、その内側にカメラを置きたいというシナリオを実現します。最適なやり方を見つけるのに苦労した<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>こんにちはfrom2001vrです。</p>
+<p>3次元空間上の背景として円柱（Cylinder）や球（Sphere）の内側にテクスチャを貼り、その内側にカメラを置きたいというシナリオを実現します。最適なやり方を見つけるのに苦労したのでやり方を記録しておきます。Blender初めて使ったので苦労しました。。。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Preview.png"><img class="alignnone size-full wp-image-170" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Preview.png" alt="Preview" width="645" height="547" /></a></p>
+<p>まず、</p>
+<ul>
+<li>Unityで作るCylinderの内側にはテクスチャを貼れない</li>
+<li>Unityにはプリミティブを置く以外にモデルを手法が存在しない</li>
+<li>テクスチャは貼り方（Wrapping方法）を適切にしないと繋ぎ目がおかしくなる<br />
+凹凸のある3次元モデルにテキスチャを貼るためにはUVマッピングというものを使います。2次元のテクスチャを3次元に貼り付ける際にどのような配置で貼り付けるかを決めておく必要があります。</li>
+</ul>
+<blockquote><p>UVマッピングとは（<a href="http://www.dstorm.co.jp/dsproducts/lw9/tutorial/UVMapping01.html">参照元</a>）<br />
+UVマッピングは、平面の画像を不規則な形状のモデルに貼り付けるための方法です。 ご承知のとおり、オブジェクトに含まれるそれぞれの頂点は、X、Y、Zの空間座標を利用して決定されます。 UVマップではさらに、マップ上のどこへポイントを配置するかを決定するための、UとVの2つの座標を追加します。 これにより、あたかもポイントがそのテクスチャの位置に常に保持されているかのように、画像をオブジェクトに貼り付けることができます。</p></blockquote>
+<p>ということを理解した上で進んでいきましょう。</p>
+<p>今回はUnityだけでは実現することができないので、オープンソースの3Dモデリングソフトウェアの<a href="http://www.blender.org/">Blender</a>を利用します。</p>
+<p>では早速始めていきましょう。</p>
+<p><span id="more-142"></span></p>
+<p>まずは、ブレンダーを開き、Cylinderを追加します。この時にCap Fill TypeをNothingにして円柱の蓋を作成しないようにしましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder1.png"><img class="alignnone size-full wp-image-151" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder1.png" alt="Cylinder1" width="1395" height="998" /></a></p>
+<p>&nbsp;</p>
+<p>次に、見やすいように画面のレイアウトを変更しておきます。3Dビューの右上の角っこを引っ張って、そこにUV/Image Editorを表示しておきます。ここにはUV展開（UV Unwrap）されたメッシュが表示されます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder2.png"><img class="alignnone size-full wp-image-152" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder2.png" alt="Cylinder2" width="1395" height="998" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>今回、円柱の内側にテクスチャを貼りたいわけですが、普通に円柱を作成すると、メッシュが外側を向いて存在し、内側にはメッシュが存在しません。（円柱の内側にカメラを置くと、表面が透過して外が見える状況です。）<br />
+内側にテクスチャを貼るにはメッシュを外向きではなく内向きに扁壺すうる必要があります。</p>
+<p>モードを「Edit mode」に変更し、Aキーで全選択後、「Flip Direction」でメッシュの方向を内側に変更しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder3.png"><img class="alignnone size-full wp-image-153" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder3.png" alt="Cylinder3" width="1395" height="998" /></a></p>
+<p>&nbsp;</p>
+<p>次に、円柱をUV展開します。（この処理を行わないとUnityにモデルをインポートした際にUnityがどこにどのようにテクスチャを貼っていいのかわからないためテクスチャを貼ることができません）<br />
+UV展開をうまく行わないとテクスチャを綺麗に貼ることができません。</p>
+<p>試行錯誤のすえ下記の方法にたどり着きました。</p>
+<p>まず円柱をUV展開する上での切り目（Seam）を決定します。（ここがキモ）<br />
+「辺選択モード」で円柱の高さ方向の線を右クリックし一つ選択します。<br />
+「Make Seam」をクリックし、選択した辺をSeamにします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder4.png"><img class="alignnone size-full wp-image-154" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder4.png" alt="Cylinder4" width="1395" height="998" /></a></p>
+<p>Unwrapをクリックし、円柱をUV展開します。下の画像のように円柱の側面が横一列に並んでいれば成功です。この展開方法ではテクスチャを並べた際に綺麗につなぎ目なく表示されます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder5.png"><img class="alignnone size-full wp-image-155" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder5.png" alt="Cylinder5" width="1395" height="998" /></a></p>
+<p>ここで作成した円柱を保存しましょう。（仮にCylinder.blendとして保存しましょう）</p>
+<p>&nbsp;</p>
+<p>では次に、貼り付けるテクスチャを作成しましょう。並べた時に繋ぎ目がないテクスチャを作成するソフトはいろいろありますが、今回は</p>
+<p><a href="http://www.stripegenerator.com/">Stripe Generator &#8211; ajax diagonal stripes background designer</a></p>
+<p>を利用てテストしてみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Stripe.png"><img class="alignnone size-full wp-image-168" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Stripe.png" alt="Stripe" width="932" height="655" /></a></p>
+<p>設定を行い、ダウンロードをクリックすると画像ファイルがダウンロードできます。今回作成したファイルはこのような画像です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/stripe.png"><img class="alignnone size-full wp-image-169" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/stripe.png" alt="stripe" width="100" height="100" /></a></p>
+<p>&nbsp;</p>
+<p>作成した円柱のモデルファイルとテクスチャ画像ファイルをUnityにインポートします。ProjectビューのAssetsにドラッグすることでインポートできます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder7.png"><img class="alignnone size-full wp-image-157" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder7.png" alt="Cylinder7" width="1912" height="942" /></a></p>
+<p>&nbsp;</p>
+<p>次にヒエラルキービューにCylinderをドラッグしシーンに追加。Scaleを10にし、拡大しておきましょう。<br />
+そして、Inspectorビューにテクスチャをドラッグし追加します。Tilingの数字を変更することにより、敷き詰めるテクスチャの数を変えることができます。</p>
+<p>円柱の内側にテクスチャがつなぎ目なく表示されていることが確認できると思います。</p>
+<p>円柱は内側にしかメッシュが無いため、外側から円柱を見るとすけてみえます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder8.png"><img class="alignnone size-full wp-image-158" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder8.png" alt="Cylinder8" width="1914" height="793" /></a></p>
+<p>幾つかよく使う内側メッシュのモデルを予め用意しておけばテクスチャ自体はUnityで貼ることができるので便利だと思います。</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

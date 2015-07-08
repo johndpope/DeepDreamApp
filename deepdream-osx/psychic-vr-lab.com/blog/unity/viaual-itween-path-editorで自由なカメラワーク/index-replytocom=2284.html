@@ -1,0 +1,490 @@
+	<!doctype html>
+	<!--[if !IE]>
+	<html class="no-js non-ie" lang="ja"> <![endif]-->
+	<!--[if IE 7 ]>
+	<html class="no-js ie7" lang="ja"> <![endif]-->
+	<!--[if IE 8 ]>
+	<html class="no-js ie8" lang="ja"> <![endif]-->
+	<!--[if IE 9 ]>
+	<html class="no-js ie9" lang="ja"> <![endif]-->
+	<!--[if gt IE 9]><!-->
+<html class="no-js" lang="ja"> <!--<![endif]-->
+	<head>
+
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Visual iTween Path Editorで自由なカメラワーク | Psychic VRラボの殴り書き</title>
+
+		<link rel="profile" href="http://gmpg.org/xfn/11"/>
+		<link rel="pingback" href="../../xmlrpc.php"/>
+
+		
+<!-- All in One SEO Pack 2.2.6.2 by Michael Torbert of Semper Fi Web Design[481,544] -->
+<meta name="description" itemprop="description" content="Unity上でiTweenを使うと、カメラ視点・カメラポジションを簡単に自由に移動させることが可能です。そのiTweenの移動Pathを画面を見ながらスプライン曲線をヴィジュアル作成できるエディタの使い方です。" />
+
+<meta name="keywords" itemprop="keywords" content="エディタ拡張,unity" />
+
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+<link rel="alternate" type="application/rss+xml" title="Psychic VRラボの殴り書き &raquo; フィード" href="../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Psychic VRラボの殴り書き &raquo; コメントフィード" href="../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Psychic VRラボの殴り書き &raquo; Visual iTween Path Editorで視点もポジションも自由に移動するカメラワーク のコメントのフィード" href="feed/index.html" />
+<link rel='stylesheet' id='crayon-css'  href='../../wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min-ver=2.7.1.css' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-classic-css'  href='../../wp-content/plugins/crayon-syntax-highlighter/themes/classic/classic-ver=2.7.1.css' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='../../wp-content/plugins/crayon-syntax-highlighter/fonts/monaco-ver=2.7.1.css' type='text/css' media='all' />
+<link rel='stylesheet' id='addtofeedly-style-css'  href='../../wp-content/plugins/add-to-feedly/style-ver=4.1.5.css' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='../../wp-content/plugins/contact-form-7/includes/css/styles-ver=4.1.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-style-css'  href='../../wp-content/themes/responsive/core/css/style-ver=1.9.7.6.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-media-queries-css'  href='../../wp-content/themes/responsive/core/css/responsive-ver=1.9.7.6.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wptt_front-css'  href='../../wp-content/plugins/wp-twitter-feeds/css/admin_style.min-ver=4.1.5.css' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='../../wp-content/plugins/jetpack/css/jetpack-ver=3.5.3.css' type='text/css' media='all' />
+<!-- This site uses the Google Analytics by Yoast plugin v5.4.2 - Universal disabled - https://yoast.com/wordpress/plugins/google-analytics/ -->
+<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-63550884-1']);
+	_gaq.push(['_gat._forceSSL']);
+	_gaq.push(['_trackPageview']);
+
+	(function () {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+
+</script>
+<!-- / Google Analytics by Yoast -->
+<script type='text/javascript' src='../../wp-includes/js/jquery/jquery-ver=1.11.1.js'></script>
+<script type='text/javascript' src='../../wp-includes/js/jquery/jquery-migrate.min-ver=1.2.1.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.7.1","is_admin":"0","ajaxurl":"http:\/\/psychic-vr-lab.com\/blog\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u8cbc\u308a\u4ed8\u3051\u306b\u30b3\u30d4\u30fc\u3001%s\u306b%s\u3092\u62bc\u3057\u3066\u3001","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min-ver=2.7.1.js'></script>
+<script type='text/javascript' src='../../wp-content/plugins/add-to-feedly/js/jquery-1.10.2.min-ver=4.1.5.js'></script>
+<script type='text/javascript' src='../../wp-content/plugins/add-to-feedly/js/scripts-ver=4.1.5.js'></script>
+<script type='text/javascript' src='../../wp-content/themes/responsive/core/js/responsive-modernizr.min-ver=2.6.1.js'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Mirror effectアセットで簡単に鏡を設置(Unity)' href='../mirror-effectアセットで簡単に鏡を設置する/index.html' />
+<link rel='next' title='UnityでOculusローラーコースターの作成方法(Mega Shapesアセット)' href='../unityでoculusローラーコースターの作成方法mega-shapesアセット/index.html' />
+<meta name="generator" content="WordPress 4.1.5" />
+<link rel='shortlink' href='http://wp.me/p5hcgk-5v' />
+<meta name='robots' content='noindex,follow' />
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "http://psychic-vr-lab.com/blog/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.5.4';
+	window._wp_rp_post_id = '341';
+	window._wp_rp_num_rel_posts = '6';
+	window._wp_rp_thumbnails = true;
+	window._wp_rp_post_title = 'Visual+iTween+Path+Editor%E3%81%A7%E8%A6%96%E7%82%B9%E3%82%82%E3%83%9D%E3%82%B8%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%82%E8%87%AA%E7%94%B1%E3%81%AB%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%AB%E3%83%A1%E3%83%A9%E3%83%AF%E3%83%BC%E3%82%AF';
+	window._wp_rp_post_tags = ['unity', 'string', 'time', 'public', 'a', 'path', 'initi', 'void', 'visual', 'class', 'editor', 'int', 'start'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.5.4" async></script>
+<link rel="stylesheet" href="../../wp-content/plugins/wordpress-23-related-posts-plugin/static/themes/vertical-m-version=3.5.4.css" />
+<style type='text/css'>img#wpstats{display:none}</style><!-- We need this for debugging -->
+<!-- Responsive 1.9.7.6 -->
+	</head>
+
+<body class="single single-post postid-341 single-format-standard">
+
+<div id="container" class="hfeed">
+
+	<div class="skip-container cf">
+		<a class="skip-link screen-reader-text focusable" href="index-replytocom=2284.html#content">&darr; Skip to Main Content</a>
+	</div><!-- .skip-container -->
+	<div id="header">
+
+		
+		
+		
+		
+		
+			<div id="logo">
+				<span class="site-name"><a href="../../index.html" title="Psychic VRラボの殴り書き" rel="home">Psychic VRラボの殴り書き</a></span>
+				<span class="site-description">Unity, Oculus rift, Leap motion, Kinect技術メモ</span>
+			</div><!-- end of #logo -->
+
+		
+				<div class="main-nav"><ul class="menu"><li ><a href="../../index.html">ホーム</a></li></ul>
+</div>
+		
+		
+	</div><!-- end of #header -->
+
+	<div id="wrapper" class="clearfix">
+
+<div id="content" class="grid col-620">
+
+	<span class="breadcrumb" typeof="v:Breadcrumb"><!-- Breadcrumb NavXT 5.2.1 -->
+<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to Psychic VRラボの殴り書き." href="../../index.html" class="home">開発入門</a></span> &gt; <span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to the Unity category archives." href="../../category/unity/index.html" class="taxonomy category">Unity</a></span> &gt; <span typeof="v:Breadcrumb"><span property="v:title">Visual iTween Path Editorで視点もポジションも自由に移動するカメラワーク</span></span></span>
+	
+		
+						<div id="post-341" class="post-341 post type-post status-publish format-standard has-post-thumbnail hentry category-unity">
+				
+				
+	<h1 class="entry-title post-title">Visual iTween Path Editorで視点もポジションも自由に移動するカメラワーク</h1>
+
+<div class="post-meta">
+	<span class="meta-prep meta-prep-author posted">投稿日: </span><a href="index.html" title="Visual iTween Path Editorで視点もポジションも自由に移動するカメラワーク" rel="bookmark"><time class="timestamp updated" datetime="2015-01-30T11:29:32+00:00">2015年1月30日</time></a><span class="byline"> 作成者: </span><span class="author vcard"><a class="url fn n" href="../../author/from2001/index.html" title="from2001 の投稿をすべて表示">from2001</a></span>
+			<span class="comments-link">
+		<span class="mdash">&mdash;</span>
+			<a href="index.html#comments" title="Comment on Visual iTween Path Editorで視点もポジションも自由に移動するカメラワーク">2件のコメント &darr;</a>		</span>
+	</div><!-- end of .post-meta -->
+
+				<div class="post-entry">
+					<p><a href="https://twitter.com/from2001vr" target="_blank">from2001vr</a>です。</p>
+<p>iTweenを使うと、オブジェクトを簡単に自由に移動させることが可能です。そのiTweenの移動Pathを画面を見ながらヴィジュアル作成できるエディタの使い方です。Unityで自由自在にカメラを動かしたり、オブジェクトを移動させることができます。</p>
+<p>まず、<a href="https://www.assetstore.unity3d.com/en/#!/content/84" target="_blank">iTween</a>とVISUAL ITWEEN PATH EDITORアセットをプロジェクトに追加します。<a href="http://pixelplacement.com/v2/2010/12/03/visual-editor-for-itween-motion-paths/" target="_blank">VISUAL ITWEEN PATH EDITOR</a>はアセットストアでは公開していないので、ウェブサイトからPackageファイルをダウンロードしプロジェクトに追加します。</p>
+<p><a href="../../wp-content/uploads/2015/01/iTween1.png"><img class="alignnone size-full wp-image-342" src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween1.png" alt="iTween1" width="1479" height="881" /><noscript><img class="alignnone size-full wp-image-342" src="../../wp-content/uploads/2015/01/iTween1.png" alt="iTween1" width="1479" height="881" /></noscript></a></p>
+<p>どのオブジェクトでもいいので選択した状態でiTweenPathスクリプトをメニューから追加します。今回はカメラにスクリプトを追加しました。</p>
+<p><a href="../../wp-content/uploads/2015/01/iTween2.png"><img class="alignnone size-full wp-image-343" src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween2.png" alt="iTween2" width="1121" height="724" /><noscript><img class="alignnone size-full wp-image-343" src="../../wp-content/uploads/2015/01/iTween2.png" alt="iTween2" width="1121" height="724" /></noscript></a></p>
+<p>インスペクターウィンドウでPath Nameを設定（&#8221;Path1&#8243;）。Node Countをスプライン曲線で利用したいノード数を指定。シーンビューでノードを移動させるとノードをつなぐようにスプライン曲線が作成されます。</p>
+<p>以上で準備は完了です。</p>
+<p>では作成したスプライン曲線に合わせてカメラを移動します。</p>
+<p>新しいC#スクリプトを作成し”MoveScriptOnSpline”とでも名づけます。下記のコードを入力します。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-559d94763ca6a257030393" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">MoveScriptOnSpline</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="行番号ON/OFF"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="ハイライト表示ON/OFF"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="新しいウィンドウでコードを開く"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+using UnityEngine;
+using System.Collections;
+
+public class MoveScriptOnSpline : MonoBehaviour {
+
+ public int time=100;
+ public string PathName="Path1";
+ // Use this for initialization
+ void Start () {
+ iTween.MoveTo (this.gameObject, iTween.Hash ("path", iTweenPath.GetPath (PathName), "time", time));
+ }
+}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-559d94763ca6a257030393-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca6a257030393-2">2</div><div class="crayon-num" data-line="crayon-559d94763ca6a257030393-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca6a257030393-4">4</div><div class="crayon-num" data-line="crayon-559d94763ca6a257030393-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca6a257030393-6">6</div><div class="crayon-num" data-line="crayon-559d94763ca6a257030393-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca6a257030393-8">8</div><div class="crayon-num" data-line="crayon-559d94763ca6a257030393-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca6a257030393-10">10</div><div class="crayon-num" data-line="crayon-559d94763ca6a257030393-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca6a257030393-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-559d94763ca6a257030393-1"><span class="crayon-st">using</span><span class="crayon-h"> </span><span class="crayon-v">UnityEngine</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca6a257030393-2"><span class="crayon-st">using</span><span class="crayon-h"> </span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">Collections</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca6a257030393-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca6a257030393-4"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-v">MoveScriptOnSpline</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">MonoBehaviour</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-559d94763ca6a257030393-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca6a257030393-6"><span class="crayon-h"> </span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">time</span><span class="crayon-o">=</span><span class="crayon-cn">100</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca6a257030393-7"><span class="crayon-h"> </span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">string</span><span class="crayon-h"> </span><span class="crayon-v">PathName</span><span class="crayon-o">=</span><span class="crayon-s">"Path1"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca6a257030393-8"><span class="crayon-h"> </span><span class="crayon-c">// Use this for initialization</span></div><div class="crayon-line" id="crayon-559d94763ca6a257030393-9"><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">Start</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca6a257030393-10"><span class="crayon-h"> </span><span class="crayon-v">iTween</span><span class="crayon-sy">.</span><span class="crayon-e">MoveTo</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-v">gameObject</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">iTween</span><span class="crayon-sy">.</span><span class="crayon-e">Hash</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">"path"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">iTweenPath</span><span class="crayon-sy">.</span><span class="crayon-e">GetPath</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">PathName</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"time"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">time</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca6a257030393-11"><span class="crayon-h"> </span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca6a257030393-12"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0120 seconds] -->
+<p>&nbsp;</p>
+<p>作成したMoveScriptOnSplineスクリプトをスプライン曲線に沿って移動させたいオブジェクトに追加します。今回はカメラを移動させたいのでカメラにスクリプトを追加します。</p>
+<p><a href="../../wp-content/uploads/2015/01/iTween3.png"><img class="alignnone size-full wp-image-344" src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween3.png" alt="iTween3" width="357" height="302" /><noscript><img class="alignnone size-full wp-image-344" src="../../wp-content/uploads/2015/01/iTween3.png" alt="iTween3" width="357" height="302" /></noscript></a></p>
+<p>Path Nameには作成したスプライン曲線の名前を指定します。</p>
+<p>以上で完成です。実行するとスプライン曲線に合わせてカメラがスムーズに移動します。</p>
+<p><a href="../../wp-content/uploads/2015/01/iTween4.png"><img class="alignnone size-full wp-image-345" src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween4.png" alt="iTween4" width="864" height="573" /><noscript><img class="alignnone size-full wp-image-345" src="../../wp-content/uploads/2015/01/iTween4.png" alt="iTween4" width="864" height="573" /></noscript></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>追記2015/01/31</p>
+<p>上記の例ではカメラは常に一定方向を向いたままになります。カメラの視点パスも同様に用意しカメラ視点がそのパスに追従する例を見て行きましょう。iTweenPathを2つ用意して、一つをカメラ移動用に、もう一つをカメラ視線先を移動するように利用します。</p>
+<p>CameraTargetというからオブジェクトを用意し、iTweenPathを作成します。そして、下記のコード（CameraTargetMoveScriptOnSpline）を作成し貼り付けます。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-559d94763ca85200203446" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">CameraTargetMoveScriptOnSpline</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="行番号ON/OFF"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="ハイライト表示ON/OFF"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="新しいウィンドウでコードを開く"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+using UnityEngine;
+using System.Collections;
+
+public class CameraTargetMoveScriptOnSpline : MonoBehaviour {
+
+
+	public int time=100;
+	public string PathName="CameraTarget";
+	
+	void Start () {
+		iTween.MoveTo (this.gameObject, iTween.Hash ("path", iTweenPath.GetPath (PathName), "time", time));
+	}
+
+
+}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-559d94763ca85200203446-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca85200203446-2">2</div><div class="crayon-num" data-line="crayon-559d94763ca85200203446-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca85200203446-4">4</div><div class="crayon-num" data-line="crayon-559d94763ca85200203446-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca85200203446-6">6</div><div class="crayon-num" data-line="crayon-559d94763ca85200203446-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca85200203446-8">8</div><div class="crayon-num" data-line="crayon-559d94763ca85200203446-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca85200203446-10">10</div><div class="crayon-num" data-line="crayon-559d94763ca85200203446-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca85200203446-12">12</div><div class="crayon-num" data-line="crayon-559d94763ca85200203446-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca85200203446-14">14</div><div class="crayon-num" data-line="crayon-559d94763ca85200203446-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-559d94763ca85200203446-1"><span class="crayon-st">using</span><span class="crayon-h"> </span><span class="crayon-v">UnityEngine</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca85200203446-2"><span class="crayon-st">using</span><span class="crayon-h"> </span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">Collections</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca85200203446-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca85200203446-4"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-v">CameraTargetMoveScriptOnSpline</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">MonoBehaviour</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-559d94763ca85200203446-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca85200203446-6">&nbsp;</div><div class="crayon-line" id="crayon-559d94763ca85200203446-7"><span class="crayon-h">	</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">time</span><span class="crayon-o">=</span><span class="crayon-cn">100</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca85200203446-8"><span class="crayon-h">	</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">string</span><span class="crayon-h"> </span><span class="crayon-v">PathName</span><span class="crayon-o">=</span><span class="crayon-s">"CameraTarget"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca85200203446-9"><span class="crayon-h">	</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca85200203446-10"><span class="crayon-h">	</span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">Start</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-559d94763ca85200203446-11"><span class="crayon-h">		</span><span class="crayon-v">iTween</span><span class="crayon-sy">.</span><span class="crayon-e">MoveTo</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-v">gameObject</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">iTween</span><span class="crayon-sy">.</span><span class="crayon-e">Hash</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">"path"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">iTweenPath</span><span class="crayon-sy">.</span><span class="crayon-e">GetPath</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">PathName</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"time"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">time</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca85200203446-12"><span class="crayon-h">	</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-559d94763ca85200203446-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca85200203446-14">&nbsp;</div><div class="crayon-line" id="crayon-559d94763ca85200203446-15"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0122 seconds] -->
+<p><a href="../../wp-content/uploads/2015/01/iTween5.png"><img class="alignnone size-full wp-image-367" src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween5.png" alt="iTween5" width="1100" height="853" /><noscript><img class="alignnone size-full wp-image-367" src="../../wp-content/uploads/2015/01/iTween5.png" alt="iTween5" width="1100" height="853" /></noscript></a></p>
+<p>MainCameraにも同様にiTweenPathを作成し、下記のコード（CameraMoveScriptOnSpline_with_lookat）を作成し貼り付けます。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-559d94763ca96321730244" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">CameraMoveScriptOnSpline_with_lookat</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="行番号ON/OFF"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="ハイライト表示ON/OFF"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="新しいウィンドウでコードを開く"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+using UnityEngine;
+using System.Collections;
+
+public class CameraMoveScriptOnSpline_with_lookat : MonoBehaviour {
+
+
+	public int time=100;
+	public string PathName="Path1";
+	public GameObject targetObj;
+
+	void Start () {
+		iTween.MoveTo (this.gameObject, iTween.Hash ("path", iTweenPath.GetPath (PathName), "time", time));
+	}
+
+
+	void Update(){
+		this.gameObject.transform.LookAt (targetObj.transform);
+	}
+	
+}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-559d94763ca96321730244-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-2">2</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-4">4</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-6">6</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-8">8</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-10">10</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-12">12</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-14">14</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-16">16</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-18">18</div><div class="crayon-num" data-line="crayon-559d94763ca96321730244-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-559d94763ca96321730244-20">20</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-559d94763ca96321730244-1"><span class="crayon-st">using</span><span class="crayon-h"> </span><span class="crayon-v">UnityEngine</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-2"><span class="crayon-st">using</span><span class="crayon-h"> </span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">Collections</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca96321730244-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-4"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-v">CameraMoveScriptOnSpline_with_lookat</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">MonoBehaviour</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-559d94763ca96321730244-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-6">&nbsp;</div><div class="crayon-line" id="crayon-559d94763ca96321730244-7"><span class="crayon-h">	</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">time</span><span class="crayon-o">=</span><span class="crayon-cn">100</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-8"><span class="crayon-h">	</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">string</span><span class="crayon-h"> </span><span class="crayon-v">PathName</span><span class="crayon-o">=</span><span class="crayon-s">"Path1"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca96321730244-9"><span class="crayon-h">	</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-e">GameObject </span><span class="crayon-v">targetObj</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-10">&nbsp;</div><div class="crayon-line" id="crayon-559d94763ca96321730244-11"><span class="crayon-h">	</span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">Start</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-12"><span class="crayon-h">		</span><span class="crayon-v">iTween</span><span class="crayon-sy">.</span><span class="crayon-e">MoveTo</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-v">gameObject</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">iTween</span><span class="crayon-sy">.</span><span class="crayon-e">Hash</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">"path"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">iTweenPath</span><span class="crayon-sy">.</span><span class="crayon-e">GetPath</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">PathName</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"time"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">time</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-559d94763ca96321730244-13"><span class="crayon-h">	</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-14">&nbsp;</div><div class="crayon-line" id="crayon-559d94763ca96321730244-15">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-16"><span class="crayon-h">	</span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">Update</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-559d94763ca96321730244-17"><span class="crayon-h">		</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-v">gameObject</span><span class="crayon-sy">.</span><span class="crayon-v">transform</span><span class="crayon-sy">.</span><span class="crayon-e">LookAt</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">targetObj</span><span class="crayon-sy">.</span><span class="crayon-v">transform</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-18"><span class="crayon-h">	</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-559d94763ca96321730244-19"><span class="crayon-h">	</span></div><div class="crayon-line crayon-striped-line" id="crayon-559d94763ca96321730244-20"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0214 seconds] -->
+<p>インスペクタービューでカメラ視点の対象をTargetに指定します。（ヒエラルキービューからCameraTargetをドラッグしてください）</p>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2015/01/iTween6.png"><img class="alignnone size-full wp-image-368" src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween6.png" alt="iTween6" width="1100" height="853" /><noscript><img class="alignnone size-full wp-image-368" src="../../wp-content/uploads/2015/01/iTween6.png" alt="iTween6" width="1100" height="853" /></noscript></a></p>
+<p>実行するとカメラの視点が移動しながらカメラ自身が移動するのも確認できると思います。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">More from my site</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-412" data-post-type="none" ><a href="../kinect-v2でスケルトン情報をオーバーレイ表示unity/index.html" class="wp_rp_thumbnail"><img src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/002-150x150.gif" alt="Kinect v2でスケルトン情報をオーバーレイ表示する方法(Unity)" width="150" height="150" /><noscript><img src="../../wp-content/uploads/2015/03/002-150x150.gif" alt="Kinect v2でスケルトン情報をオーバーレイ表示する方法(Unity)" width="150" height="150" /></noscript></a><a href="../kinect-v2でスケルトン情報をオーバーレイ表示unity/index.html" class="wp_rp_title">Kinect v2でスケルトン情報をオーバーレイ表示する方法(Unity)</a></li><li data-position="1" data-poid="in-372" data-post-type="none" ><a href="../全天球動画再生環境の作り方/index.html" class="wp_rp_thumbnail"><img src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro1-150x150.png" alt="全天球動画（外部mp4ファイル）再生環境の作り方-AVProアセット利用" width="150" height="150" /><noscript><img src="../../wp-content/uploads/2015/01/AVPro1-150x150.png" alt="全天球動画（外部mp4ファイル）再生環境の作り方-AVProアセット利用" width="150" height="150" /></noscript></a><a href="../全天球動画再生環境の作り方/index.html" class="wp_rp_title">全天球動画（外部mp4ファイル）再生環境の作り方-AVProアセット利用</a></li><li data-position="2" data-poid="in-210" data-post-type="none" ><a href="../360度カメラthetaで撮った写真をunityで使う/index.html" class="wp_rp_thumbnail"><img src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Eye-150x150.png" alt="360度カメラTHETAで撮った写真・動画をUnityで使う" width="150" height="150" /><noscript><img src="../../wp-content/uploads/2014/11/Eye-150x150.png" alt="360度カメラTHETAで撮った写真・動画をUnityで使う" width="150" height="150" /></noscript></a><a href="../360度カメラthetaで撮った写真をunityで使う/index.html" class="wp_rp_title">360度カメラTHETAで撮った写真・動画をUnityで使う</a></li><li data-position="3" data-poid="in-96" data-post-type="none" ><a href="../ユニティちゃんcandy-rock-star-live-with-oculus/index.html" class="wp_rp_thumbnail"><img src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ-150x150.png" alt="あなただけのために見つめて歌ってくれるユニティちゃんCandy Rock Starライブの作り方 with Oculus" width="150" height="150" /><noscript><img src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/%E3%81%82%E3%81%AA%E3%81%9F%E3%81%A0%E3%81%91-150x150.png" alt="あなただけのために見つめて歌ってくれるユニティちゃんCandy Rock Starライブの作り方 with Oculus" width="150" height="150" /></noscript></a><a href="../ユニティちゃんcandy-rock-star-live-with-oculus/index.html" class="wp_rp_title">あなただけのために見つめて歌ってくれるユニティちゃんCandy Rock Starライブの作り方 with Oculus</a></li><li data-position="4" data-poid="in-534" data-post-type="none" ><a href="../unityでgear-vr用パススルーカメラアプリの作り方/index.html" class="wp_rp_thumbnail"><img src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough01-150x150.png" alt="UnityでGear VR用パススルーカメラアプリの作り方" width="150" height="150" /><noscript><img src="../../wp-content/uploads/2015/05/PassThrough01-150x150.png" alt="UnityでGear VR用パススルーカメラアプリの作り方" width="150" height="150" /></noscript></a><a href="../unityでgear-vr用パススルーカメラアプリの作り方/index.html" class="wp_rp_title">UnityでGear VR用パススルーカメラアプリの作り方</a></li><li data-position="5" data-poid="in-326" data-post-type="none" ><a href="../mirror-effectアセットで簡単に鏡を設置する/index.html" class="wp_rp_thumbnail"><img src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror1-150x150.png" alt="Mirror effectアセットで簡単に鏡を設置(Unity)" width="150" height="150" /><noscript><img src="../../wp-content/uploads/2015/01/mirror1-150x150.png" alt="Mirror effectアセットで簡単に鏡を設置(Unity)" width="150" height="150" /></noscript></a><a href="../mirror-effectアセットで簡単に鏡を設置する/index.html" class="wp_rp_title">Mirror effectアセットで簡単に鏡を設置(Unity)</a></li></ul></div></div>
+
+					
+									</div><!-- end of .post-entry -->
+
+				<div class="navigation">
+					<div class="previous">&#8249; <a href="../mirror-effectアセットで簡単に鏡を設置する/index.html" rel="prev">Mirror effectアセットで簡単に鏡を設置(Unity)</a></div>
+					<div class="next"><a href="../unityでoculusローラーコースターの作成方法mega-shapesアセット/index.html" rel="next">UnityでOculusローラーコースターの作成方法(Mega Shapesアセット)</a> &#8250;</div>
+				</div><!-- end of .navigation -->
+
+				
+
+	<div class="post-data">
+		カテゴリー: <a href="../../category/unity/index.html">Unity</a>			</div><!-- end of .post-data -->
+
+
+<div class="post-edit"></div>
+							</div><!-- end of #post-341 -->
+			
+						
+	<h6 id="comments">
+		2 comments on &ldquo;<span>Visual iTween Path Editorで視点もポジションも自由に移動するカメラワーク</span>&rdquo;	</h6>
+
+	
+	<ol class="commentlist">
+				<li class="comment even thread-even depth-1 parent" id="comment-2281">
+				<div id="div-comment-2281" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=60" class='avatar avatar-60 photo avatar-default' height='60' width='60' /><noscript><img alt='' src="http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=60" class='avatar avatar-60 photo avatar-default' height='60' width='60' /></noscript>			<cite class="fn">通りすがり</cite> <span class="says">より:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-2281">
+			2015年5月18日 4:20 PM</a>		</div>
+
+		<p>ターゲットとカメラのパスが同じなら　iTween.Hashに&#8221;orienttopath&#8221;,true　を追加すればターゲットを作らなくても対応できます。あまり融通利きませんが・・・</p>
+
+		<div class="reply"><a class='comment-reply-link' href='index-replytocom=2281.html#respond' onclick='return addComment.moveForm( "div-comment-2281", "2281", "respond", "341" )' aria-label='通りすがり に返信'>返信</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-from2001 bypostauthor odd alt depth-2" id="comment-2284">
+				<div id="div-comment-2284" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src="../../wp-content/plugins/lazy-load/images/1x1.trans.gif" data-lazy-src="http://1.gravatar.com/avatar/d2e14066075d04ff36e50efd56f15802?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G" class='avatar avatar-60 photo' height='60' width='60' /><noscript><img alt='' src="http://1.gravatar.com/avatar/d2e14066075d04ff36e50efd56f15802?s=60&d=http://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=60&r=G" class='avatar avatar-60 photo' height='60' width='60' /></noscript>			<cite class="fn">from2001</cite> <span class="says">より:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-2284">
+			2015年5月18日 6:11 PM</a>		</div>
+
+		<p>通りすがりさん、<br />
+情報ありがとうございます！</p>
+
+		<div class="reply"><a class='comment-reply-link' href='index-replytocom=2284.html#respond' onclick='return addComment.moveForm( "div-comment-2284", "2284", "respond", "341" )' aria-label='from2001 に返信'>返信</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	</ol>
+
+	
+
+
+
+									<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title"><a href="index-replytocom=2284.html#comment-2284">from2001</a> にコメントする <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond">コメントをキャンセル</a></small></h3>
+									<form action="http://psychic-vr-lab.com/blog/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes"><span id="email-notes">メールアドレスが公開されることはありません。</span></p>							<p class="comment-form-author"><label for="author">名前</label> <input id="author" name="author" type="text" value="" size="30" /></p>
+<p class="comment-form-email"><label for="email">メールアドレス</label> <input id="email" name="email" type="text" value="" size="30" /></p>
+<p class="comment-form-url"><label for="url">ウェブサイト</label><input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">コメント</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true"></textarea></p>						<p class="form-allowed-tags" id="form-allowed-tags">次の<abbr title="HyperText Markup Language">HTML</abbr> タグと属性が使えます:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code class=&quot;&quot; title=&quot;&quot; data-url=&quot;&quot;&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre class=&quot;&quot; title=&quot;&quot; data-url=&quot;&quot;&gt; &lt;span class=&quot;&quot; title=&quot;&quot; data-url=&quot;&quot;&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" class="submit" value="コメントを送信" />
+							<input type='hidden' name='comment_post_ID' value='341' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='2284' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="9c68d140d9" /></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">新しいコメントをメールで通知</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">新しい投稿をメールで受け取る</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="234"/></p>					</form>
+							</div><!-- #respond -->
+			
+
+			
+		
+</div><!-- end of #content -->
+
+
+	<div id="widgets" class="grid col-300 fit">
+		
+		<div id="text-9" class="widget-wrapper widget_text"><div class="widget-title"><h3>リンク</h3></div>			<div class="textwidget"><a href="../../../index.html">Psychic VR Lab本サイト</a>へ戻る</div>
+		</div><div id="text-2" class="widget-wrapper widget_text"><div class="widget-title"><h3>Twitter(from2001vr)</h3></div>			<div class="textwidget"><a class="twitter-timeline" href="https://twitter.com/from2001vr" data-widget-id="530621992806805504">@from2001vr からのツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</div>
+		</div><div id="search-2" class="widget-wrapper widget_search"><form method="get" id="searchform" action="http://psychic-vr-lab.com/blog/">
+	<label class="screen-reader-text" for="s">Search for:</label>
+	<input type="text" class="field" name="s" id="s" placeholder="検索&hellip;" />
+	<input type="submit" class="submit" name="submit" id="searchsubmit" value="Go" />
+</form></div>		<div id="recent-posts-2" class="widget-wrapper widget_recent_entries">		<div class="widget-title"><h3>最近の投稿</h3></div>		<ul>
+					<li>
+				<a href="../zspace用アプリケーションをunityで開発する/index.html">zSpace用アプリケーションをUnityで開発する</a>
+						</li>
+					<li>
+				<a href="../unityでgear-vr用パススルーカメラアプリの作り方/index.html">UnityでGear VR用パススルーカメラアプリの作り方</a>
+						</li>
+					<li>
+				<a href="../unity5でgear-vr用アプリの開発環境の設定/index.html">Unity5でGear VR用アプリの開発方法</a>
+						</li>
+					<li>
+				<a href="../oculusかぶっている人の映像を外部の人と共有するovrmirror/index.html">Oculusかぶっている人の映像を外部の人と共有する(OVRMirrorの利用)</a>
+						</li>
+					<li>
+				<a href="../kinect-v2でスケルトン情報をオーバーレイ表示unity/index.html">Kinect v2でスケルトン情報をオーバーレイ表示する方法(Unity)</a>
+						</li>
+				</ul>
+		</div><div id="archives-2" class="widget-wrapper widget_archive"><div class="widget-title"><h3>アーカイブ</h3></div>		<ul>
+	<li><a href='../../2015/07/index.html'>2015年7月</a></li>
+	<li><a href='../../2015/05/index.html'>2015年5月</a></li>
+	<li><a href='../../2015/04/index.html'>2015年4月</a></li>
+	<li><a href='../../2015/03/index.html'>2015年3月</a></li>
+	<li><a href='../../2015/02/index.html'>2015年2月</a></li>
+	<li><a href='../../2015/01/index.html'>2015年1月</a></li>
+	<li><a href='../../2014/12/index.html'>2014年12月</a></li>
+	<li><a href='../../2014/11/index.html'>2014年11月</a></li>
+	<li><a href='../../2014/10/index.html'>2014年10月</a></li>
+		</ul>
+</div><div id="categories-2" class="widget-wrapper widget_categories"><div class="widget-title"><h3>カテゴリー</h3></div>		<ul>
+	<li class="cat-item cat-item-8"><a href="../../category/unity/blender/index.html" >Blender</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="../../category/unity/kinect/index.html" >Kinect</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../category/unity/leap-motion/index.html" >Leap motion</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="../../category/unity/oculus/index.html" >Oculus</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="../../category/unity/index.html" >Unity</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../category/その他/index.html" >その他</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="../../category/サンプル/index.html" >サンプル</a>
+</li>
+		</ul>
+</div><div id="text-5" class="widget-wrapper widget_text"><div class="widget-title"><h3>ブログランキング</h3></div>			<div class="textwidget"><a href="http://it.blogmura.com/unity/ranking_out.html" target="_blank"><img src="http://it.blogmura.com/unity/img/unity88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 ＩＴ技術ブログ Unityへ" /></a><br /><a href="http://it.blogmura.com/unity/ranking_out.html" target="_blank">にほんブログ村</a>
+
+<br>
+
+<a href="http://blog.with2.net/link.php?1693602:1075" title="Unity ブログランキングへ"　target="_blank"><img src="http://image.with2.net/img/banner/c/banner_1/br_c_1075_1.gif" width="110" height="31" border="0" /></a><br /><a href="http://blog.with2.net/link.php?1693602:1075" style="font-size:12px;">Unity ブログランキングへ</a></div>
+		</div><div id="widget_add_to_feedly" class="widget-wrapper widget_ADD_TO_FEEDLY"><a id="addtofeedly" href="http://cloud.feedly.com/#subscription/feed/" title="Follow on Feedly" target="_blank"><img src="http://psychic-vr-lab.com/blog/wp-content/plugins/add-to-feedly/images/addtofeedly_.png" alt="Follow on Feedly"/></a></div>
+			</div><!-- end of #widgets -->
+</div><!-- end of #wrapper -->
+</div><!-- end of #container -->
+
+<div id="footer" class="clearfix">
+	
+	<div id="footer-wrapper">
+
+		
+		<div class="grid col-940">
+
+			<div class="grid col-540">
+							</div><!-- end of col-540 -->
+
+			<div class="grid col-380 fit">
+				<ul class="social-icons"></ul><!-- .social-icons -->			</div><!-- end of col-380 fit -->
+
+		</div><!-- end of col-940 -->
+		
+		<div class="grid col-300 copyright">
+			&copy; 2015<a href="../../index.html" title="Psychic VRラボの殴り書き">
+				Psychic VRラボの殴り書き			</a>
+		</div><!-- end of .copyright -->
+
+		<div class="grid col-300 scroll-top"><a href="index-replytocom=2284.html#scroll-top" title="トップへ戻る">&uarr;</a></div>
+
+		<div class="grid col-300 fit powered">
+			<a href="http://cyberchimps.com/responsive-theme/" title="Responsive テーマ">
+				Responsive Theme</a>
+			powered by <a href="http://wordpress.org/" title="WordPress">
+				WordPress</a>
+		</div><!-- end .powered -->
+
+	</div><!-- end #footer-wrapper -->
+
+	</div><!-- end #footer -->
+
+	<div style="display:none">
+	<div class="grofile-hash-map-d41d8cd98f00b204e9800998ecf8427e">
+	</div>
+	<div class="grofile-hash-map-d2e14066075d04ff36e50efd56f15802">
+	</div>
+	</div>
+<script type='text/javascript' src='../../wp-content/plugins/akismet/_inc/form-ver=3.1.1.js'></script>
+<script type='text/javascript' src='../../wp-content/plugins/contact-form-7/includes/js/jquery.form.min-ver=3.51.0-2014.06.20.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/psychic-vr-lab.com\/blog\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"\u9001\u4fe1\u4e2d ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../wp-content/plugins/contact-form-7/includes/js/scripts-ver=4.1.2.js'></script>
+<script type='text/javascript' src='../../wp-content/plugins/lazy-load/js/jquery.sonar.min-ver=0.5.js'></script>
+<script type='text/javascript' src='../../wp-content/plugins/lazy-load/js/lazy-load-ver=0.5.js'></script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201528'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2015Julaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../wp-content/plugins/jetpack/modules/wpgroho-ver=4.1.5.js'></script>
+<script type='text/javascript' src='../../wp-content/themes/responsive/core/js/responsive-scripts.min-ver=1.2.6.js'></script>
+<script type='text/javascript' src='../../wp-content/themes/responsive/core/js/jquery.placeholder.min-ver=2.0.7.js'></script>
+<script type='text/javascript' src='../../wp-includes/js/comment-reply.min-ver=4.1.5.js'></script>
+<script type='text/javascript' src='http://stats.wp.com/e-201528.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.5.3',blog:'77980396',post:'341',tz:'9',srv:'psychic-vr-lab.com'} ]);
+	_stq.push([ 'clickTrackerInit', '77980396', '341' ]);
+</script>
+</body>
+</html>

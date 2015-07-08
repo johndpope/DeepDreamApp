@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Psychic VRラボの殴り書き &#187; Oculus</title>
+	<atom:link href="http://psychic-vr-lab.com/blog/category/unity/oculus/feed/" rel="self" type="application/rss+xml" />
+	<link>http://psychic-vr-lab.com/blog</link>
+	<description>Unity, Oculus rift, Leap motion, Kinect技術メモ</description>
+	<lastBuildDate>Fri, 03 Jul 2015 00:39:36 +0000</lastBuildDate>
+	<language>ja</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1.5</generator>
+	<item>
+		<title>UnityでGear VR用パススルーカメラアプリの作り方</title>
+		<link>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/#comments</comments>
+		<pubDate>Mon, 04 May 2015 05:07:43 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=534</guid>
+		<description><![CDATA[Gear VRのPass Through Camera機能はとても良く出来ていて感動しました。これがあればARアプリの開発も簡単になりそうです。 UnityでGear VRのパススルーカメラ機能の実装方法をテストしてみま<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>Gear VRのPass Through Camera機能はとても良く出来ていて感動しました。これがあればARアプリの開発も簡単になりそうです。</p>
+<p>UnityでGear VRのパススルーカメラ機能の実装方法をテストしてみましたので公開いたします。実装方法はとても簡単です。Oculusカメラの目の前に常にGalaxyで撮影したカメラ画像を表示する形で実装します。</p>
+<p>新しくPassThroughCamera.csスクリプトを用意して下記のコードを書きます。<br />
+Gear VRのカメラも通常のウェブカメラと扱いは同じです。</p>
+<p>カメラが書くやFPSはあまり高くするとカクつくので<br />
+1280&#215;720ピクセル、25FPSで設定しましょう。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class PassThroughCamera : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+			WebCamTexture webcamTexture = new WebCamTexture(1280,720,25);
+			gameObject.GetComponent&lt;Renderer&gt;().material.mainTexture = webcamTexture;
+			webcamTexture.Play();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}</pre><p>続いて<a href="https://developer.oculus.com/downloads/#version=mobile-0.5.1" target="_blank">Oculus Mobile SDK </a>をダウンロードしてインポートします。</p>
+<p>シーンにOVRCameraRigを追加したら、CenterEyeAnchorの子オブジェクトとしてPlaneを作成します。<br />
+Planeの設定はアスペクト比をカメラに合わせて16:9に。PositionやRotationを設定します。（設置場所などは微調整が必要かも）</p>
+<p>そして先ほど作成したPassThroughCamera.csをアタッチします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough01.png"><img class="alignnone size-full wp-image-536" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough01.png" alt="PassThrough01" width="835" height="891" /></a></p>
+<p>ウェブカメラの付いているPCで実行すると、こんなかんじで表示されるはずです。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough02.png"><img class="alignnone size-full wp-image-537" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough02.png" alt="PassThrough02" width="1099" height="663" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/unity/unity5%E3%81%A7gear-vr%E7%94%A8%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%81%AE%E8%A8%AD%E5%AE%9A/" target="_blank">こちら</a>を参考にAndroid実機に転送します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough03.png"><img class="alignnone size-full wp-image-539" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough03.png" alt="PassThrough03" width="1724" height="866" /></a></p>
+<p>そして、現実世界にUnityちゃんを召喚すると楽しくなります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough04.png"><img class="alignnone size-full wp-image-540" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough04.png" alt="PassThrough04" width="1630" height="833" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Oculusかぶっている人の映像を外部の人と共有する(OVRMirrorの利用)</title>
+		<link>http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/#comments</comments>
+		<pubDate>Sun, 26 Apr 2015 12:08:35 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=438</guid>
+		<description><![CDATA[こんばんは。Oculusを使ったイベントで、Oculusを体験している人の映像を他の客とも共有できたほうが楽しそうという話になり、Oculusのヘッドトラッキングと連携しその前後の映像をプロジェクターで、会場の前後面に表<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Projection.png"><img class="alignnone size-full wp-image-439" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Projection.png" alt="Projection" width="846" height="712" /></a></p>
+<p>こんばんは。Oculusを使ったイベントで、Oculusを体験している人の映像を他の客とも共有できたほうが楽しそうという話になり、Oculusのヘッドトラッキングと連携しその前後の映像をプロジェクターで、会場の前後面に表示する仕組みを用意しました。</p>
+<p>構築には<a href="https://twitter.com/Stereoarts" target="_blank">Nora@Stereoarts</a>さんの開発された<a href="http://stereoarts.jp/" target="_blank">OVRMirror</a>を利用しています。Nora@Stereoartsさん、構築にあたりアドバイスありがとうございました。<br />
+また私の以前書いたエントリー「<a href="http://psychic-vr-lab.com/blog/unity/oculus%E4%BD%BF%E7%94%A8%E6%99%82%E3%81%AB%E7%AC%AC%E4%B8%89%E8%80%85%E8%A6%96%E7%82%B9%E3%81%AE%E3%82%AB%E3%83%A1%E3%83%A9%E3%82%92%E5%88%A5%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%A7/" target="_blank">Oculus使用時に第三者視点のカメラを別ウィンドウで表示する</a>」も参考にしてください。</p>
+<p><span id="more-438"></span></p>
+<p>OVRMirrorは</p>
+<blockquote><p>任意のカメラ(RenderTexture)を、別ウィンドウに描画するコンポーネントです。</p></blockquote>
+<p>OVRMirrorの現バージョンでは、2つの外部出力ウィンドウを生成することができないので、前の映像、後ろの映像を2つつなげて一つのウィンドウに表示し、そのウィンドウを2つのモニタ横断的に表示することで、モニタ１に前映像を、モニタ２に後ろ映像を表示するということを実現しました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection1.png"><img class="alignnone size-full wp-image-440" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection1.png" alt="projection1" width="693" height="864" /></a></p>
+<p>設定のキモは2つのカメラで撮った映像を1つのRenderTextureに表示し、OVRMirrorへ受け渡すところです。主要箇所の設定は下記のとおりです。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection5.png"><img class="alignnone size-full wp-image-450" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection5.png" alt="projection5" width="799" height="899" /></a> <a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection6.png"><img class="alignnone size-full wp-image-451" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection6.png" alt="projection6" width="799" height="899" /></a> <a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection7.png"><img class="alignnone size-full wp-image-452" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection7.png" alt="projection7" width="881" height="899" /></a></p>
+<p>&nbsp;</p>
+<p>今回のプロジェクトで利用したOculusカメラとOVRMirrorを組み合わせて適切に設定を行ったパッケージを下記からダウンロードできるようにしてあります。</p>
+<p>Oculusカメラは相性の問題で0.4.4を利用。<br />
+OVRMirrorは現時点の最新版であるOVRMirror_20150215を利用しています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg"><img class="alignnone  wp-image-382" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg" alt="UnityIcon" width="28" height="18" /></a><a href="https://www.dropbox.com/s/oqu86gq2d94sp7s/OVRCameraRig_with_2Projectors.unitypackage?dl=1">OVRCameraRig_with_2Projectors.unitypackage</a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection2.png"><img class="alignnone size-full wp-image-443" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection2.png" alt="projection2" width="720" height="758" /></a></p>
+<p>パッケージをインポート後に/Assets/OVRCameraRig_with_2Projectors<br />
+をシーンに追加することで利用が可能です。OVRMirrorはエディター上では標準では表示されないので、ビルドすることで出力ウィンドウが表示されます。</p>
+<p>Oculusで見た映像がこんなかんじの場合、</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Oculus.png"><img class="alignnone size-full wp-image-441" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Oculus.png" alt="Oculus" width="1920" height="1080" /></a>OVRmirrorで出力した左半分にはOculusで見ている映像。右半分には後ろ側の映像が表示されます。これを左右別のプロジェクターに表ずることでOculusを装着している人と観客の一体感を作り出します。<a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/OVRMirror.png"><img class="alignnone size-full wp-image-442" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/OVRMirror.png" alt="OVRMirror" width="1719" height="814" /></a></p>
+<p>下記の設定で表示の微調整を行いました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection3.png"><img class="alignnone size-full wp-image-444" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection3.png" alt="projection3" width="1153" height="546" /></a></p>
+<p>OVRMirrorで表示するCameraのField of Viewを60から75に変更することで、Oculusで見ている視野に近い映像を表示するようにしています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection4.png"><img class="alignnone size-full wp-image-445" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection4.png" alt="projection4" width="549" height="221" /></a></p>
+<p>OVRMirrorで表示する画角はRenderTextureのサイズで指定します。<br />
+また表示を高速にするために、OVRMirror表示のAnti-AliasingをNoneに設定していますが、こちらは環境によりオンにしてもいいかと思います。</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>全天球動画（外部mp4ファイル）再生環境の作り方-AVProアセット利用</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/#comments</comments>
+		<pubDate>Sat, 31 Jan 2015 10:52:25 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=372</guid>
+		<description><![CDATA[from2001vrです。 Unityで任意のフォルダに置いてあるスティッチ済み全天球動画ファイルを再生する環境の構築方法です。 ビデオ再生用アセットのAVPro QuickTimeを利用して、映像を全天球オブジェクトへ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="https://twitter.com/from2001vr" target="_blank">from2001vr</a>です。</p>
+<p>Unityで任意のフォルダに置いてあるスティッチ済み全天球動画ファイルを再生する環境の構築方法です。<br />
+ビデオ再生用アセットのAVPro QuickTimeを利用して、映像を全天球オブジェクトへ投影する方法を説明します。</p>
+<p>Unity ProのMovie Textureを使う方法は<br />
+<a href="http://psychic-vr-lab.com/blog/unity/360%E5%BA%A6%E3%82%AB%E3%83%A1%E3%83%A9theta%E3%81%A7%E6%92%AE%E3%81%A3%E3%81%9F%E5%86%99%E7%9C%9F%E3%82%92unity%E3%81%A7%E4%BD%BF%E3%81%86/" target="_blank">360度カメラTHETAで撮った写真・動画をUnityで使う</a><br />
+で紹介しましたが、AVProを使うことで下記のメリットがあります。</p>
+<ul>
+<li>外部mp4ファイルの再生が可能（プロジェクトに事前インポート不要）</li>
+<li>映像はライトの影響を受けず表示される（ライト不要）</li>
+<li>映像を途中から再生するなど細かな制御ができる</li>
+<li>動作が軽く安定している（気がする）</li>
+</ul>
+<p>まずは<a href="https://www.assetstore.unity3d.com/en/#!/content/2307" target="_blank">AVPro QuickTime</a>を購入しインポートします。開発元の<a href="http://www.renderheads.com/portfolio/UnityAVProQuickTime/" target="_blank">RenderHeads公式サイト</a>では透かしの入るトライアル版も公開されています。AVProにはQuicktime版とWindows Media版がありますが、QuickTime版はWindowsでもMacでも動きますのでQuickTime版を購入しましょう。</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro1.png"><img class="alignnone size-full wp-image-373" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro1.png" alt="AVPro1" width="1076" height="575" /></a></p>
+<p><span id="more-372"></span></p>
+<p>全天球動画投影のためのオブジェクトUVsphereを下記にアップしましたのでダウンロードしインポートします。ちなみにこのオブジェクトの作り方は<a href="http://psychic-vr-lab.com/blog/unity/360%E5%BA%A6%E3%82%AB%E3%83%A1%E3%83%A9theta%E3%81%A7%E6%92%AE%E3%81%A3%E3%81%9F%E5%86%99%E7%9C%9F%E3%82%92unity%E3%81%A7%E4%BD%BF%E3%81%86/" target="_blank">こちら</a>。</p>
+<p><a href="https://www.dropbox.com/s/1a8bo6v93fu5ynw/UVsphere.blend?dl=1" target="_blank">全天球用内側メッシュSphereオブジェクト UVsphere.blend</a> <a href="https://twitter.com/GoddoSukoupion" target="_blank">@GoddoSukoupion</a>作成</p>
+<p>UVsphereをシーンに追加してください。この球に映像が投影されます。</p>
+<p>空オブジェクトを作成しAVProMovieObjectとでも名づけます。<br />
+下記のスクリプトを追加していきます。デフォルト値以外に変更する場所を下記に示します。（下記画像では赤い点の場所）</p>
+<ul>
+<li>AVProQuickTimeMaterialApplyスクリプト<br />
+Material：UVsphere_material</li>
+<li>AVProQuickTimeMovieスクリプト<br />
+Folder：再生するビデオの保存フォルダ<br />
+Filename：再生するビデオファイル名</li>
+<li>AVProQuickTimeManagerスクリプト</li>
+<li>Projector<br />
+Material：UVsphere_material</li>
+</ul>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro6.png"><img class="alignnone size-full wp-image-379" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro6.png" alt="AVPro6" width="1103" height="1080" /></a></p>
+<p>実行すると綺麗に全天球動画が再生されているのを確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro7.png"><img class="alignnone size-full wp-image-380" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro7.png" alt="AVPro7" width="1007" height="628" /></a></p>
+<p>&nbsp;</p>
+<p>AVProではスクリプトから動画の読み込みや再生に対応していますがドキュメントやサンプルがあまり整備されていません。</p>
+<p>基本的な一時停止、再生、指定ファイルの読み込み再生を行うためのサンプルコードを作成しましたので載せておきます。<br />
+任意のオブジェクトにアタッチし、AVProQuickTimeMovieにAVProMovieObjectを設定してください。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class AVProFunctions : MonoBehaviour {
+	
+	//キーボードで制御サンプル
+	//  S: 一時停止
+	//  P: 再生
+	//  L: 指定のファイルを読み込んで再生
+	void Update () {
+		if (Input.GetKeyDown(KeyCode.S)) {
+			pause();
+		} 
+		if (Input.GetKeyDown(KeyCode.P)) {
+			play();
+		}
+		if (Input.GetKeyDown(KeyCode.L)) {
+			loadMovieFile("T:/video.mp4");
+		}
+	}
+
+
+	public AVProQuickTimeMovie _movie;
+	private AVProQuickTime moviePlayer;
+
+	//再生
+	void play(){
+		moviePlayer = _movie.MovieInstance;
+		moviePlayer.Play();
+	}
+
+	//一時停止
+	void pause(){
+		moviePlayer = _movie.MovieInstance;
+		moviePlayer.Pause();
+	}
+
+	//ビデオファイル読み込み
+	void loadMovieFile(string fileFullPath){
+		_movie._folder =  System.IO.Path.GetDirectoryName (fileFullPath);
+		_movie._filename = System.IO.Path.GetFileName (fileFullPath);
+		_movie.LoadMovie();
+		play ();
+	}
+
+
+}</pre><p>上記全天球用Sphereオブジェクト、設定済みAVProMovieObject、サンプルシーン、サンプル360度映像、基本関数サンプルをセットにしたPackageファイルを用意しましたので公開しておきます。AVPro QuickTime製品版・トライアル版両方で動作することを確認済み。</p>
+<p><a href="https://www.dropbox.com/s/9vqfd2mbjdsomly/AVPro360Sample.unitypackage?dl=1"><img class="alignnone  wp-image-382" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg" alt="UnityIcon" width="29" height="19" />AVPro360Sample.unitypackage</a></p>
+<ol>
+<li>AVProアセットのインポート</li>
+<li>AVPro用360度設定済みパッケージAVPro360Sample.unitypackageのインポート（インポートに少し時間がかかります）</li>
+<li>AVPro_360というフォルダが作成され下記のファイルがインポートされます。<br />
+AVProMovieObject：　360度全天球設定済みPrefab<br />
+UVsphere：　全天球用球体オブジェクト<br />
+AVProFunctions：　基本関数サンプルセット<br />
+Sample/AVPro360Sample：　サンプルシーン<br />
+Sample/RollerCoaster_Short：　サンプル360度映像(<a href="https://www.assetstore.unity3d.com/en/#!/content/21979" target="_blank">SphericalImageCam</a>で生成)</li>
+<li>初回実行時にはDLLコピーに関するアラートが上がるので「Yes, copy」を選択後、再度実行しなおしてください。</li>
+</ol>
+<p>&nbsp;</p>
+<p>最後に、設定の勘違いで行き詰っていたところを助けていただいた@kojiokbさんどうもありがとうございました。</p>
+<blockquote class="twitter-tweet" lang="ja" data-conversation="none" data-cards="hidden"><p><a href="https://twitter.com/from2001vr">@from2001vr</a> トライアル版で試してみましたが特に問題なく360度動画の表示できました。インスペクターはこんな感じです。（phong1が自作Sphereのマテリアルです） <a href="https://t.co/DDLrjbuns9">https://t.co/DDLrjbuns9</a> <a href="http://t.co/eiGcl7n5p8">pic.twitter.com/eiGcl7n5p8</a></p>
+<p>— koji okabe (@kojiokb) <a href="https://twitter.com/kojiokb/status/561417294857789440">2015, 1月 31</a></p></blockquote>
+<p><script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script></p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>あなただけのために見つめて歌ってくれるユニティちゃんCandy Rock Starライブの作り方 with Oculus</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/#comments</comments>
+		<pubDate>Thu, 06 Nov 2014 05:07:20 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=96</guid>
+		<description><![CDATA[ユニティちゃんのLiveプロジェクトが公開され、さわって遊んでUnityの楽しさを更に味わえるようになりました。 また、このLive 『Candy Rock Star』のデータを利用した動画・ゲームなどのコンテストが開催<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ.png"><img class="alignnone size-full wp-image-110" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ.png" alt="あなただけ" width="1121" height="650" /></a></p>
+<p>ユニティちゃんのLiveプロジェクトが公開され、さわって遊んでUnityの楽しさを更に味わえるようになりました。</p>
+<p>また、このLive 『Candy Rock Star』のデータを利用した動画・ゲームなどのコンテストが開催されています。</p>
+<p>特設サイトはこちら：　<a href="http://unity-chan.com/contents/event/director-cup/">ユニティちゃんディレクター杯｜UNITY-CHAN DIRECTOR CUP</a></p>
+<p><span id="more-96"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live1.png"><img class="alignnone size-full wp-image-97" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live1.png" alt="live1" width="1179" height="282" /></a></p>
+<p>&nbsp;</p>
+<p>さて、このLive、かなり迫力のあるプロジェクトなのですが、Oculusを使ってライブ会場の臨場感を味わいながら、ユニティちゃんがあなただけを見つめて歌ってくれるように改造してみましょう。しかも、あなたはステージ最前列かぶりつきでユニティちゃんを独占しちゃいます。</p>
+<p>参考にさせていただいたサイト。ありがとうございます。</p>
+<ul>
+<li><a href="http://tsubakit1.hateblo.jp/entry/2014/11/05/235140">ユニティちゃんライブ公開！とりあえず役立ちそうな情報とか、入手方法とかまとめてる：テラシュールブログ</a></li>
+<li><a href="http://dvorak.hatenablog.com/entry/2014/08/24/230302">Unityでキャラクターに見つめてもらう：銀の弾丸、はじめました</a></li>
+<li><a href="http://blogs.unity3d.com/2009/07/10/just-looking-around/">JUST LOOKING AROUND</a></li>
+</ul>
+<p>&nbsp;</p>
+<p>まずは、<a href="http://unity-chan.com/download/guideline.html">Unity-Chan公式サイトのダウンロードページから</a>『Candy Rock Star』のプロジェクトファイルをダウンロードしましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live2.png"><img class="alignnone size-full wp-image-98" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live2.png" alt="live2" width="1022" height="729" /></a></p>
+<p>続いて、必要プラグインをダウンロードしてインポートしておきます。<br />
+必要なプラグインは下記の2つ。</p>
+<ul>
+<li><a href="https://developer.oculusvr.com/">Oculus SDK &#8211; Unity 4 Integration</a> (要アカウントログイン)</li>
+<li><a href="https://www.assetstore.unity3d.com/jp/#!/content/4">Head Look Controllerアセット(無料)</a></li>
+</ul>
+<p>&nbsp;</p>
+<p>これから修正を加える概要はこんなかんじです。</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live12.png"><img class="alignnone size-full wp-image-109" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live12.png" alt="live12" width="1897" height="776" /></a></p>
+<p>プロジェクトを開いて、Mainシーンを読み込んでもらえればわかるのですが、ヒエラルキービューにはユニティちゃんもステージも表示されません。これは、スクリプトから動的に各プレハブをインスタンス化しているためです。各オブジェクトを編集するためにはプレハブを編集し、変更をプレハブに適用する必要があります。（この概念がわかるとあとはスムーズに行くと思います）</p>
+<p>ユニティちゃんのプレハブ「CandyRockStar」を編集するために、新しいシーンを作成し、<br />
+プロジェクトビュー内の「Assets」-「UnityChan」-「Prefab」内のCandyRockStarをヒエラルキービューにドラッグします。<br />
+仮にこのシーンは「TempScene1」とでも名付け保存しておいてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live4.png"><img class="alignnone size-full wp-image-100" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live4.png" alt="live4" width="1305" height="941" /></a></p>
+<p>&nbsp;</p>
+<p>では、CandyRockStarプレハブに修正を加えていきましょう。<br />
+まずは、ユニティちゃんの視点の先を変更するスクリプトをアタッチします。<br />
+ヒエラルキービュー内の「CandyRockStar」に対して、「Assets」-「Head Look Controller」-「Scripts」内の&#8217;Head Look Controller&#8217;スクリプトをアタッチし、下記を参考にプロパティの設定を行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live5.png"><img class="alignnone size-full wp-image-101" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live5.png" alt="live5" width="946" height="957" /></a></p>
+<p>次に、ユニティちゃんが見つめる先のターゲットを追加し、スクリプトをアタッチします。</p>
+<p>ヒエラルキービューでSphereを追加し、「Assets」-「Head Look Controller」-「Scripts」内の&#8217;CusorHitr&#8217;スクリプトをアタッチし、下記を参考にプロパティの設定を行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live6.png"><img class="alignnone size-full wp-image-102" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live6.png" alt="live6" width="1346" height="757" /></a></p>
+<p>プロパティの設定が終わったら先ほど追加したSphereの名前を「LookupTarget」に変更してCandyRockStarの子オブジェクトになるように移動しましょう。これで、このLookupTargetはCandyRockStarプレハブの一部になります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live7.png"><img class="alignnone size-full wp-image-103" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live7.png" alt="live7" width="340" height="253" /></a></p>
+<p>&nbsp;</p>
+<p>実行して、SceneビューでLookup Targetを移動してみましょう。ユニティちゃんが踊りながらターゲットの方に顔を向けることを確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live9.png"><img class="alignnone size-full wp-image-105" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live9.png" alt="live9" width="555" height="356" /></a></p>
+<p>では、この変更がMainシーンにも反映されるようにしましょう。</p>
+<p>ヒエラルキービューでCandyRockStarを選択した状態で「GameObject」メニュー内の「Apply Changes To Prefab」を選択し、プレハブへの変更を適用します。これで、このプレハブを呼び出す全てのシーンにこのプレハブの変更が反映されるようになります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live8.png"><img class="alignnone size-full wp-image-104" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live8.png" alt="live8" width="451" height="427" /></a></p>
+<p>&nbsp;</p>
+<p>続いて、Oculusの設定に移ります。</p>
+<p>「Assets」-「Scenes」内のMainシーンを開きましょう。このシーンにはほとんど何も含まれていませんが、実行するとスクリプトから各プレハブがインスタンス化され表示されます。</p>
+<p>ヒエラルキービューにOculusカメラを追加しましょう。「Assets」-「OVR」-「Prefabs」内の&#8217;OVRCameraController&#8217;をヒエラルキービューにドラッグします。<br />
+追加後、下記を参考にプロパティを設定します。これだけでOculusでの利用が可能になります。</p>
+<p>&nbsp;</p>
+<p>追記2014/11/06<br />
+Oculus SDK 0.4.3からOVRCameraControllerの名称がOVRCameraRigに変更になりました。SDK 0.4.3以降を利用している方は読み替えてください。<br />
+ようてん<a href="https://twitter.com/youten_redo">@youten_redo</a> さんご指摘ありがとうございました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live10.png"><img class="alignnone size-full wp-image-106" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live10.png" alt="live10" width="1346" height="828" /></a></p>
+<p>続いて、CandyRockStarに追加した視点の先「LookupTarget」の座標をOculusカメラの位置に移動するようにしましょう。<br />
+新しいスクリプトを作成しUpdate()関数内で座標の移動を行います。LookupTargetの座標はプレハブ内でユニティちゃんに対して相対的に設定されているためユニティちゃんが動くとそれに合わせてLookupTargetの位置も移動してしまいます。ですのでStart()内ではなくUpdate()関数内で毎回座標を変更してあげるようにしましょう。</p>
+<p>新しいC#スクリプトを「UpdateLookupTarget」という名前で作成します。作成したらOVRCameraControllerにアタッチします。</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live11.png"><img class="alignnone size-full wp-image-107" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live11.png" alt="live11" width="1141" height="905" /></a></p>
+<p>UpdateLookupTargetスクリプトをダブルクリックし下記のように変更します。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class UpdateLookupTarget : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+		GameObject.Find ("LookupTarget").transform.position = transform.position;
+
+	}
+}</pre><p>&nbsp;</p>
+<p>これで完成。ユニティちゃんがずっとあなたを見つめ、あなただけのために歌ってくれます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ２.png"><img class="alignnone size-full wp-image-111" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ２.png" alt="あなただけ２" width="1127" height="653" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div><img src="http://unity-chan.com/images/imageLicenseLogo.png" alt="ユニティちゃんライセンス" />このコンテンツは、『<a href="http://unity-chan.com/download/license.html" target="_blank">ユニティちゃんライセンス</a>』で提供されています</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

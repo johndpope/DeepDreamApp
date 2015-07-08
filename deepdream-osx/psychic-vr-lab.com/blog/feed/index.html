@@ -1,0 +1,1530 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Psychic VRラボの殴り書き</title>
+	<atom:link href="http://psychic-vr-lab.com/blog/feed/" rel="self" type="application/rss+xml" />
+	<link>http://psychic-vr-lab.com/blog</link>
+	<description>Unity, Oculus rift, Leap motion, Kinect技術メモ</description>
+	<lastBuildDate>Fri, 03 Jul 2015 00:39:36 +0000</lastBuildDate>
+	<language>ja</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1.5</generator>
+	<item>
+		<title>zSpace用アプリケーションをUnityで開発する</title>
+		<link>http://psychic-vr-lab.com/blog/unity/zspace%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%92unity%e3%81%a7%e9%96%8b%e7%99%ba%e3%81%99%e3%82%8b/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/zspace%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%92unity%e3%81%a7%e9%96%8b%e7%99%ba%e3%81%99%e3%82%8b/#comments</comments>
+		<pubDate>Fri, 03 Jul 2015 00:39:36 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=457</guid>
+		<description><![CDATA[&#160; zSpaceでのアプリケーションの開発・実行にはNVIDIAまたはATIのグラフィックカードが必要です。NVIDIAの場合、GeForce系のカードでは動作せず、QUADRO系のグラフィックカードが必要です<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/zspace%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%92unity%e3%81%a7%e9%96%8b%e7%99%ba%e3%81%99%e3%82%8b/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>&nbsp;</p>
+<p>zSpaceでのアプリケーションの開発・実行にはNVIDIAまたはATIのグラフィックカードが必要です。NVIDIAの場合、GeForce系のカードでは動作せず、QUADRO系のグラフィックカードが必要です。</p>
+<p>今回はNVIDIA Quadro K2000Dを用いて開発を行いました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/quadro-k2000d.png"><img class="alignnone size-full wp-image-458" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/quadro-k2000d.png" alt="quadro-k2000d" width="281" height="188" /></a></p>
+<p>またzSpaceとNVIDIA Quadro K2000Dの接続にはDVIを用いますが、立体視用の情報はFullHD2つ分のため、DVIデュアルリンクケーブルを利用します。DVIシングルリンクケーブルと違い、ピンが全部埋まっているのが特徴です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/DVI.png"><img class="alignnone size-full wp-image-461" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/DVI.png" alt="DVI" width="501" height="620" /></a></p>
+<p>NVIDIA QuadroとzSpaceをDVD-Dケーブルで接続します。この段階ではまだUSBケーブルの接続は行いません。</p>
+<p>NVIDIAコントロールパネルで下記の設定を行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace01.png"><img class="alignnone size-full wp-image-462" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace01.png" alt="zSpace01" width="947" height="850" /></a></p>
+<p>3D設定の管理 &#8211; グローバル設定 -3D App DefaultSettings &#8211; ステレオを有効にする をオン</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace02.png"><img class="alignnone size-full wp-image-463" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace02.png" alt="zSpace02" width="947" height="850" /></a></p>
+<p>3D設定の管理 &#8211; グローバル設定 -ベースプロフィール &#8211; ステレオを有効にする をオン</p>
+<p>続いてzSpace用のドライバを<a href="http://developer.zspace.com/downloads" target="_blank">こちら</a>からインストールします。<br />
+ｚSpace100と200ではドライバが異なりますので注意しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace02.5.png"><img class="alignnone size-full wp-image-466" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace02.5.png" alt="zSpace02.5" width="815" height="918" /></a></p>
+<p>zSpace System Install<br />
+SDK 3.0 Install<br />
+をインストールします。</p>
+<p>インストールが完了するとコントロールパネルに「zSpace Control Panel」アイコンが追加されていることを確認します。<br />
+zSpaceとPCをUSBケーブルで接続します。USBケーブルを接続するとデバイスドライバのインストールが始まりますので完了するまで待ちます。<br />
+デバイスドライバのインストール完了後、「zSpace Control Panel」を起動しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace02.61.png"><img class="alignnone size-full wp-image-468" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace02.61.png" alt="zSpace02.6" width="1119" height="729" /></a></p>
+<p>初回起動時にはSystem check （キャリブレーション）が実行されますので指示に従って完了させましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace03.png"><img class="alignnone size-full wp-image-469" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace03.png" alt="zSpace03" width="637" height="629" /></a></p>
+<p>各ステップでは、緑のマークがついているもの（zSpace用メガネまたはスタイラス）を利用します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace04.png"><img class="alignnone size-full wp-image-470" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace04.png" alt="zSpace04" width="637" height="629" /></a></p>
+<p>画面は何色に見えるかを答えます。上記スクリーンショットでは赤色に見えますが、実際には左目用に赤、右目用に青が表示されるためメガネなしで見ると紫色に見えます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace05.png"><img class="alignnone size-full wp-image-471" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace05.png" alt="zSpace05" width="637" height="629" /></a></p>
+<p>左右の画像に違いがありますか？こちらはメガネをかけてみると右側の画像だけ立体的に見えます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace06.png"><img class="alignnone size-full wp-image-472" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace06.png" alt="zSpace06" width="637" height="629" /></a></p>
+<p>メガネのトラッキングテストを行います。zSpaceのメガネには位置トラッキングの機能があり、メガネの位置情報によりモニタに表示される映像が、利用者の視点に合わせて変わるようになっています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace07.png"><img class="alignnone size-full wp-image-473" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace07.png" alt="zSpace07" width="1920" height="1080" /></a></p>
+<p>メガネをかけた状態で頭を動かし、xマークを○マークに次々に合わせていきます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace08.png"><img class="alignnone size-full wp-image-474" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace08.png" alt="zSpace08" width="637" height="629" /></a></p>
+<p>続いてスタイラスのボタンの動作確認です。各ボタンを順番に押していきましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace09.png"><img class="alignnone size-full wp-image-475" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace09.png" alt="zSpace09" width="637" height="629" /></a></p>
+<p>スタイラスのライトが赤-&gt;緑-&gt;青の順に点滅することを確認してください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace10.png"><img class="alignnone size-full wp-image-476" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace10.png" alt="zSpace10" width="637" height="629" /></a></p>
+<p>スタイラスのバイブレーション機能が正常に動作することを確認してください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace11.png"><img class="alignnone size-full wp-image-477" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace11.png" alt="zSpace11" width="637" height="629" /></a></p>
+<p>スタイラスのトラッキング機能のチェックを行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace12.png"><img class="alignnone size-full wp-image-478" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace12.png" alt="zSpace12" width="1920" height="1080" /></a></p>
+<p>スタイラスを動かしxマークを○マークに次々に合わせていきます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace13.png"><img class="alignnone size-full wp-image-479" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace13.png" alt="zSpace13" width="637" height="629" /></a></p>
+<p>zSpaceのシステムチェックが完了しました。おめでとうございます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace14.png"><img class="alignnone size-full wp-image-480" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace14.png" alt="zSpace14" width="654" height="489" /></a></p>
+<p>初回のシステムチェックが完了すると、zSpace Control Panelを立ち上げることが可能になります。</p>
+<p>続いてUnityで開発できる環境を構築します。Unityでstereoscopic3d対応のアプリケーションの開発を行う場合、オプション付きでUnityを起動する必要があります。Unity4、Unity5のそれそれをオプション付きで起動するコマンドは下記のようになります。また起動用のバッチファイルを用意したのでダウンロードできるようにしておきます。</p>
+<p>Unity4用　（<a href="https://www.dropbox.com/s/3hgzpsuxl3hcqip/Unity4%20Stereo3D.bat?dl=1">Unity4 Stereo3D.bat</a>）</p><pre class="crayon-plain-tag">"C:\Program Files (x86)\Unity\Editor\Unity.exe" -force-opengl -enable-stereoscopic3d</pre><p>Unity5用　（<a href="https://www.dropbox.com/s/iqygsv3ivvo5ycj/Unity5%20Stereo3D.bat?dl=1">Unity5 Stereo3D.bat</a>）</p><pre class="crayon-plain-tag">"C:\Program Files\Unity\Editor\Unity.exe" -force-opengl -enable-stereoscopic3d</pre><p>Windows8.1ではバッチファイルを実行すると「WindowsによってPCが保護されました」と表示されバッチファイルが実行されません。<br />
+「詳細情報」をクリックしてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace151.png"><img class="alignnone size-full wp-image-485" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace151.png" alt="zSpace15" width="810" height="263" /></a></p>
+<p>「実行」ボタンが現れるのでクリックしてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace16.png"><img class="alignnone size-full wp-image-484" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace16.png" alt="zSpace16" width="826" height="267" /></a></p>
+<p>続いて<a href="http://developer.zspace.com/downloads" target="_blank">こちら</a>からUnity用Pluginをダウンロードします。</p>
+<p>以下、Unity4での利用を前提にしています。<br />
+Unityで新規プロジェクトを作成し、ダウンロードしたZSCore.unitypackageをインポートします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace17.png"><img class="alignnone size-full wp-image-487" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace17.png" alt="zSpace17" width="1119" height="935" /></a></p>
+<p>テスト用のオブジェクトを適当に配置した後</p>
+<p>ZSCoreプレハブをMain Cameraの子オブジェクトとしてシーンに追加します。</p>
+<p>実行すると3Dステレオ表示されることが確認できます。メガネを掛けて頭を動かすと視点によりUnityゲームビュー上に表示される内容が変化することも確認できるかと思います。スクリーンショットではステレオ表示の感動が伝わらないのが残念。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace181.png"><img class="alignnone size-full wp-image-489" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace181.png" alt="zSpace18" width="1256" height="897" /></a></p>
+<p>ZSCoreスクリプトのパラメーターを設定することで3D表示の見え方を調整することが可能です。</p>
+<p>また、Windows &#8211; zxSpace &#8211; Core Diagnostic から設定ウィンドウを開き、各種パラメーターの設定も可能です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace19.png"><img class="alignnone size-full wp-image-490" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace19.png" alt="zSpace19" width="599" height="282" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace20.png"><img class="alignnone size-full wp-image-491" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace20.png" alt="zSpace20" width="334" height="428" /></a></p>
+<p><em>注意点１</em></p>
+<p>ビルドしてexeファイルを作成する際の注意点です。<br />
+現時点（2015年5月）ではzSpaceのUnityプラグインが64ビット対応していません。ビルド時には必ずArchtectureをx86に設定します。<br />
+（Unity5はエディターが64ビット動作ですので、エディターでの確認時には3D表示できません。）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace21.png"><img class="alignnone size-full wp-image-492" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace21.png" alt="zSpace21" width="566" height="619" /></a></p>
+<p>次に、ビルドしたexeファイルもUnity起動時と同様にオプションを指定しなければステレオ表示されません。<br />
+exe実行用のバッチファイルを用意しておきます。</p><pre class="crayon-plain-tag">zSpaceTest.exe -force-opengl -enable-stereoscopic3d</pre><p>バッチファイルから実行すると、ステレオ表示されたウィンドウが立ち上がります。</p>
+<p><em>注意点2</em></p>
+<p>zSpaceのUnityプラグインは、インポートすると、Asstes/Pluginsフォルダ以下にDLLをコピーします。<br />
+このフォルダは32ビット64ビットどちらでビルドしてもこのなかのDLLが使われることを意味しますが、zSpaceのdllは64ビット対応していません。<br />
+つまり32ビットビルドすれば正常に動作します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace23.png"><img class="alignnone size-full wp-image-495" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace23.png" alt="zSpace23" width="445" height="213" /></a></p>
+<p>ここで、このプロジェクトに32ビット、64ビット別々のDLLが含まれるプラグインをインストールしたとします。<br />
+具体例としてLeapmotionプラグインをインポートしてみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace25.png"><img class="alignnone size-full wp-image-496" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace25.png" alt="zSpace25" width="435" height="350" /></a></p>
+<p>PluginsフォルダにLeapmotion関連のDLLがコピーされます。<br />
+ではこの状態で先ほどのシーンを実行してみるとDllNotFoundExeptionエラーが発生するようになり実行できません。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace24.png"><img class="alignnone size-full wp-image-497" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace24.png" alt="zSpace24" width="559" height="145" /></a></p>
+<p>これは、Leapmotionプラグインが<br />
+Pluginsフォルダ以下に<br />
+x86<br />
+x86_64<br />
+というフォルダを生成したことによりUnityが32ビットdllと64ビットDllを区別するようになったことによる問題です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace26.png"><img class="alignnone size-full wp-image-498" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/zSpace26.png" alt="zSpace26" width="435" height="350" /></a></p>
+<p>ｚSpace関連のDLLファイルをx86フォルダ内にコピーしましょう。</p>
+<p>これで動作するようになりました。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/zspace%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%92unity%e3%81%a7%e9%96%8b%e7%99%ba%e3%81%99%e3%82%8b/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>UnityでGear VR用パススルーカメラアプリの作り方</title>
+		<link>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/#comments</comments>
+		<pubDate>Mon, 04 May 2015 05:07:43 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=534</guid>
+		<description><![CDATA[Gear VRのPass Through Camera機能はとても良く出来ていて感動しました。これがあればARアプリの開発も簡単になりそうです。 UnityでGear VRのパススルーカメラ機能の実装方法をテストしてみま<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>Gear VRのPass Through Camera機能はとても良く出来ていて感動しました。これがあればARアプリの開発も簡単になりそうです。</p>
+<p>UnityでGear VRのパススルーカメラ機能の実装方法をテストしてみましたので公開いたします。実装方法はとても簡単です。Oculusカメラの目の前に常にGalaxyで撮影したカメラ画像を表示する形で実装します。</p>
+<p>新しくPassThroughCamera.csスクリプトを用意して下記のコードを書きます。<br />
+Gear VRのカメラも通常のウェブカメラと扱いは同じです。</p>
+<p>カメラが書くやFPSはあまり高くするとカクつくので<br />
+1280&#215;720ピクセル、25FPSで設定しましょう。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class PassThroughCamera : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+			WebCamTexture webcamTexture = new WebCamTexture(1280,720,25);
+			gameObject.GetComponent&lt;Renderer&gt;().material.mainTexture = webcamTexture;
+			webcamTexture.Play();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}</pre><p>続いて<a href="https://developer.oculus.com/downloads/#version=mobile-0.5.1" target="_blank">Oculus Mobile SDK </a>をダウンロードしてインポートします。</p>
+<p>シーンにOVRCameraRigを追加したら、CenterEyeAnchorの子オブジェクトとしてPlaneを作成します。<br />
+Planeの設定はアスペクト比をカメラに合わせて16:9に。PositionやRotationを設定します。（設置場所などは微調整が必要かも）</p>
+<p>そして先ほど作成したPassThroughCamera.csをアタッチします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough01.png"><img class="alignnone size-full wp-image-536" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough01.png" alt="PassThrough01" width="835" height="891" /></a></p>
+<p>ウェブカメラの付いているPCで実行すると、こんなかんじで表示されるはずです。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough02.png"><img class="alignnone size-full wp-image-537" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough02.png" alt="PassThrough02" width="1099" height="663" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/unity/unity5%E3%81%A7gear-vr%E7%94%A8%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%81%AE%E8%A8%AD%E5%AE%9A/" target="_blank">こちら</a>を参考にAndroid実機に転送します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough03.png"><img class="alignnone size-full wp-image-539" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough03.png" alt="PassThrough03" width="1724" height="866" /></a></p>
+<p>そして、現実世界にUnityちゃんを召喚すると楽しくなります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough04.png"><img class="alignnone size-full wp-image-540" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/PassThrough04.png" alt="PassThrough04" width="1630" height="833" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7gear-vr%e7%94%a8%e3%83%91%e3%82%b9%e3%82%b9%e3%83%ab%e3%83%bc%e3%82%ab%e3%83%a1%e3%83%a9%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Unity5でGear VR用アプリの開発方法</title>
+		<link>http://psychic-vr-lab.com/blog/unity/unity5%e3%81%a7gear-vr%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e9%96%8b%e7%99%ba%e7%92%b0%e5%a2%83%e3%81%ae%e8%a8%ad%e5%ae%9a/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/unity5%e3%81%a7gear-vr%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e9%96%8b%e7%99%ba%e7%92%b0%e5%a2%83%e3%81%ae%e8%a8%ad%e5%ae%9a/#comments</comments>
+		<pubDate>Fri, 01 May 2015 09:01:12 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=502</guid>
+		<description><![CDATA[こんばんは。今朝Gear VRとGalaxy S6 Edgeが手にはいり、うちは皆テンション高めです。 私はUnityでのAndroidアプリ開発は初めてでしたので開発環境のセットアップから行いました。備忘録をアップして<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/unity5%e3%81%a7gear-vr%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e9%96%8b%e7%99%ba%e7%92%b0%e5%a2%83%e3%81%ae%e8%a8%ad%e5%ae%9a/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/linecamera_shareimage.jpg"><img class="alignnone wp-image-530 size-large" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/linecamera_shareimage-768x1024.jpg" alt="linecamera_shareimage" width="605" height="807" /></a></p>
+<p>こんばんは。今朝Gear VRとGalaxy S6 Edgeが手にはいり、うちは皆テンション高めです。</p>
+<p>私はUnityでのAndroidアプリ開発は初めてでしたので開発環境のセットアップから行いました。備忘録をアップしておきます。OSはWindows 8.1です。</p>
+<h3>Unityパッチのインストール</h3>
+<p>Unity5.0.1では現状、パッチを当てないとGear VRアプリ起動時にエラーでクラッシュします。<br />
+<a href="http://unity3d.com/unity/qa/patch-releases?version=5.0" target="_blank">UnityのPatch Release</a>ページから最新版のパッチを当てましょう。</p>
+<h3>JDKのインストール</h3>
+<p>インストール時にJDK環境をインストールしていない場合、JDKのインストールを促されます。JDK環境をインストールしていない人は先にインストールしておきましょう。</p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank">Java SE Development Kit 7 Downloads</a>ページから環境にあったインストーラーをダウンロードしインストールします。</p>
+<p>私は<br />
+Java SE Development Kit 7u79のWindows x64版、<a id="jdk-7u79-oth-JPRXXXjdk-7u79-windows-x64.exe" class="download" name="jdk-7u79-oth-JPRXXXjdk-7u79-windows-x64.exe"></a>jdk-7u79-windows-x64.exeをダウンロードしインストールを完了しました。</p>
+<h3>Android Studioのインストール</h3>
+<p>UnityでAndroid用のアプリを開発するために必要です。<br />
+<a href="http://developer.android.com/sdk/index.html" target="_blank">Android Studioのページ</a>からAndroid Studioをダウンロードしインストールします。</p>
+<h3>Android SDKのインストール</h3>
+<p>続いてAndroid SDKのインストールをAndroid Studio内から行います。</p>
+<p>Android Studioを起動し、Configureをクリックします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear01.png"><img class="alignnone size-full wp-image-505" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear01.png" alt="Gear01" width="689" height="600" /></a></p>
+<p><span id="more-502"></span></p>
+<p>続いてSDK Managerを選択。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear02.png"><img class="alignnone size-full wp-image-506" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear02.png" alt="Gear02" width="689" height="600" /></a></p>
+<p>Android SDK Managerからインストールしたいコンポーネントを選択します。<br />
+下記にチェックしたコンポーネントが必須らしいのでインストールします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear03.png"><img class="alignnone size-full wp-image-507" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear03.png" alt="Gear03" width="634" height="1050" /></a></p>
+<h3></h3>
+<h3>Unity5のExternal Toolsの設定</h3>
+<p>Unity5のメニューバーから<br />
+Edit &#8211; Preferences をクリックしExternal Toolsタブを開きます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear04.png"><img class="alignnone size-full wp-image-508" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear04.png" alt="Gear04" width="516" height="439" /></a></p>
+<p>Android SDK LocationにはSDKの場所を指定します。通常、各ユーザーフォルダ以下の下記の場所に設定されています。AppDataフォルダは隠しフォルダになっていますので、見つからないなーという場合は、Explorerの設定で隠しフォルダを表示するようにしてみてください。<br />
+C:\Users\xxxxxxxxx\AppData\Local\Android\sdk</p>
+<p>JDK Locationは通常<br />
+C:\Program Files\Java\jdk1.7.0_79<br />
+などになります。バージョンに合わせて適切に指定してください。</p>
+<h3>新規Unityプロジェクトの作成</h3>
+<p>新しいプロジェクトを作成し、適当にCubeなどを配置しておきましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear05.png"><img class="alignnone size-full wp-image-509" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear05.png" alt="Gear05" width="824" height="419" /></a></p>
+<h3>Oculus Mobile SDKのインポート</h3>
+<p><a href="https://developer.oculus.com/downloads/#sdk=mobile" target="_blank">OculusのDevelopperサイト</a>からOculus Mobile SDKをダウンロードします。ダウンロードにはOculus Developerサイトにログインが必要です。ダウンロードしたZipファイルを解凍しておきましょう。</p>
+<p>\ovr_mobile_sdk_0.5.1\VrUnity\UnityIntegration 内にある<br />
+UnityIntegration.unityPackage<br />
+をインポートします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear06.png"><img class="alignnone size-full wp-image-510" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear06.png" alt="Gear06" width="366" height="389" /></a></p>
+<p>続いてProjectSettingsフォルダをUnityプロジェクトにコピーする必要があります。Projectビューを右クリックしてShow in Explorerを選択し、Exploreを起動します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear07.png"><img class="alignnone size-full wp-image-511" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear07.png" alt="Gear07" width="534" height="423" /></a></p>
+<p>&nbsp;</p>
+<p>ProjectSettingsフォルダをコピーします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear08.png"><img class="alignnone size-full wp-image-512" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear08.png" alt="Gear08" width="710" height="479" /></a></p>
+<p>OVRCameraRigをシーンに追加します。これで、両眼対応になりました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear09.png"><img class="alignnone size-full wp-image-513" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear09.png" alt="Gear09" width="473" height="670" /></a></p>
+<p>PC上で実行してちゃんと両眼対応になっているか確認しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear16.png"><img class="alignnone size-full wp-image-521" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear16.png" alt="Gear16" width="1478" height="742" /></a></p>
+<p>&nbsp;</p>
+<h3>Device IDの取得とOculus Signature File（osig）の作成</h3>
+<p>Galaxy S6デバイスに<a href="https://play.google.com/store/apps/details?id=com.skyworxx.sideloadvrdeviceid">SideloadVR DeviceID</a>をインストールし、Device IDを確認します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear10.png"><img class="alignnone wp-image-515 size-large" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear10-576x1024.png" alt="Gear10" width="576" height="1024" /></a></p>
+<p><a href="https://developer.oculus.com/osig/" target="_blank">Oculus Signature File (osig) Generatorサイト</a>にて先ほど確認したDevice IDを入力しいてosigファイルを取得します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear11.png"><img class="alignnone size-full wp-image-516" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear11.png" alt="Gear11" width="977" height="487" /></a></p>
+<p>作成したファイルをUnityプロジェクトにコピーします。<br />
+Assets &#8211; Plugins &#8211; Android &#8211; assets<br />
+にoculussig_xxxxxxxファイルをドラッグしてインポートしてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear12.png"><img class="alignnone size-full wp-image-517" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear12.png" alt="Gear12" width="445" height="333" /></a></p>
+<h3>Galaxy S6のデバッグモードをオンにする</h3>
+<p>Galaxy S6端末から<br />
+設定 &#8211; 端末情報 &#8211; ビルド番号<br />
+を7回タップするとデベロッパーモードがオンになります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear13.png"><img class="alignnone size-full wp-image-518" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear13.png" alt="Gear13" width="500" height="889" /></a></p>
+<p>すると<br />
+設定 &#8211; 端末情報 &#8211; 開発者向けオプション<br />
+が現れるので、USBデバッグをオンに設定します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear14.png"><img class="alignnone size-full wp-image-519" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear14.png" alt="Gear14" width="500" height="889" /></a></p>
+<h3>ビルド設定</h3>
+<p>PlatformをAndroidに変更します。選択した状態でSwitch Platformをクリック。<br />
+TEっれCompressionをETC2(GRE3.0)に変更。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear15.png"><img class="alignnone size-full wp-image-520" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear15.png" alt="Gear15" width="566" height="619" /></a></p>
+<h3>ビルドして実機で実行</h3>
+<p>Android用ビルドを行うとAndroid用のアプリケーションファイルapkファイルが出来上がります。ここではtest.apkというファイル名です。</p>
+<p>このファイルをGalaxy s6にコピーします。Galaxy s6をUSBケーブルでPCに接続し、エクスプローラーで開きます。Phoneというドライブが見えるのでその中に適当なフォルダを作り先ほどのapkファイルをコピーします。私は_UnityAppsというフォルダを作成しました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear17.png"><img class="alignnone size-full wp-image-522" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear17.png" alt="Gear17" width="1247" height="584" /></a></p>
+<p>次に、Galaxy s6実機からapkファイルを実行するために<a href="https://play.google.com/store/apps/details?id=com.estrongs.android.pop&amp;hl=ja" target="_blank">ES ファイルエクスプローラー</a>をインストールします。 ESファイルエクスプローラーからapkファイルをタップしインストールを行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-25-55.png"><img class="alignnone size-large wp-image-523" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-25-55-576x1024.png" alt="Screenshot_2015-05-01-19-25-55" width="576" height="1024" /></a></p>
+<p>アラートが上がった場合、支持に従ってインストールを進めてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-26-01.png"><img class="alignnone size-large wp-image-524" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-26-01-576x1024.png" alt="Screenshot_2015-05-01-19-26-01" width="576" height="1024" /></a></p>
+<p>インストールが完了するとアプリ一覧にOculus Sampleというアプリが追加されます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-29-581.png"><img class="alignnone size-large wp-image-526" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-29-581-576x1024.png" alt="Screenshot_2015-05-01-19-29-58" width="576" height="1024" /></a></p>
+<p>アイコンをタップしすると、端末をGear VRに挿入するようにアラートが出ますので指示に従います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-30-04.png"><img class="alignnone size-large wp-image-527" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Screenshot_2015-05-01-19-30-04-576x1024.png" alt="Screenshot_2015-05-01-19-30-04" width="576" height="1024" /></a></p>
+<p>ちなみにアプリ名とアイコンは<br />
+Edit &#8211; Project Settings &#8211; Playerから変更可能です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear18.png"><img class="alignnone size-full wp-image-528" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/Gear18.png" alt="Gear18" width="324" height="484" /></a></p>
+<h3>Gear VRに挿入</h3>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/IMG_2526.jpg"><img class="alignnone size-large wp-image-529" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/05/IMG_2526-1024x768.jpg" alt="IMG_2526" width="605" height="454" /></a></p>
+<p>これで完了です！！</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/unity5%e3%81%a7gear-vr%e7%94%a8%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e9%96%8b%e7%99%ba%e7%92%b0%e5%a2%83%e3%81%ae%e8%a8%ad%e5%ae%9a/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Oculusかぶっている人の映像を外部の人と共有する(OVRMirrorの利用)</title>
+		<link>http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/#comments</comments>
+		<pubDate>Sun, 26 Apr 2015 12:08:35 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=438</guid>
+		<description><![CDATA[こんばんは。Oculusを使ったイベントで、Oculusを体験している人の映像を他の客とも共有できたほうが楽しそうという話になり、Oculusのヘッドトラッキングと連携しその前後の映像をプロジェクターで、会場の前後面に表<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Projection.png"><img class="alignnone size-full wp-image-439" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Projection.png" alt="Projection" width="846" height="712" /></a></p>
+<p>こんばんは。Oculusを使ったイベントで、Oculusを体験している人の映像を他の客とも共有できたほうが楽しそうという話になり、Oculusのヘッドトラッキングと連携しその前後の映像をプロジェクターで、会場の前後面に表示する仕組みを用意しました。</p>
+<p>構築には<a href="https://twitter.com/Stereoarts" target="_blank">Nora@Stereoarts</a>さんの開発された<a href="http://stereoarts.jp/" target="_blank">OVRMirror</a>を利用しています。Nora@Stereoartsさん、構築にあたりアドバイスありがとうございました。<br />
+また私の以前書いたエントリー「<a href="http://psychic-vr-lab.com/blog/unity/oculus%E4%BD%BF%E7%94%A8%E6%99%82%E3%81%AB%E7%AC%AC%E4%B8%89%E8%80%85%E8%A6%96%E7%82%B9%E3%81%AE%E3%82%AB%E3%83%A1%E3%83%A9%E3%82%92%E5%88%A5%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%A7/" target="_blank">Oculus使用時に第三者視点のカメラを別ウィンドウで表示する</a>」も参考にしてください。</p>
+<p><span id="more-438"></span></p>
+<p>OVRMirrorは</p>
+<blockquote><p>任意のカメラ(RenderTexture)を、別ウィンドウに描画するコンポーネントです。</p></blockquote>
+<p>OVRMirrorの現バージョンでは、2つの外部出力ウィンドウを生成することができないので、前の映像、後ろの映像を2つつなげて一つのウィンドウに表示し、そのウィンドウを2つのモニタ横断的に表示することで、モニタ１に前映像を、モニタ２に後ろ映像を表示するということを実現しました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection1.png"><img class="alignnone size-full wp-image-440" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection1.png" alt="projection1" width="693" height="864" /></a></p>
+<p>設定のキモは2つのカメラで撮った映像を1つのRenderTextureに表示し、OVRMirrorへ受け渡すところです。主要箇所の設定は下記のとおりです。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection5.png"><img class="alignnone size-full wp-image-450" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection5.png" alt="projection5" width="799" height="899" /></a> <a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection6.png"><img class="alignnone size-full wp-image-451" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection6.png" alt="projection6" width="799" height="899" /></a> <a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection7.png"><img class="alignnone size-full wp-image-452" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection7.png" alt="projection7" width="881" height="899" /></a></p>
+<p>&nbsp;</p>
+<p>今回のプロジェクトで利用したOculusカメラとOVRMirrorを組み合わせて適切に設定を行ったパッケージを下記からダウンロードできるようにしてあります。</p>
+<p>Oculusカメラは相性の問題で0.4.4を利用。<br />
+OVRMirrorは現時点の最新版であるOVRMirror_20150215を利用しています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg"><img class="alignnone  wp-image-382" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg" alt="UnityIcon" width="28" height="18" /></a><a href="https://www.dropbox.com/s/oqu86gq2d94sp7s/OVRCameraRig_with_2Projectors.unitypackage?dl=1">OVRCameraRig_with_2Projectors.unitypackage</a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection2.png"><img class="alignnone size-full wp-image-443" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection2.png" alt="projection2" width="720" height="758" /></a></p>
+<p>パッケージをインポート後に/Assets/OVRCameraRig_with_2Projectors<br />
+をシーンに追加することで利用が可能です。OVRMirrorはエディター上では標準では表示されないので、ビルドすることで出力ウィンドウが表示されます。</p>
+<p>Oculusで見た映像がこんなかんじの場合、</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Oculus.png"><img class="alignnone size-full wp-image-441" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/Oculus.png" alt="Oculus" width="1920" height="1080" /></a>OVRmirrorで出力した左半分にはOculusで見ている映像。右半分には後ろ側の映像が表示されます。これを左右別のプロジェクターに表ずることでOculusを装着している人と観客の一体感を作り出します。<a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/OVRMirror.png"><img class="alignnone size-full wp-image-442" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/OVRMirror.png" alt="OVRMirror" width="1719" height="814" /></a></p>
+<p>下記の設定で表示の微調整を行いました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection3.png"><img class="alignnone size-full wp-image-444" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection3.png" alt="projection3" width="1153" height="546" /></a></p>
+<p>OVRMirrorで表示するCameraのField of Viewを60から75に変更することで、Oculusで見ている視野に近い映像を表示するようにしています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection4.png"><img class="alignnone size-full wp-image-445" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/04/projection4.png" alt="projection4" width="549" height="221" /></a></p>
+<p>OVRMirrorで表示する画角はRenderTextureのサイズで指定します。<br />
+また表示を高速にするために、OVRMirror表示のAnti-AliasingをNoneに設定していますが、こちらは環境によりオンにしてもいいかと思います。</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/oculus%e3%81%8b%e3%81%b6%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e4%ba%ba%e3%81%ae%e6%98%a0%e5%83%8f%e3%82%92%e5%a4%96%e9%83%a8%e3%81%ae%e4%ba%ba%e3%81%a8%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8bovrmirror/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Kinect v2でスケルトン情報をオーバーレイ表示する方法(Unity)</title>
+		<link>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/#comments</comments>
+		<pubDate>Mon, 30 Mar 2015 13:51:34 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Kinect]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=412</guid>
+		<description><![CDATA[Unity上で、Kinect v2カメラを使って取得したカラー映像に、スケルトン（骨格情報）を重ねて表示する方法を紹介します。使いまわしやすいUnity用コードがネット上に見つからなかったので作成したので公開しておきます<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/002.gif"><img class="alignnone size-full wp-image-436" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/002.gif" alt="002" width="1500" height="1000" /></a></p>
+<p>Unity上で、Kinect v2カメラを使って取得したカラー映像に、スケルトン（骨格情報）を重ねて表示する方法を紹介します。使いまわしやすいUnity用コードがネット上に見つからなかったので作成したので公開しておきます。</p>
+<p>Kinect v2 with MS-SDKアセットには何かと便利な機能が揃っているので、このアセットをベースに開発を行うことにします。ただし、スケルトンをオーバーレイ表示する機能が存在しないため、その部分だけ自作して利用することにしました。</p>
+<p><span id="more-412"></span></p>
+<p><img class="alignnone size-full wp-image-413" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect.jpg" alt="kinect" width="600" height="450" /></p>
+<p>まずは、<a href="https://www.assetstore.unity3d.com/en/#!/content/18708" target="_blank">Kinect v2 with MS-SDKアセット（20ドル）</a>を購入しインポートします。</p>
+<p>スケルトンを描画する用のスクリプトを用意しましたので、新規にc#スクリプトを作成しコピペします。スクリプト名をKinectSkeletonOverlay_Psychic.csとしておきましょう。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+using System;
+using System.Collections.Generic;
+using Windows.Kinect;
+
+public class KinectSkeletonOverlay_Psychic : MonoBehaviour {
+
+    public GUITexture displayGui;      //スケルトン表示用
+
+    private Texture2D displayTexture;
+    private KinectInterop.BodyData bodyData;
+    private KinectInterop.SensorData sensorData = null;
+    private KinectSensor _sensor;
+
+
+	// Use this for initialization
+	void Start () {
+        _sensor = KinectSensor.GetDefault();
+        displayTexture = new Texture2D(1920,1080);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+        //Kinectマネージャーのインスタンスを取得
+        KinectManager manager = KinectManager.Instance;
+
+        //カラーマップ取得（カメラ撮影のカラー画像）
+        if (displayGui &amp;&amp; (displayGui.texture == null))
+        {
+            displayTexture = manager.GetUsersClrTex();
+        }
+
+        //センサーデータをDrawSkeleton2関数内で利用できるように取得しておく
+        sensorData = manager.GetSensorData();
+        //人数分ループ
+        for (int i = 0; i &lt; manager.GetUsersCount(); i++)
+        {
+            bodyData = manager.GetUserBodyData(manager.GetUserIdByIndex(i)); 
+            DrawSkeleton2(displayTexture, ref bodyData);
+            displayTexture.Apply();
+        }
+        displayGui.texture = displayTexture;
+	}
+
+
+    //指定のテクスチャにスケルトンを追加描画
+    private void DrawSkeleton2(Texture2D aTexture, ref KinectInterop.BodyData bodyData)
+    {
+     
+        //関節でループ
+        int jointsCount = sensorData.jointCount;
+        for (int i = 0; i &lt; jointsCount; i++)
+        {
+            int parent = (int)sensorData.sensorInterface.GetParentJoint((KinectInterop.JointType)i);
+
+            if (bodyData.joint[i].trackingState != KinectInterop.TrackingState.NotTracked &amp;&amp;
+               bodyData.joint[parent].trackingState != KinectInterop.TrackingState.NotTracked)
+            {
+
+                //3次元座標をカラーマップ座標に変換
+                //CamraSpacePointはメートル座標
+                //ColorSpacePointはカラーマップ(フルHD)座標
+                CameraSpacePoint posParent_cameraSpace = new CameraSpacePoint();
+                posParent_cameraSpace.X = bodyData.joint[parent].kinectPos.x;
+                posParent_cameraSpace.Y = bodyData.joint[parent].kinectPos.y;
+                posParent_cameraSpace.Z = bodyData.joint[parent].kinectPos.z;
+                ColorSpacePoint posParent_colorPoint = _sensor.CoordinateMapper.MapCameraPointToColorSpace(posParent_cameraSpace);
+                Vector2 posParent = new Vector2(posParent_colorPoint.X, posParent_colorPoint.Y);
+
+                CameraSpacePoint posJoint_cameraSpace = new CameraSpacePoint();
+                posJoint_cameraSpace.X = bodyData.joint[i].kinectPos.x;
+                posJoint_cameraSpace.Y = bodyData.joint[i].kinectPos.y;
+                posJoint_cameraSpace.Z = bodyData.joint[i].kinectPos.z;
+                ColorSpacePoint posJoint_colorPoint = _sensor.CoordinateMapper.MapCameraPointToColorSpace(posJoint_cameraSpace);
+                Vector2 posJoint = new Vector2(posJoint_colorPoint.X, posJoint_colorPoint.Y);
+
+
+                if (posParent != Vector2.zero &amp;&amp; posJoint != Vector2.zero)
+                {
+                    //関節情報が飛んでる場合には骨を描画せず
+                    if (float.IsInfinity(posParent.x)) { break; }
+                    if (float.IsInfinity(posParent.y)) { break; }
+                    if (float.IsInfinity(posJoint.x))  { break; }
+                    if (float.IsInfinity(posJoint.y))  { break; }
+
+                    //KinectInteropに用意されている機能を使い骨を描画
+                    KinectInterop.DrawLine(aTexture, (int)posParent.x, (int)posParent.y, (int)posJoint.x, (int)posJoint.y, Color.yellow);
+                }
+            }
+        }
+    }
+}</pre><p>余談ですが、Kinect v2 with MS-SDKアセットにはDrawSkeletonという関数が用意されています。この関数は良く出来ていて、Depth情報を元に人以外の背景を切り抜いてくれたりするんですが、Depth情報を元にしているため画角が512&#215;424サイズのテクスチャとしてしか取得できなかったり、背景切り抜きをオフに出来なかったりと、少し使い勝手が悪かったりします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect1.png"><img class="alignnone size-full wp-image-415" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect1.png" alt="kinect1" width="184" height="177" /></a></p>
+<p>メモ</p>
+<p>bodyData.joint[i].kinectPos.xで取得できる座標はメートル単位のデータなので、これをカラーマップ座標系（1920&#215;1080）に変換する必要がある。<br />
+変換に必要なMapCameraPointToColorSpace関数はKinect v2 with MS-SDKアセット内でラッパー関数が用意されていないので<br />
+using Windows.Kinect;でKinectのSDKを呼び出し<br />
+private KinectSensor _sensor;<br />
+_sensor = KinectSensor.GetDefault();<br />
+_sensor.CoordinateMapper.MapCameraPointToColorSpace()として利用する必要あり<br />
+このあたりの処理をきっちりやらないとボーンが実際の映像とずれたりします。</p>
+<p>続いて、下記を参考にシーンの準備をします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i1.png"><img class="alignnone size-full wp-image-416" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i1.png" alt="kinect-i1" width="866" height="984" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i2.png"><img class="alignnone size-full wp-image-417" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i2.png" alt="kinect-i2" width="865" height="265" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i3.png"><img class="alignnone size-full wp-image-418" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i3.png" alt="kinect-i3" width="869" height="364" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i4.png"><img class="alignnone size-full wp-image-419" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i4.png" alt="kinect-i4" width="866" height="468" /></a></p>
+<p>&nbsp;</p>
+<p>実行するとこんな感じでカラーマップ（カラー映像）にスケルトンのボーンがオーバーレイ描画されます。<br />
+（散らかった部屋と、タイマー撮影の方法がわからず左手でPrintScreenを押してるのはご愛嬌）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect2.png"><img class="alignnone size-full wp-image-420" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect2.png" alt="kinect2" width="1120" height="941" /></a></p>
+<p>・KinectSkeletonOverlay_Psychic.cs<br />
+・テスト用のシーン<br />
+・各種必要GameObject及び設定<br />
+をまとめたPackageを作成しておきましたので公開しておきます。<br />
+「Kinect v2withMS-SDKアセット」は含みませんので「Kinect v2withMS-SDKアセット」をインポートした後に下記パッケージをインポートして実行してください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg"><img class="alignnone  wp-image-382" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg" alt="UnityIcon" width="24" height="16" /></a><a href="https://www.dropbox.com/sh/tfrxxzh1nyfi1ma/AACvVq379JH3v_9daYNfj6r9a?dl=1" target="_blank">KinectV2SkeletonOverlay.unitypackage</a></p>
+<p>&nbsp;</p>
+<p>ついでに、Kinect v2withMS-SDKを利用して、スケルトンの3次元情報をそのままUnityの3D空間で利用する際のハマりどころの解説をしておきます。</p>
+<p>Kinect v2withMS-SDKアセットは<a href="http://psychic-vr-lab.com/blog/unity/%E7%B6%9Akinect-v2%E3%81%A7%E3%83%A6%E3%83%8B%E3%83%86%E3%82%A3%E3%81%A1%E3%82%83%E3%82%93%E3%82%92%E5%8B%95%E3%81%8B%E3%81%99%EF%BC%88kinect-v2withms-sdk%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88/" target="_blank">[続]Kinect v2でユニティちゃんを動かす</a>で紹介したように、Kinectで取得した骨格情報をMechanimで利用することが簡単にできます。この機能は良く出来過ぎていて、下記の機能が実装されています。ホネホネ人間はCubemanといいます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect3.png"><img class="alignnone size-full wp-image-422" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect3.png" alt="kinect3" width="864" height="623" /></a></p>
+<p>これは、非常に便利で有意義な機能なのですが、Kinectが取得した3次元情報をそのまま利用せずに、人体を認識した瞬間の場所をoffset情報として相対的な座標計算に用いています。1人分の情報しか利用しない場合はいいのですが、ふたり以上の人物の情報を同時に扱う場合はには、二人の各関節の場所が絶対座標ではなく、offsetを元に相対的な座標であるため問題が発生します。具体的には二人が手を合わせてたとしても、それぞれ別のoffsetが聞いていて、Cubemanの手が合いません。</p>
+<p>CubemanController.csの163行目のoffset処理している箇所をコメントアウトすることでこの問題を回避することが可能です。</p><pre class="crayon-plain-tag">//CubemanController.cs
+//163行目
+//transform.position = initialPosOffset + (verticalMovement ? posPointMan : new Vector3(posPointMan.x, 0, posPointMan.z));
+transform.position =  (verticalMovement ? posPointMan : new Vector3(posPointMan.x, 0, posPointMan.z));</pre><p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect4.png"><img class="alignnone size-full wp-image-423" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect4.png" alt="kinect4" width="512" height="389" /></a></p>
+<p>仲良く二人分のCubemanを表示することができるようになりました。</p>
+<p>ただし、この処理をはずすことで、Kinectカメラの高さがCubemanの垂直方向の位置に影響をおよぼすようになるため、足が地面にめり込んだり宙に浮いたりするようになりますので、調整が必要になります。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>MIDIコントローラーNanoKONTROL2をUnityアナログ入力デバイスとして利用する</title>
+		<link>http://psychic-vr-lab.com/blog/unity/midi%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bcnanokontrol2%e3%82%92unity%e3%82%a2%e3%83%8a%e3%83%ad%e3%82%b0%e5%85%a5%e5%8a%9b%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e3%81%a8/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/midi%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bcnanokontrol2%e3%82%92unity%e3%82%a2%e3%83%8a%e3%83%ad%e3%82%b0%e5%85%a5%e5%8a%9b%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e3%81%a8/#comments</comments>
+		<pubDate>Tue, 10 Feb 2015 08:38:29 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=398</guid>
+		<description><![CDATA[@from2001vrです。@GoddoSukoupionがKORG社のMIDIコントローラーNanoKONTROL2を使ってDJで利用するのがカッコ良かったので、私もさわってみることにしました。 nanoKONTROL<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/midi%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bcnanokontrol2%e3%82%92unity%e3%82%a2%e3%83%8a%e3%83%ad%e3%82%b0%e5%85%a5%e5%8a%9b%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e3%81%a8/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="https://twitter.com/from2001vr" target="_blank">@from2001vr</a>です。<a href="https://twitter.com/GoddoSukoupion" target="_blank">@GoddoSukoupion</a>がKORG社のMIDIコントローラーNanoKONTROL2を使ってDJで利用するのがカッコ良かったので、私もさわってみることにしました。</p>
+<p>nanoKONTROL2はスライダー及びノブが8個ずつ、ボタンが35個付いているMIDIコントローラーです。DJするときやDTMなどでソフトウェアシンセサイザーとともに利用するものですが、ボタンやアナログ入力が多数付いているので、音楽での利用以外にも何かと便利なコントローラーかもしれません。</p>
+<p>このnanoKONTROL2をUnityから簡単に利用するためのスクリプトを作成しましたので、使い方の備忘録として公開しておきます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nano_kon2_group.jpg"><img class="alignnone size-full wp-image-399" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nano_kon2_group.jpg" alt="nano_kon2_group" width="1772" height="827" /></a></p>
+<p><span id="more-398"></span>ちなみにnanoKONTROL2の通信に利用されるMIDIとは</p>
+<blockquote><p>MIDI（ミディ、Musical Instrument Digital Interface）は、日本のMIDI規格協議会（JMSC、現在の社団法人音楽電子事業協会）と国際団体のMIDI Manufacturers Association (MMA) により策定された、電子楽器の演奏データを機器間でデジタル転送するための世界共通規格。物理的な送受信回路・インタフェース、通信プロトコル、ファイルフォーマットなど複数の規定からなる。（Wikipediaより）</p></blockquote>
+<p>にある通り、音楽関連機器と通信するために定められた国際規格です。</p>
+<p>UnityからMIDIを制御するためのプラグインはいくつかあるようですが、今回は<a href="https://twitter.com/_kzr" target="_blank">@_kzr</a>氏の<a href="https://github.com/keijiro/unity-midi-receiver-test" target="_blank">unity-midi-receiver-test</a>をベースに一部改変するとともにnanoKONTROL2専用のスクリプト等を作成しました。</p>
+<p>なお、本記事で紹介するスクリプト及びプロジェクトは下記のライセンスに準じて配布しています。</p>
+<blockquote><p>License<br />
+Copyright (c) 2013 Keijiro Takahashi</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &#8220;Software&#8221;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br />
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &#8220;AS IS&#8221;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p></blockquote>
+<p>まずは下準備</p>
+<p>KORG社のサイトよりUSB-MIDIドライバをダウンロードしインストールします。</p>
+<ul>
+<li><a href="http://www.korg.co.jp/Support/Download/Software/USB-MIDI/win.html" target="_blank">Windows用USB-MIDIドライバ</a></li>
+<li><a href="http://www.korg.co.jp/Support/Download/Software/USB-MIDI/mac.html" target="_blank">Mac用USB-MIDIドライバ</a></li>
+</ul>
+<p>続いて下記からnanoKONTROL2用プロジェクト及びパッケージファイルをダウンロードします。（unity-midi-receiveを含みます）</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/kd3mi2g9tpdceot/NanoKontrol2.zip?dl=1" target="_blank">nanoKONTROL2用Unityプロジェクト</a></li>
+</ul>
+<p>ダウンロードZIPを解凍し、NanoKontrol2_projectを開くかNanoKontrol2.unitypackageをダブルクリックし既存のプロジェクトに追加してください。</p>
+<p>&nbsp;</p>
+<p>使い方は非常に簡単です。<br />
+/Assets/NanoKontrol2/NanoKontrol2プレハブをヒエラルキービューに追加します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nanoKONTROL1.png"><img class="alignnone size-full wp-image-403" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nanoKONTROL1.png" alt="nanoKONTROL1" width="1025" height="744" /></a></p>
+<p>実行するとnanoKONTROL2の操作に合わせてインスペクタービューの値が変化するのが確認できると思います。</p>
+<p>では次にスクリプトから値を取得するサンプルを示します。</p>
+<p>値の取得の方法は大きく2つあります。</p>
+<ul>
+<li>値が変更された場合やボタンが押された場合に呼び出されるコールバック関数の引数として値を取得する</li>
+<li>任意のタイミングでnanoKontrol2インスタンスの変数を取得する</li>
+</ul>
+<p>用途やプログラミングスタイルに合わせてどちらかを利用してください。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class SampleScript_for_NanoKontrol2 : MonoBehaviour {
+	
+	//nanoKontrol2を宣言
+	private NanoKontrol2 nanoKontrol2;
+	
+	void Start () {
+		//Start()の中でコールバック関数の設定を行う
+		nanoKontrol2 = GameObject.Find("NanoKontrol2").GetComponent&lt;NanoKontrol2&gt;();
+		nanoKontrol2.valueChangedFunctions.Add (nanoKontrol2_valueChanged);
+		nanoKontrol2.keyPushedFunctions.Add (nanoKontrol2_keyPushed);
+	}
+	
+	
+	//キー（スライダー・ノブ）の値が変更された場合に呼び出される関数
+	public void nanoKontrol2_valueChanged(string keyName, int keyValue)
+	{
+		Debug.Log(keyName);
+		Debug.Log(keyValue);
+	}
+	
+	//キーが押された場合に呼び出される関数
+	public void nanoKontrol2_keyPushed(string keyName)
+	{
+		Debug.Log(keyName);
+	}
+	
+	
+	//任意のタイミングでスライダーやノブの値の取得
+	void Update () {
+		//Debug.Log (nanoKontrol2.Slider1);
+		//Debug.Log (nanoKontrol2.Slider2);
+		//Debug.Log (nanoKontrol2.knob1);
+		//Debug.Log (nanoKontrol2.knob2);
+	}
+
+}</pre><p>上記スクリプトは<br />
+\Assets\NanoKontrol2\Scripts\SampleScript_for_NanoKontrol2.cs<br />
+にありますので、このスクリプトを任意のオブジェクトにアタッチします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nanoKONTROL2.png"><img class="alignnone size-full wp-image-404" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nanoKONTROL2.png" alt="nanoKONTROL2" width="1025" height="744" /></a></p>
+<p>実行するとnanoKONTROL2の操作に合わせてConsoleビューにログが表示されるのを確認できます。</p>
+<p>デモシーンも2つ用意していますので参考にしてください</p>
+<ul>
+<li>/NanoKontrol2/Demo/Demo1シーン<br />
+スライダー1の値に合わせてオブジェクトのサイズが変わるシンプルなデモ</li>
+<li>/NanoKontrol2/Demo/Demo2シーン<br />
+各スライダー・ノブに合わせてオブジェクトのサイズ・角度が変わるサンプル<br />
+SMRボタンをおすことによりオブジェクトの色が変化します</li>
+</ul>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nanoKONTROL3.png"><img class="alignnone size-full wp-image-405" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/02/nanoKONTROL3.png" alt="nanoKONTROL3" width="1025" height="744" /></a></p>
+<p>nanoKONTROL2はボタンの数も多く、スライダー・ノブでアナログ情報の入力も行えるため、イベント等でUnityを利用したインタラクティブコンテンツを利用する際には非常に便利なコントローラーのように思います。</p>
+<p>一つ難点としてはMIDIの仕様上、値に変化があった場合にのみMIDI信号が送信される仕組みになっているため（たぶん）、各スライダー・ノブの初期値を取得することができません。その点留意して利用してください。</p>
+<p>今回MIDIの制御に利用させていただいた非常に有用なプラグインを公開されている@_kzr氏にあらためて感謝です。私の書いたnanoKONTROL2用スクリプトは自由に改変・利用・配布していただいて構いません。ソースコード汚すぎて恥ずかしいですが。。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/midi%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bcnanokontrol2%e3%82%92unity%e3%82%a2%e3%83%8a%e3%83%ad%e3%82%b0%e5%85%a5%e5%8a%9b%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e3%81%a8/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>全天球動画（外部mp4ファイル）再生環境の作り方-AVProアセット利用</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/#comments</comments>
+		<pubDate>Sat, 31 Jan 2015 10:52:25 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=372</guid>
+		<description><![CDATA[from2001vrです。 Unityで任意のフォルダに置いてあるスティッチ済み全天球動画ファイルを再生する環境の構築方法です。 ビデオ再生用アセットのAVPro QuickTimeを利用して、映像を全天球オブジェクトへ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="https://twitter.com/from2001vr" target="_blank">from2001vr</a>です。</p>
+<p>Unityで任意のフォルダに置いてあるスティッチ済み全天球動画ファイルを再生する環境の構築方法です。<br />
+ビデオ再生用アセットのAVPro QuickTimeを利用して、映像を全天球オブジェクトへ投影する方法を説明します。</p>
+<p>Unity ProのMovie Textureを使う方法は<br />
+<a href="http://psychic-vr-lab.com/blog/unity/360%E5%BA%A6%E3%82%AB%E3%83%A1%E3%83%A9theta%E3%81%A7%E6%92%AE%E3%81%A3%E3%81%9F%E5%86%99%E7%9C%9F%E3%82%92unity%E3%81%A7%E4%BD%BF%E3%81%86/" target="_blank">360度カメラTHETAで撮った写真・動画をUnityで使う</a><br />
+で紹介しましたが、AVProを使うことで下記のメリットがあります。</p>
+<ul>
+<li>外部mp4ファイルの再生が可能（プロジェクトに事前インポート不要）</li>
+<li>映像はライトの影響を受けず表示される（ライト不要）</li>
+<li>映像を途中から再生するなど細かな制御ができる</li>
+<li>動作が軽く安定している（気がする）</li>
+</ul>
+<p>まずは<a href="https://www.assetstore.unity3d.com/en/#!/content/2307" target="_blank">AVPro QuickTime</a>を購入しインポートします。開発元の<a href="http://www.renderheads.com/portfolio/UnityAVProQuickTime/" target="_blank">RenderHeads公式サイト</a>では透かしの入るトライアル版も公開されています。AVProにはQuicktime版とWindows Media版がありますが、QuickTime版はWindowsでもMacでも動きますのでQuickTime版を購入しましょう。</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro1.png"><img class="alignnone size-full wp-image-373" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro1.png" alt="AVPro1" width="1076" height="575" /></a></p>
+<p><span id="more-372"></span></p>
+<p>全天球動画投影のためのオブジェクトUVsphereを下記にアップしましたのでダウンロードしインポートします。ちなみにこのオブジェクトの作り方は<a href="http://psychic-vr-lab.com/blog/unity/360%E5%BA%A6%E3%82%AB%E3%83%A1%E3%83%A9theta%E3%81%A7%E6%92%AE%E3%81%A3%E3%81%9F%E5%86%99%E7%9C%9F%E3%82%92unity%E3%81%A7%E4%BD%BF%E3%81%86/" target="_blank">こちら</a>。</p>
+<p><a href="https://www.dropbox.com/s/1a8bo6v93fu5ynw/UVsphere.blend?dl=1" target="_blank">全天球用内側メッシュSphereオブジェクト UVsphere.blend</a> <a href="https://twitter.com/GoddoSukoupion" target="_blank">@GoddoSukoupion</a>作成</p>
+<p>UVsphereをシーンに追加してください。この球に映像が投影されます。</p>
+<p>空オブジェクトを作成しAVProMovieObjectとでも名づけます。<br />
+下記のスクリプトを追加していきます。デフォルト値以外に変更する場所を下記に示します。（下記画像では赤い点の場所）</p>
+<ul>
+<li>AVProQuickTimeMaterialApplyスクリプト<br />
+Material：UVsphere_material</li>
+<li>AVProQuickTimeMovieスクリプト<br />
+Folder：再生するビデオの保存フォルダ<br />
+Filename：再生するビデオファイル名</li>
+<li>AVProQuickTimeManagerスクリプト</li>
+<li>Projector<br />
+Material：UVsphere_material</li>
+</ul>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro6.png"><img class="alignnone size-full wp-image-379" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro6.png" alt="AVPro6" width="1103" height="1080" /></a></p>
+<p>実行すると綺麗に全天球動画が再生されているのを確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro7.png"><img class="alignnone size-full wp-image-380" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/AVPro7.png" alt="AVPro7" width="1007" height="628" /></a></p>
+<p>&nbsp;</p>
+<p>AVProではスクリプトから動画の読み込みや再生に対応していますがドキュメントやサンプルがあまり整備されていません。</p>
+<p>基本的な一時停止、再生、指定ファイルの読み込み再生を行うためのサンプルコードを作成しましたので載せておきます。<br />
+任意のオブジェクトにアタッチし、AVProQuickTimeMovieにAVProMovieObjectを設定してください。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class AVProFunctions : MonoBehaviour {
+	
+	//キーボードで制御サンプル
+	//  S: 一時停止
+	//  P: 再生
+	//  L: 指定のファイルを読み込んで再生
+	void Update () {
+		if (Input.GetKeyDown(KeyCode.S)) {
+			pause();
+		} 
+		if (Input.GetKeyDown(KeyCode.P)) {
+			play();
+		}
+		if (Input.GetKeyDown(KeyCode.L)) {
+			loadMovieFile("T:/video.mp4");
+		}
+	}
+
+
+	public AVProQuickTimeMovie _movie;
+	private AVProQuickTime moviePlayer;
+
+	//再生
+	void play(){
+		moviePlayer = _movie.MovieInstance;
+		moviePlayer.Play();
+	}
+
+	//一時停止
+	void pause(){
+		moviePlayer = _movie.MovieInstance;
+		moviePlayer.Pause();
+	}
+
+	//ビデオファイル読み込み
+	void loadMovieFile(string fileFullPath){
+		_movie._folder =  System.IO.Path.GetDirectoryName (fileFullPath);
+		_movie._filename = System.IO.Path.GetFileName (fileFullPath);
+		_movie.LoadMovie();
+		play ();
+	}
+
+
+}</pre><p>上記全天球用Sphereオブジェクト、設定済みAVProMovieObject、サンプルシーン、サンプル360度映像、基本関数サンプルをセットにしたPackageファイルを用意しましたので公開しておきます。AVPro QuickTime製品版・トライアル版両方で動作することを確認済み。</p>
+<p><a href="https://www.dropbox.com/s/9vqfd2mbjdsomly/AVPro360Sample.unitypackage?dl=1"><img class="alignnone  wp-image-382" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg" alt="UnityIcon" width="29" height="19" />AVPro360Sample.unitypackage</a></p>
+<ol>
+<li>AVProアセットのインポート</li>
+<li>AVPro用360度設定済みパッケージAVPro360Sample.unitypackageのインポート（インポートに少し時間がかかります）</li>
+<li>AVPro_360というフォルダが作成され下記のファイルがインポートされます。<br />
+AVProMovieObject：　360度全天球設定済みPrefab<br />
+UVsphere：　全天球用球体オブジェクト<br />
+AVProFunctions：　基本関数サンプルセット<br />
+Sample/AVPro360Sample：　サンプルシーン<br />
+Sample/RollerCoaster_Short：　サンプル360度映像(<a href="https://www.assetstore.unity3d.com/en/#!/content/21979" target="_blank">SphericalImageCam</a>で生成)</li>
+<li>初回実行時にはDLLコピーに関するアラートが上がるので「Yes, copy」を選択後、再度実行しなおしてください。</li>
+</ol>
+<p>&nbsp;</p>
+<p>最後に、設定の勘違いで行き詰っていたところを助けていただいた@kojiokbさんどうもありがとうございました。</p>
+<blockquote class="twitter-tweet" lang="ja" data-conversation="none" data-cards="hidden"><p><a href="https://twitter.com/from2001vr">@from2001vr</a> トライアル版で試してみましたが特に問題なく360度動画の表示できました。インスペクターはこんな感じです。（phong1が自作Sphereのマテリアルです） <a href="https://t.co/DDLrjbuns9">https://t.co/DDLrjbuns9</a> <a href="http://t.co/eiGcl7n5p8">pic.twitter.com/eiGcl7n5p8</a></p>
+<p>— koji okabe (@kojiokb) <a href="https://twitter.com/kojiokb/status/561417294857789440">2015, 1月 31</a></p></blockquote>
+<p><script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script></p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e5%85%a8%e5%a4%a9%e7%90%83%e5%8b%95%e7%94%bb%e5%86%8d%e7%94%9f%e7%92%b0%e5%a2%83%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>UnityでOculusローラーコースターの作成方法(Mega Shapesアセット)</title>
+		<link>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7oculus%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bc%e3%82%b3%e3%83%bc%e3%82%b9%e3%82%bf%e3%83%bc%e3%81%ae%e4%bd%9c%e6%88%90%e6%96%b9%e6%b3%95mega-shapes%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7oculus%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bc%e3%82%b3%e3%83%bc%e3%82%b9%e3%82%bf%e3%83%bc%e3%81%ae%e4%bd%9c%e6%88%90%e6%96%b9%e6%b3%95mega-shapes%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/#comments</comments>
+		<pubDate>Fri, 30 Jan 2015 08:04:11 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=350</guid>
+		<description><![CDATA[from2001vrです。 UE4にはローラーコースタープラグインがあっていいなと思っているUnity使いの皆さま。UnityでRoller Coasterの作り方の説明です。 有料アセットのMega Shapes（10<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7oculus%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bc%e3%82%b3%e3%83%bc%e3%82%b9%e3%82%bf%e3%83%bc%e3%81%ae%e4%bd%9c%e6%88%90%e6%96%b9%e6%b3%95mega-shapes%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="https://twitter.com/from2001vr" target="_blank">from2001vr</a>です。</p>
+<p>UE4にはローラーコースタープラグインがあっていいなと思っているUnity使いの皆さま。UnityでRoller Coasterの作り方の説明です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster0.png"><img class="alignnone size-full wp-image-362" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster0.png" alt="Coaster0" width="1321" height="661" /></a></p>
+<p>有料アセットの<a href="http://u3d.as/content/chris-west/mega-shapes/32r" target="_blank">Mega Shapes</a>（100ドル）を利用します。購入してインポートします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster1.png"><img class="alignnone size-full wp-image-351" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster1.png" alt="Coaster1" width="814" height="439" /></a></p>
+<p>&nbsp;</p>
+<p><span id="more-350"></span></p>
+<p>まず、コースターを走らせる道を作成します。道をつくるパスをスプライン曲線で作ります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster2.png"><img class="alignnone size-full wp-image-352" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster2.png" alt="Coaster2" width="547" height="466" /></a></p>
+<p>ヒエラルキービューに Create &#8211; Create Other &#8211; MegaShape &#8211; Circle Shape(他の形でも良い)を選択します。<br />
+シーンビューに円形のスプライン曲線が現れます。インスペクタービューの設定で円のRadius（半径）を10に変更してコースを大きくしておきます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster3.png"><img class="alignnone size-full wp-image-353" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster3.png" alt="Coaster3" width="1685" height="1080" /></a></p>
+<p>円周にある矢印（Knot）を動かしてコースターの道の計上を作成します。</p>
+<p>つくったパスに厚みを付けて道にしましょう。厚みをつける形を指定してMegaShapeオブジェクトを作成します。今回はRactangle Shapeを選択します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster4.png"><img class="alignnone size-full wp-image-354" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster4.png" alt="Coaster4" width="529" height="438" /></a></p>
+<p>では道（Loft）を作っていきましょう。MegaSpaheのLoftオブジェクトを作成します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster5.png"><img class="alignnone size-full wp-image-355" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster5.png" alt="Coaster5" width="527" height="452" /></a></p>
+<p>LoftのインスペクタービューからAdd Layerをクリックします。ポップアップウィンドウが出てきます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster61.png"><img class="alignnone size-full wp-image-357" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster61.png" alt="Coaster6" width="861" height="642" /></a></p>
+<p>Pathにコースターを走らせるための道のパス（Circle Shape）<br />
+Sectionに道の厚み（Rectangle Shape）<br />
+Materialに道に利用したいマテリアル<br />
+を設定します。</p>
+<p>Createをクリックすると道が出来上がります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster7.png"><img class="alignnone size-full wp-image-358" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster7.png" alt="Coaster7" width="773" height="551" /></a></p>
+<p>次に道（線路）を走らせたいコースターを準備してプロジェクトに追加します。<br />
+私は<a href="http://u3d.as/2ga" target="_blank">レーシングカー</a>を走らせることにしました。プロジェクトに追加します。Stockcarという名前のプレハブです。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster8.png"><img class="alignnone size-full wp-image-359" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster8.png" alt="Coaster8" width="607" height="313" /></a></p>
+<p>走らせたいオブジェクト（今回はレーシングカーStockcar）にMegaWalkLoftSmoothスクリプトを追加します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster9.png"><img class="alignnone size-full wp-image-360" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster9.png" alt="Coaster9" width="1261" height="903" /></a></p>
+<p>&nbsp;</p>
+<p>Cross Alpha：　道（Loft）のどの面を走らせたいかを変更（上や底や側面などを設定できます）<br />
+Surface：　走らせたい道（Loft）を指定<br />
+Layer：　Noneになっているものを変更する必要があります。ここでは追加されているNew Layerを選択。<br />
+Animate：　チェックがonになっていると車が動きます。<br />
+Speed：　移動速度を指定します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster10.png"><img class="alignnone size-full wp-image-361" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster10.png" alt="Coaster10" width="1216" height="732" /></a></p>
+<p>背景などを設定して実行するとコースターの完成です。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster11.png"><img class="alignnone size-full wp-image-364" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/Coaster11.png" alt="Coaster11" width="1896" height="1069" /></a></p>
+<p>Oculusカメラを設定すれば迫力のコースターが楽しめます。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/unity%e3%81%a7oculus%e3%83%ad%e3%83%bc%e3%83%a9%e3%83%bc%e3%82%b3%e3%83%bc%e3%82%b9%e3%82%bf%e3%83%bc%e3%81%ae%e4%bd%9c%e6%88%90%e6%96%b9%e6%b3%95mega-shapes%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Visual iTween Path Editorで視点もポジションも自由に移動するカメラワーク</title>
+		<link>http://psychic-vr-lab.com/blog/unity/viaual-itween-path-editor%e3%81%a7%e8%87%aa%e7%94%b1%e3%81%aa%e3%82%ab%e3%83%a1%e3%83%a9%e3%83%af%e3%83%bc%e3%82%af/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/viaual-itween-path-editor%e3%81%a7%e8%87%aa%e7%94%b1%e3%81%aa%e3%82%ab%e3%83%a1%e3%83%a9%e3%83%af%e3%83%bc%e3%82%af/#comments</comments>
+		<pubDate>Fri, 30 Jan 2015 02:29:32 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=341</guid>
+		<description><![CDATA[from2001vrです。 iTweenを使うと、オブジェクトを簡単に自由に移動させることが可能です。そのiTweenの移動Pathを画面を見ながらヴィジュアル作成できるエディタの使い方です。Unityで自由自在にカメラ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/viaual-itween-path-editor%e3%81%a7%e8%87%aa%e7%94%b1%e3%81%aa%e3%82%ab%e3%83%a1%e3%83%a9%e3%83%af%e3%83%bc%e3%82%af/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="https://twitter.com/from2001vr" target="_blank">from2001vr</a>です。</p>
+<p>iTweenを使うと、オブジェクトを簡単に自由に移動させることが可能です。そのiTweenの移動Pathを画面を見ながらヴィジュアル作成できるエディタの使い方です。Unityで自由自在にカメラを動かしたり、オブジェクトを移動させることができます。</p>
+<p>まず、<a href="https://www.assetstore.unity3d.com/en/#!/content/84" target="_blank">iTween</a>とVISUAL ITWEEN PATH EDITORアセットをプロジェクトに追加します。<a href="http://pixelplacement.com/v2/2010/12/03/visual-editor-for-itween-motion-paths/" target="_blank">VISUAL ITWEEN PATH EDITOR</a>はアセットストアでは公開していないので、ウェブサイトからPackageファイルをダウンロードしプロジェクトに追加します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween1.png"><img class="alignnone size-full wp-image-342" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween1.png" alt="iTween1" width="1479" height="881" /></a></p>
+<p>どのオブジェクトでもいいので選択した状態でiTweenPathスクリプトをメニューから追加します。今回はカメラにスクリプトを追加しました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween2.png"><img class="alignnone size-full wp-image-343" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween2.png" alt="iTween2" width="1121" height="724" /></a></p>
+<p>インスペクターウィンドウでPath Nameを設定（&#8221;Path1&#8243;）。Node Countをスプライン曲線で利用したいノード数を指定。シーンビューでノードを移動させるとノードをつなぐようにスプライン曲線が作成されます。</p>
+<p>以上で準備は完了です。</p>
+<p>では作成したスプライン曲線に合わせてカメラを移動します。</p>
+<p>新しいC#スクリプトを作成し”MoveScriptOnSpline”とでも名づけます。下記のコードを入力します。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class MoveScriptOnSpline : MonoBehaviour {
+
+ public int time=100;
+ public string PathName="Path1";
+ // Use this for initialization
+ void Start () {
+ iTween.MoveTo (this.gameObject, iTween.Hash ("path", iTweenPath.GetPath (PathName), "time", time));
+ }
+}</pre><p>&nbsp;</p>
+<p>作成したMoveScriptOnSplineスクリプトをスプライン曲線に沿って移動させたいオブジェクトに追加します。今回はカメラを移動させたいのでカメラにスクリプトを追加します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween3.png"><img class="alignnone size-full wp-image-344" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween3.png" alt="iTween3" width="357" height="302" /></a></p>
+<p>Path Nameには作成したスプライン曲線の名前を指定します。</p>
+<p>以上で完成です。実行するとスプライン曲線に合わせてカメラがスムーズに移動します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween4.png"><img class="alignnone size-full wp-image-345" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween4.png" alt="iTween4" width="864" height="573" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>追記2015/01/31</p>
+<p>上記の例ではカメラは常に一定方向を向いたままになります。カメラの視点パスも同様に用意しカメラ視点がそのパスに追従する例を見て行きましょう。iTweenPathを2つ用意して、一つをカメラ移動用に、もう一つをカメラ視線先を移動するように利用します。</p>
+<p>CameraTargetというからオブジェクトを用意し、iTweenPathを作成します。そして、下記のコード（CameraTargetMoveScriptOnSpline）を作成し貼り付けます。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class CameraTargetMoveScriptOnSpline : MonoBehaviour {
+
+
+	public int time=100;
+	public string PathName="CameraTarget";
+	
+	void Start () {
+		iTween.MoveTo (this.gameObject, iTween.Hash ("path", iTweenPath.GetPath (PathName), "time", time));
+	}
+
+
+}</pre><p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween5.png"><img class="alignnone size-full wp-image-367" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween5.png" alt="iTween5" width="1100" height="853" /></a></p>
+<p>MainCameraにも同様にiTweenPathを作成し、下記のコード（CameraMoveScriptOnSpline_with_lookat）を作成し貼り付けます。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class CameraMoveScriptOnSpline_with_lookat : MonoBehaviour {
+
+
+	public int time=100;
+	public string PathName="Path1";
+	public GameObject targetObj;
+
+	void Start () {
+		iTween.MoveTo (this.gameObject, iTween.Hash ("path", iTweenPath.GetPath (PathName), "time", time));
+	}
+
+
+	void Update(){
+		this.gameObject.transform.LookAt (targetObj.transform);
+	}
+	
+}</pre><p>インスペクタービューでカメラ視点の対象をTargetに指定します。（ヒエラルキービューからCameraTargetをドラッグしてください）</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween6.png"><img class="alignnone size-full wp-image-368" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/iTween6.png" alt="iTween6" width="1100" height="853" /></a></p>
+<p>実行するとカメラの視点が移動しながらカメラ自身が移動するのも確認できると思います。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/viaual-itween-path-editor%e3%81%a7%e8%87%aa%e7%94%b1%e3%81%aa%e3%82%ab%e3%83%a1%e3%83%a9%e3%83%af%e3%83%bc%e3%82%af/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Mirror effectアセットで簡単に鏡を設置(Unity)</title>
+		<link>http://psychic-vr-lab.com/blog/unity/mirror-effect%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7%e7%b0%a1%e5%8d%98%e3%81%ab%e9%8f%a1%e3%82%92%e8%a8%ad%e7%bd%ae%e3%81%99%e3%82%8b/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/mirror-effect%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7%e7%b0%a1%e5%8d%98%e3%81%ab%e9%8f%a1%e3%82%92%e8%a8%ad%e7%bd%ae%e3%81%99%e3%82%8b/#comments</comments>
+		<pubDate>Thu, 08 Jan 2015 02:15:43 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=326</guid>
+		<description><![CDATA[from2001vrです。 Unityで鏡を用いて目の前のものを反射させて表示させるために簡単に利用できるアセットの紹介です。（あのアセットなんだっけなーってよく忘れる自分用のメモです。。） MirrorやReflect<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/mirror-effect%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7%e7%b0%a1%e5%8d%98%e3%81%ab%e9%8f%a1%e3%82%92%e8%a8%ad%e7%bd%ae%e3%81%99%e3%82%8b/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="https://twitter.com/from2001vr" target="_blank">from2001vr</a>です。</p>
+<p>Unityで鏡を用いて目の前のものを反射させて表示させるために簡単に利用できるアセットの紹介です。（あのアセットなんだっけなーってよく忘れる自分用のメモです。。）<br />
+MirrorやReflection系のアセットはいくつかアセットストアにありますし、Pro版の機能を使って実現することもできます。ただ機能が多かったり、利用方法が難しいかったりで、単純に綺麗な鏡を設置するだけには向いていないものも多いです。</p>
+<p>今回利用する<a href="https://www.assetstore.unity3d.com/en/#!/content/21780" target="_blank">Mirror effectアセット</a>は利用がすごく簡単なアセットです。まずは、購入して（15ドル）、インポートします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror1.png"><img class="alignnone size-full wp-image-327" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror1.png" alt="mirror1" width="820" height="629" /></a></p>
+<p><span id="more-326"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror2.png"><img class="alignnone size-full wp-image-328" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror2.png" alt="mirror2" width="1341" height="912" /></a></p>
+<p>Plugins/Mirror for Unity/Free/mirror をHierarchyビューにドラッグします。大きさは調整しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror3.png"><img class="alignnone size-full wp-image-329" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror3.png" alt="mirror3" width="1341" height="912" /></a></p>
+<p>ライト、鏡に表示したいオブジェクト追加します。</p>
+<p>Skyboxで空を表示する際には注意が必要です。現バージョンでは、通常のSkyboxでは空が鏡に表示されません。Mirror Effectが提供するSkyboxを利用する必要があります。次期バージョンでの改善を期待します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror4.png"><img class="alignnone size-full wp-image-330" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror4.png" alt="mirror4" width="1341" height="912" /></a></p>
+<p>実行すると先ほど設置したミラーにオブジェクトが反射して表示されてるのが確認できます。</p>
+<p>以上、すごく簡単でした。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror5.png"><img class="alignnone size-full wp-image-332" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/mirror5.png" alt="mirror5" width="906" height="751" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/mirror-effect%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7%e7%b0%a1%e5%8d%98%e3%81%ab%e9%8f%a1%e3%82%92%e8%a8%ad%e7%bd%ae%e3%81%99%e3%82%8b/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Unityから１フレームごと出力し高画質動画を作成する方法</title>
+		<link>http://psychic-vr-lab.com/blog/unity/unity%e3%81%8b%e3%82%89%ef%bc%91%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%81%94%e3%81%a8%e5%87%ba%e5%8a%9b%e3%81%97%e9%ab%98%e7%94%bb%e8%b3%aa%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/unity%e3%81%8b%e3%82%89%ef%bc%91%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%81%94%e3%81%a8%e5%87%ba%e5%8a%9b%e3%81%97%e9%ab%98%e7%94%bb%e8%b3%aa%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99/#comments</comments>
+		<pubDate>Fri, 26 Dec 2014 00:54:27 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=289</guid>
+		<description><![CDATA[こんばんはfrom2001vrです。 UnityのGameViewをオフライン(リアルタイム描画ではない)にて画面をキャプチャして動画を作成する方法です。遅いPCにて高画質の動画を作成することも可能です。 ユニティちゃん<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/unity%e3%81%8b%e3%82%89%ef%bc%91%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%81%94%e3%81%a8%e5%87%ba%e5%8a%9b%e3%81%97%e9%ab%98%e7%94%bb%e8%b3%aa%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>こんばんはfrom2001vrです。</p>
+<p>UnityのGameViewをオフライン(リアルタイム描画ではない)にて画面をキャプチャして動画を作成する方法です。遅いPCにて高画質の動画を作成することも可能です。</p>
+<p>ユニティちゃんライブCandy Rock Starを4K解像度で録画してみました。</p>
+<h2><a href="https://www.assetstore.unity3d.com/en/#!/content/9154" target="_blank">uRecord</a></h2>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-03.31.11-pm.png"><img class="alignnone size-full wp-image-294" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-03.31.11-pm.png" alt="2014-12-23 03.31.11 pm" width="795" height="383" /></a></p>
+<p>いくつかのアッセとを試してみて今回一番使いやすかったuRecordを利用して説明します。</p>
+<p><span id="more-289"></span></p>
+<p>AssetStoreでuRecordを購入しインポートします。メニューにuRecordが現れますので選択してuRecordを開きます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/11.png"><img class="alignnone size-full wp-image-304" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/11.png" alt="1" width="921" height="420" /></a></p>
+<p>まずはuRecordのオプションを設定します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/21.png"><img class="alignnone size-full wp-image-305" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/21.png" alt="2" width="516" height="279" /></a></p>
+<p>&nbsp;</p>
+<p>Capture Path：　キャプチャした画像が1フレームごとに保存されるフォルダを設定します。<br />
+Upscale Amount：　ここで指定した倍率で画像が引き伸ばされて保存されます。引き伸ばされた分画質が荒くなるだけですので1を指定しておきます。<br />
+Capture FrameRate：　1秒辺りにキャプチャする枚数を指定します。ここで大きな値を指定した場合、画面の描画が追いつかない場合がありますが、そういった場合でもコンピューターの速度に依存せず1フレーム1フレーム録画してくれます。</p>
+<p>設定を行うと、下記のメッセージが表示されます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/3.png"><img class="alignnone size-full wp-image-307" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/3.png" alt="3" width="748" height="243" /></a></p>
+<p>書いてあるインストラクションに従います。</p>
+<p>・録画したい画面サイズを /Project Settings/ Playerで設定する</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/3.5.png"><img class="alignnone size-full wp-image-306" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/3.5.png" alt="3.5" width="399" height="804" /></a></p>
+<p>・Game Viewの左上のドロップダウンメニューで画角を選択</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/5.png"><img class="alignnone size-full wp-image-309" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/5.png" alt="5" width="479" height="353" /></a></p>
+<p>&nbsp;</p>
+<p>・Resize the windows so that there is a border around the rendering area, as shown bellow, it must be fully sorounded.</p>
+<p>とありますが、これは、Game View画面をキャプチャしたいサイズより大きく表示しなさいということなんです。<br />
+実はここで問題があります。Unityの実行時、GmeViewを最大化しても、Unityアプリ自体の枠などがあり、モニタの解像度をフルで利用することができないんです。。。つまり4K解像度でキャプチャしようとすると、Unityアプリの枠も考慮して4Kより大きなモニタが必要なんです。。。そんな。。。</p>
+<p>そこで、Unityを下記のブログページを参考に4K強の解像度で実行します。私の場合は4000&#215;2500の解像度でMacからWindowsへ接続し、Unityを実行しました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/%E3%81%9D%E3%81%AE%E4%BB%96/%E6%8E%A5%E7%B6%9A%E3%83%A2%E3%83%8B%E3%82%BF%E3%82%88%E3%82%8A%E9%AB%98%E8%A7%A3%E5%83%8F%E5%BA%A6%E3%81%A7pc%E3%82%92%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B-2/" target="_blank"> 接続モニタより高解像度でPCを利用する &#8211; VRラボの殴り書き</a></p>
+<p>キャプチャしたいシーンを読み込んで、Game Viewの「Maximize on Play」をチェックしておきます。<a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/7.png"><img class="alignnone size-full wp-image-315" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/7.png" alt="7" width="687" height="187" /></a></p>
+<p>これで準備は完了です。uRecordの画面で「Play And Auto Record」を押してキャプチャを開始します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/4.png"><img class="alignnone size-full wp-image-308" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/4.png" alt="4" width="484" height="356" /></a></p>
+<p>キャプチャを開始すると、uRecordの画面が下記のように切り替わりますので、<br />
+・ビデオの作成<br />
+・キャプチャ画像の削除<br />
+のチェックを外しておきます。<br />
+この作業は後で音声の追加時に手動で行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/6.png"><img class="alignnone size-full wp-image-314" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/6.png" alt="6" width="484" height="356" /></a></p>
+<p>あとはキャプチャ終了までまちます。<br />
+私の環境では４分のユニティちゃんライブを4K解像度でキャプチャ完了するのに約２時間かかりました。<br />
+気長に待ちましょう。出力フォルダにキャプチャ画像が連番ファイルとして生成されます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/8.png"><img class="alignnone size-full wp-image-316" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/8.png" alt="8" width="1273" height="909" /></a></p>
+<p>&nbsp;</p>
+<h2>FFMpegで連番画像ファイルと音声ファイルを動画ファイルへ結合する</h2>
+<p>次に作成された連番ファイルを動画ファイルへ変換します。この際、Candy Rock Starのmp3ファイルから音楽も一緒に結合させましょう。</p>
+<p><a href="https://www.ffmpeg.org/">FFMpeg</a>をダウンロードし、任意のフォルダに解凍しておきます。（Windows版ビルドは<a href="http://ffmpeg.zeranoe.com/builds/" target="_blank">こちら</a>から）</p>
+<p>Unite In The Sky (full).mp3<br />
+をUnityのプロジェクトから連番画像と同じフォルダにコピーしておきましょう。</p>
+<p>下記のコマンドを用い、動画ファイルを生成します。<br />
+連番画像保存フォルダ：C:\temp\video<br />
+FFMpeg解凍フォルダ：C:\ffmpeg-20141224-git-3a2bed1-win32-static<br />
+の場合です。フォルダ名は適宜環境に合わせて変更してください。</p>
+<p>C:\temp\video&gt;C:\ffmpeg-20141224-git-3a2bed1-win32-static\bin\ffmpeg.exe -r 30 -start_number 60 -i %08dImage.png -i &#8220;Unite In The Sky (full).mp3&#8243; -q:a 0 -q:v 0 c:\temp\out.avi</p>
+<p>オプションの説明<br />
+-r 30<br />
+フレームレートを30に設定します。</p>
+<p>-start_number 60<br />
+連番ファイルを60から利用します。これは、Candy Rock Starシーンでは開始2秒後から曲の再生が始まるためです。</p>
+<p>-q:a 0 -q:v 0<br />
+オーディオ、画質ともに最高画質で変換する設定です。</p>
+<p>&nbsp;</p>
+<p>完成した動画ファイルは下記からダウンロード可能です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/4k30fps%E5%8B%95%E7%94%BB%EF%BC%88%E3%83%A6%E3%83%8B%E3%83%86%E3%82%A3%E3%81%A1%E3%82%83%E3%82%93-candy-rock-star-%E3%83%A9%E3%82%A4%E3%83%96%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8%EF%BC%89/" target="_blank">4k30fps動画（ユニティちゃん Candy Rock Star ライブステージ） &#8211; VRラボの殴り書き</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>その他のキャプチャアセット</h2>
+<h2><a href="https://www.assetstore.unity3d.com/en/#!/content/2670" target="_blank">AVPro Movie Capture</a></h2>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-03.29.44-pm.png"><img class="alignnone size-full wp-image-292" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-03.29.44-pm.png" alt="2014-12-23 03.29.44 pm" width="800" height="382" /></a></p>
+<p>スクリプトから呼び出して利用することが可能</p>
+<h2><a href="https://www.assetstore.unity3d.com/en/#!/content/15411" target="_blank">Capture Monster</a></h2>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-03.30.33-pm.png"><img class="alignnone size-full wp-image-293" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-03.30.33-pm.png" alt="2014-12-23 03.30.33 pm" width="800" height="384" /></a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/unity%e3%81%8b%e3%82%89%ef%bc%91%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%81%94%e3%81%a8%e5%87%ba%e5%8a%9b%e3%81%97%e9%ab%98%e7%94%bb%e8%b3%aa%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>4k30fps動画（ユニティちゃん Candy Rock Star ライブステージ）</title>
+		<link>http://psychic-vr-lab.com/blog/%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab/4k30fps%e5%8b%95%e7%94%bb%ef%bc%88%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93-candy-rock-star-%e3%83%a9%e3%82%a4%e3%83%96%e3%82%b9%e3%83%86%e3%83%bc%e3%82%b8%ef%bc%89/</link>
+		<comments>http://psychic-vr-lab.com/blog/%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab/4k30fps%e5%8b%95%e7%94%bb%ef%bc%88%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93-candy-rock-star-%e3%83%a9%e3%82%a4%e3%83%96%e3%82%b9%e3%83%86%e3%83%bc%e3%82%b8%ef%bc%89/#comments</comments>
+		<pubDate>Thu, 25 Dec 2014 04:44:36 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[サンプル]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=299</guid>
+		<description><![CDATA[著作権を気にせず自由に使えるいい感じの無料4K動画サンプルが見つからなかったので、UnityちゃんCandy Rock Star ライブステージを4K録画してみました。 高画質AVIファイルを下記からダウンロードできるよ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab/4k30fps%e5%8b%95%e7%94%bb%ef%bc%88%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93-candy-rock-star-%e3%83%a9%e3%82%a4%e3%83%96%e3%82%b9%e3%83%86%e3%83%bc%e3%82%b8%ef%bc%89/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>著作権を気にせず自由に使えるいい感じの無料4K動画サンプルが見つからなかったので、UnityちゃんCandy Rock Star ライブステージを4K録画してみました。</p>
+<p>高画質AVIファイルを下記からダウンロードできるようにしました。</p>
+<p>・ユニティちゃん Candy Rock Star ライブステージ4k動画<br />
+(3840x2160px, 30fps, AVI形式)<br />
+<a href="https://www.dropbox.com/s/zkj95vac2vfxuw0/CandyRockStar_4k30fps.avi?dl=1">CandyRockStar_4k30fps.avi</a> (3.32GB)</p>
+<p>この動画の作成方法はこちら<br />
+<a href="http://psychic-vr-lab.com/blog/unity/unity%E3%81%8B%E3%82%89%EF%BC%91%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%81%94%E3%81%A8%E5%87%BA%E5%8A%9B%E3%81%97%E9%AB%98%E7%94%BB%E8%B3%AA%E5%8B%95%E7%94%BB%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99/" target="_blank">Unityから１フレームごと出力し高画質動画を作成する方法 &#8211; VRラボの殴り書き</a></p>
+<p>↓クリックすると4K動画の1フレームが表示されます。縦3840横2160ピクセルの画像は1フレームでも6.5Mあります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/new_00002453Image.png" target="_blank"><img class="alignnone size-full wp-image-301" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/new_00002453Image.png" alt="new_00002453Image" width="3840" height="2160" /></a></p>
+<div><img class="aligncenter" src="http://unity-chan.com/images/imageLicenseLogo.png" alt="ユニティちゃんライセンス" /></p>
+<p style="text-align: center;">このコンテンツは、『<a href="http://unity-chan.com/contents/license_jp/" target="_blank">ユニティちゃんライセンス</a>』で提供されています</p>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab/4k30fps%e5%8b%95%e7%94%bb%ef%bc%88%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93-candy-rock-star-%e3%83%a9%e3%82%a4%e3%83%96%e3%82%b9%e3%83%86%e3%83%bc%e3%82%b8%ef%bc%89/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+<enclosure url="https://www.dropbox.com/s/zkj95vac2vfxuw0/CandyRockStar_4k30fps.avi?dl=1" length="0" type="video/avi" />
+		</item>
+		<item>
+		<title>接続モニタより高解像度でPCを利用する</title>
+		<link>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/</link>
+		<comments>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/#comments</comments>
+		<pubDate>Tue, 23 Dec 2014 05:29:36 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[その他]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=284</guid>
+		<description><![CDATA[from2001vrです。 アプリやWEBのスクリーンショットを大きな画面で撮りたいがPCに接続されているモニタの解像度が低いので大きなサイズのスクリーンショットを撮れないということがあります。私は今回4Kより大きな解像<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>from2001vrです。</p>
+<p>アプリやWEBのスクリーンショットを大きな画面で撮りたいがPCに接続されているモニタの解像度が低いので大きなサイズのスクリーンショットを撮れないということがあります。私は今回4Kより大きな解像度でスクリーンショットを取る必要があったのですが（正確にはUnityを4k＋α解像度で利用したかった）、手元にある一番大きなモニタが2560&#215;1440だったので困ってました。Windowsでは接続しているモニタより大きな解像度を選択することができません。</p>
+<p>今回、良い解決策を思いついたのでメモしておきます。</p>
+<p>方法は単純で、Microsoftのリモートデスクトップ接続を利用し、利用したいマシンに高い解像度で接続を行い利用するだけです。MicrosoftのRDPプロトコルは、VNCやTeam Viewerなどのリモートデスクトップソフトとは異なり、画面に表示された映像をリモートに転送するのではなく、リモートに接続されたゲストを接続されたモニタのように描画に利用するプロトコルです。ですので、接続元のホストPCの環境に依存せず、任意の解像度で利用することが可能です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-01.33.09-pm.png"><img class="alignnone size-full wp-image-280" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-01.33.09-pm.png" alt="2014-12-23 01.33.09 pm" width="1042" height="538" /></a></p>
+<p>&nbsp;</p>
+<p>まずは、ホストWindowsの設定を行います。Windows7,8ではPro版でしかホストになることができませんので注意が必要です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/1.png"><img class="alignnone size-full wp-image-281" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/1.png" alt="1" width="623" height="674" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2.png"><img class="alignnone size-full wp-image-282" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2.png" alt="2" width="494" height="442" /></a></p>
+<p>次のゲスト側の設定を行います。今回はゲストをMacで行ってみました。</p>
+<p>Mac App Storeから<a href="https://itunes.apple.com/jp/app/microsoft-remote-desktop/id715768417?mt=12" target="_blank">Microsoft Remote Desktop（無料）</a>をインストールし実行します。<br />
+Windowsの場合はスタートメニューから標準でインストールされているリモート デスクトップ接続を起動します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.16.07-pm.png"><img class="alignnone size-full wp-image-285" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.16.07-pm.png" alt="2014-12-23 02.16.07 pm" width="527" height="688" /></a></p>
+<p>ホストのIPアドレスなどの情報を指定し、接続先情報を作成します。ここで、Resolution(解像度)に利用したい解像度を設定します。もし、ここで大きな解像度を設定できない場合は適当な値を選択肢ます。</p>
+<p>作成した接続情報をエクスポートします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/Screen-Shot-2014-12-23-at-2.21.43-PM.png"><img class="alignnone size-full wp-image-286" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/Screen-Shot-2014-12-23-at-2.21.43-PM.png" alt="Screen Shot 2014-12-23 at 2.21.43 PM" width="513" height="316" /></a></p>
+<p>テキストエディタで開くと、内容を編集できるのでdesktopwidth及びdesktopheightを利用したい解像度の値に変更します。</p><pre class="crayon-plain-tag">screen mode id:i:2
+desktopwidth:i:640
+desktopheight:i:480
+use multimon:i:1
+session bpp:i:32
+full address:s:192.99.99.99
+audiomode:i:0
+username:s:
+disable wallpaper:i:0
+disable full window drag:i:0
+disable menu anims:i:0
+disable themes:i:0
+alternate shell:s:
+shell working directory:s:
+authentication level:i:2
+connect to console:i:0
+gatewayusagemethod:i:0
+disable cursor setting:i:0
+allow font smoothing:i:1
+allow desktop composition:i:1
+redirectprinters:i:0
+bookmarktype:i:3
+use redirection server name:i:0</pre><p>保存してダブルクリックすれば、設定した解像度でリモートデスクトップを利用できます。</p>
+<p>下記は4500&#215;2500の超高解像度でWindows上で動作するUnityをMacから接続している例です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.25.01-pm.png"><img class="alignnone size-full wp-image-287" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/12/2014-12-23-02.25.01-pm.png" alt="2014-12-23 02.25.01 pm" width="1920" height="1080" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e6%8e%a5%e7%b6%9a%e3%83%a2%e3%83%8b%e3%82%bf%e3%82%88%e3%82%8a%e9%ab%98%e8%a7%a3%e5%83%8f%e5%ba%a6%e3%81%a7pc%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b-2/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>360度カメラTHETAで撮った写真・動画をUnityで使う</title>
+		<link>http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/#comments</comments>
+		<pubDate>Tue, 18 Nov 2014 12:11:33 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Blender]]></category>
+		<category><![CDATA[Unity]]></category>
+		<category><![CDATA[360度カメラ]]></category>
+		<category><![CDATA[RICOH THETA m15]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=210</guid>
+		<description><![CDATA[from2001vrです。 先日、RICOHから発売された全天球撮影デバイスTHETA、早速買ってみました。デザインもかっこいいですね。 DMMが360度動画の配信を始めたり、Oculusを使って360度見回す環境が出て<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>from2001vrです。</p>
+<p>先日、RICOHから発売された全天球撮影デバイスTHETA、早速買ってみました。デザインもかっこいいですね。 <a href="http://www.dmm.com/digital/vr/" target="_blank">DMMが360度動画の配信</a>を始めたり、Oculusを使って360度見回す環境が出てきたこともあり、何かと最近360度カメラの話題をよく見るようになりました。</p>
+<p>発売元のRICOHよりiOS、Android用の<a href="https://developers.theta360.com/ja/" target="_blank">SDKが公開</a>されておりますが、Unityで利用するためのライブラリなどはまだ公開されていません。今回はTHETAで撮影した画像をUnityの中で利用してみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/THETA_RICOH.png"><img class="alignnone size-full wp-image-213" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/THETA_RICOH.png" alt="THETA_RICOH" width="800" height="1067" /></a></p>
+<p><span id="more-210"></span></p>
+<p>THETAで撮影された写真は下記のような通常のJPGデータになります。このデータの表示方法を工夫することにより360度見渡せるようになります。<a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/ThetaImage.jpg"><img class="alignnone size-full wp-image-214" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/ThetaImage.jpg" alt="ThetaImage" width="2048" height="1024" /></a></p>
+<p>内側にメッシュのある球を用意し、その中にTHETAで撮影した画像をテクスチャとしてはることで360度映像を実現します。</p>
+<p>まずは、BlenderでUV Sphereを作成します。サイズは少し大きめに作っておきましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta1.png"><img class="alignnone size-full wp-image-227" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta1.png" alt="Theta1" width="1770" height="1080" /></a></p>
+<p>メッシュをSmoothにしておきましょう。これをしないと貼り付けた画像にメッシュの四角がうつります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta2.png"><img class="alignnone size-full wp-image-228" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta2.png" alt="Theta2" width="1770" height="1080" /></a></p>
+<p>綺麗にUVマップを貼り付けるために、球の上下の極部分をUVテクスチャの貼り付け部分から除外しておきましょう。<br />
+極部分を面選択します。（上下両方の極を選択します。）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta4.png"><img class="alignnone size-full wp-image-223" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta4.png" alt="Theta4" width="1770" height="1080" /></a></p>
+<p>CTRL+Iショートカットで選択領域を反転させます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta5.png"><img class="alignnone size-full wp-image-224" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta5.png" alt="Theta5" width="1770" height="1080" /></a></p>
+<p>UV UnwrapをCylinder Projection形式で行います。この際、「Correct Aspect」と「Scale to Bounds」にチェックを入れておいてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta6.png"><img class="alignnone size-full wp-image-225" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta6.png" alt="Theta6" width="1770" height="1080" /></a></p>
+<p>ここまで出来たら、Blenderファイルを保存します。</p>
+<p>保存したBlenderファイルをUnityで読み込み、THETAで撮影した画像をテクスチャとして貼ってあげれば完成です。<br />
+画面が暗い場合はPoint Lightを設置して明るくしてあげましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta7.png"><img class="alignnone size-full wp-image-226" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta7.png" alt="Theta7" width="1770" height="1080" /></a></p>
+<p>Oculusカメラを設置してみるのもいいかと思います。</p>
+<p>また、Blenderで上記手順をやるのがめんどくさい人向けに、UnityのProjectファイルをアップしておきますので、360度画像だけ張り替えて利用してください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta360_blog.zip">360度画像用Unityプロジェクト（静止画用）</a></p>
+<p>&nbsp;</p>
+<p>THETAは動画撮影にも対応しているので、ムービングテクスチャとして貼り付けようとしたら、動画版はマッピングが違うのよね。リコーさん、なんでこの仕様なの。。。ということで動画版はまたあらためて作成して公開します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta_Movie.png"><img class="alignnone size-full wp-image-231" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Theta_Movie.png" alt="Theta_Movie" width="1748" height="919" /></a></p>
+<p>2014/11/22 追記</p>
+<p>動画の形式を変換できることを教えていただきました。ありがとうございます。</p>
+<blockquote class="twitter-tweet" lang="ja" data-conversation="none"><p><a href="https://twitter.com/from2001vr">@from2001vr</a> <a href="https://twitter.com/z_zabaglione">@z_zabaglione</a> 動画(MOV)の方はTHETAのWindowsビューワーにD&amp;Dすればステッチされたmp4が出力できます。</p>
+<p>— GOROman (@GOROman) <a href="https://twitter.com/GOROman/status/534863870666752001">2014, 11月 19</a></p></blockquote>
+<p><script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet" lang="ja" data-cards="hidden"><p>
+<a href="https://twitter.com/from2001vr">@from2001vr</a> さんの<a href="http://t.co/KVaD1mEX0m">http://t.co/KVaD1mEX0m</a> にTHETA m15の動画ファイルをセットして、MovieTexture用のスクリプトとOculusカメラをセットするだけで全天球動画完成♪ <a href="http://t.co/UtquJqNiKt">pic.twitter.com/UtquJqNiKt</a></p>
+<p>— ザバイオーネ (@z_zabaglione) <a href="https://twitter.com/z_zabaglione/status/535587299862388736">2014, 11月 21</a>
+</p></blockquote>
+<p><script src="//platform.twitter.com/widgets.js" async="" charset="utf-8"></script></p>
+<p>&nbsp;</p>
+<p>動画データの利用方法も紹介しておきたいと思います。</p>
+<p><a href="https://theta360.com/ja/support/download/" target="_blank">THETAのページ</a>よりパソコン用アプリケーションをダウンロードし、インストールします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img1.png"><img class="alignnone size-full wp-image-237" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img1.png" alt="img1" width="816" height="639" /></a></p>
+<p>THETAで撮影した動画ファイルをドラッグするとマッピングが変換されたMP4形式の動画ファイルが出来上がります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img2.png"><img class="alignnone size-full wp-image-238" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img2.png" alt="img2" width="434" height="350" /></a></p>
+<p>変換されたMP4ファイルをUnityのプロジェクトファイルにドラッグしてインポートします。<br />
+Unityで利用できる動画形式に変換されます。（要QuickTimeインストール）</p>
+<p>静止画の時と同様にMP4ファイルをテクスチャとして貼り付けてあげます。<br />
+また動画音声再生のため、空のAudio Sourceを球体に作成します。<br />
+なお、ムービーテクスチャはUnity Pro版のみの対応です。</p>
+<p>動画を再生するには、ムービーテクスチャをスクリプトから再生する必要があります。</p>
+<p>下記のC#スクリプトを作成し、球体にアタッチします。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class PlayMovieTexture : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		MovieTexture movieTexture = renderer.material.mainTexture as MovieTexture;
+		movieTexture.loop = true;
+		audio.clip = movieTexture.audioClip;
+		movieTexture.Play();
+		audio.Play();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}</pre><p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img.png"><img class="alignnone size-full wp-image-243" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/img.png" alt="img" width="1718" height="1080" /></a></p>
+<p>実行するとTHETAで撮った動画が再生されます。</p>
+<p>プロジェクトファイルアップしましたのでご利用ください。</p>
+<p><a href="https://www.dropbox.com/s/5b9tmsy2c8wvaba/Theta360_blog_movie.zip?dl=0" target="_blank">360度画像用Unityプロジェクト（動画用）</a></p>
+<p>追記　2014/11/23</p>
+<p>動画の音声の再生。動画のループ再生を追加しました。</p>
+<p>追記　2015/01/31</p>
+<p><a href="http://psychic-vr-lab.com/blog/unity/%E5%85%A8%E5%A4%A9%E7%90%83%E5%8B%95%E7%94%BB%E5%86%8D%E7%94%9F%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9/" target="_blank">全天球動画（外部mp4ファイル）再生環境の作り方-AVProアセット利用</a><br />
+も合わせて御覧ください。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="amazlet-box" style="margin-bottom: 0px;">
+<div class="amazlet-image" style="float: left; margin: 0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00F9VSJ7Q" target="_blank" name="amazletlink"><img style="border: none;" src="http://ecx.images-amazon.com/images/I/21JGSKybGyL._SL160_.jpg" alt="RICOH デジタルカメラ RICOH THETA 360°全天球イメージ撮影デバイス 0175760" /></a></div>
+<div class="amazlet-info" style="line-height: 120%; margin-bottom: 10px;">
+<div class="amazlet-name" style="margin-bottom: 10px; line-height: 120%;">
+<p><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00F9VSJ7Q" target="_blank" name="amazletlink">RICOH デジタルカメラ RICOH THETA 360°全天球イメージ撮影デバイス 0175760</a></p>
+<div class="amazlet-powered-date" style="font-size: 80%; margin-top: 5px; line-height: 120%;">posted with <a title="amazlet" href="http://www.amazlet.com/" target="_blank">amazlet</a> at 14.11.18</div>
+</div>
+<div class="amazlet-detail">リコー (2013-11-08)<br />
+売り上げランキング: 11,967</div>
+<div class="amazlet-sub-info" style="float: left;">
+<div class="amazlet-link" style="margin-top: 5px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00F9VSJ7Q" target="_blank" name="amazletlink">Amazon.co.jpで詳細を見る</a></div>
+</div>
+</div>
+<div class="amazlet-footer" style="clear: left;"></div>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/360%e5%ba%a6%e3%82%ab%e3%83%a1%e3%83%a9theta%e3%81%a7%e6%92%ae%e3%81%a3%e3%81%9f%e5%86%99%e7%9c%9f%e3%82%92unity%e3%81%a7%e4%bd%bf%e3%81%86/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Final IKアセットでキャラクターのぶら下げ方（Unity）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/#comments</comments>
+		<pubDate>Thu, 13 Nov 2014 09:54:36 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Leap motion]]></category>
+		<category><![CDATA[Unity]]></category>
+		<category><![CDATA[Asset]]></category>
+		<category><![CDATA[Final IK]]></category>
+		<category><![CDATA[Leapmotion]]></category>
+		<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[アセット]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=189</guid>
+		<description><![CDATA[今日はInverse Kinematics (IK)を使って、ユニティちゃんを上からぶら下げてみたいと思います。 &#160; Inverse Kinematics (IK)とは 引用元：Unityユーザーズガイド ジョ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>今日はInverse Kinematics (IK)を使って、ユニティちゃんを上からぶら下げてみたいと思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK9.png"><img class="alignnone size-full wp-image-198" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK9.png" alt="FinalIK9" width="1045" height="840" /></a></p>
+<p>&nbsp;</p>
+<blockquote><p>Inverse Kinematics (IK)とは<br />
+引用元：<a href="http://docs-jp.unity3d.com/Documentation/Manual/InverseKinematics.html">Unityユーザーズガイド</a></p>
+<p>ジョインのポージングを行うタスクを別の視点からとらえることが重要です。空間で特定の点を決めて、そこから逆算してジョイントの向きを、終了点がその位置に到着するような、有効な方法を見つけることです。オブジェクトをユーザにより選択された点をタッチさせる、または平らでない地面に足をつける、といったことをキャラクターにしてほしいときに、これは便利です。このアプローチは Inverse Kinematics (IK)と呼ばれ、メカニムで 正しく設定されたアバターのある ヒューマノイド キャラクターにおいてサポートされます。</p>
+<p>&nbsp;</p></blockquote>
+<p>Unity Proではスクリプトを使いIKを実現することができます。<br />
+<a href="http://docs-jp.unity3d.com/Documentation/Manual/InverseKinematics.html">インバースキネマティクス (Unity Proのみ) / Inverse Kinematics (Pro only)</a></p>
+<p>今回は<a href="http://u3d.as/content/root-motion/final-ik/6ec">Final IKアセット</a>を使って遊んでみましょう。</p>
+<p><span id="more-189"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK1.png"><img class="alignnone size-full wp-image-190" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK1.png" alt="Final IKアセット" width="814" height="431" /></a></p>
+<p>&nbsp;</p>
+<p>Final IKでどういったことができるかはこちらのデモビデオを見てみましょう。ワクワクします。</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/mNvtZCboy7w?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>&nbsp;</p>
+<p>Final IKを利用して実に様々なことを簡単に実現することができるのですが、今回はDemoシーンを改造して、Unityちゃんを上から吊るすことを実現してみたいと思います。</p>
+<p>_DEMOS &#8211; FBBIKフォルダ内のPendulumシーンを開いて実行してみましょう。お人形さんがぶら下がっている動きを確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK2.png"><img class="alignnone size-full wp-image-191" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK2.png" alt="FinalIK2" width="1351" height="983" /></a></p>
+<p>このサンプルは面白い実装をしていて、モデル本体の動きをぶら下げたラグドールの動きに追従させることで、ボクシングしながらぶら下がるアニメーションなどを実現しています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK3.png"><img class="alignnone size-full wp-image-192" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK3.png" alt="FinalIK3" width="230" height="333" /></a></p>
+<p>&nbsp;</p>
+<p>（ラグドールの一部をIs Kinematicで固定するという実装も試してみたのですが、力を加えると体が伸びたりしてしまいます。なにか解決方法あるのだろうか。。。）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK5.png"><img class="alignnone size-full wp-image-194" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK5.png" alt="FinalIK5" width="289" height="280" /></a></p>
+<p>今回は本体のモデルをUnityちゃんに置き換える方法でUnityちゃんを吊るしてみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK4.png"><img class="alignnone size-full wp-image-193" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK4.png" alt="FinalIK4" width="505" height="307" /></a></p>
+<p>&nbsp;</p>
+<p>Dummyモデルを削除し、unitychan_dynamicをインポートし、下記の画像のように設定を変更します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK6.png"><img class="alignnone size-full wp-image-195" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK6.png" alt="FinalIK6" width="1421" height="913" /></a></p>
+<p>実行するとユニティーちゃんがぶら下がるのが確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK7.png"><img class="alignnone size-full wp-image-196" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK7.png" alt="FinalIK7" width="285" height="284" /></a></p>
+<p>半透明のDummyを消すにはDummyRagdoll以下のDummyオブジェクトのSkinned Mesh Rendererのチェックを外しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK8.png"><img class="alignnone size-full wp-image-197" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/FinalIK8.png" alt="FinalIK8" width="1103" height="419" /></a></p>
+<p>Leap motionを使って触ってみましょう。</p>
+<p>&nbsp;</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/CzHTijGNyQM?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/final-ik%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88%e3%81%a7unity%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%90%8a%e3%82%8b%e3%81%97%e3%81%a6%e8%a7%a6%e3%82%8b/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>「見ろ、人がゴミのようだ」の作り方（RagDoll with Unity）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e3%80%8c%e8%a6%8b%e3%82%8d%e3%80%81%e4%ba%ba%e3%81%8c%e3%82%b4%e3%83%9f%e3%81%ae%e3%82%88%e3%81%86%e3%81%a0%e3%80%8d%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9%ef%bc%88ragdoll-with-unity%ef%bc%89/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e3%80%8c%e8%a6%8b%e3%82%8d%e3%80%81%e4%ba%ba%e3%81%8c%e3%82%b4%e3%83%9f%e3%81%ae%e3%82%88%e3%81%86%e3%81%a0%e3%80%8d%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9%ef%bc%88ragdoll-with-unity%ef%bc%89/#comments</comments>
+		<pubDate>Mon, 10 Nov 2014 01:14:18 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=172</guid>
+		<description><![CDATA[今日は「見ろ、人がゴミのようだ」をUnityで作ってみましょう。 RagDollを作って落ちてゆく人間の動きを再現します。 ラグドールとは（引用元：ニコニコ大百科） ゲーム内でキャラクターモデルは通常は各ゲーム内での役割<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e3%80%8c%e8%a6%8b%e3%82%8d%e3%80%81%e4%ba%ba%e3%81%8c%e3%82%b4%e3%83%9f%e3%81%ae%e3%82%88%e3%81%86%e3%81%a0%e3%80%8d%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9%ef%bc%88ragdoll-with-unity%ef%bc%89/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi1.png"><img class="alignnone size-full wp-image-173" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi1.png" alt="gomi1" width="1628" height="1281" /></a></p>
+<p>今日は「見ろ、人がゴミのようだ」をUnityで作ってみましょう。</p>
+<p>RagDollを作って落ちてゆく人間の動きを再現します。</p>
+<blockquote><p>ラグドールとは（引用元：<a href="http://dic.nicovideo.jp/a/%E3%83%A9%E3%82%B0%E3%83%89%E3%83%BC%E3%83%AB">ニコニコ大百科</a>）</p>
+<p>ゲーム内でキャラクターモデルは通常は各ゲーム内での役割に合わせてそのキャラクターの意思があるように関節等の動作をコントロールされているが、攻撃等により死亡して体の各部をコントロール出来なくなった時に、重力、運動エネルギー、回転モーメント等からそれらしい物理的な挙動を再現するのをラグドール処理という。ふっとばされたり、崩れ落ちたり、地面に横たわる遺体となった後にプレイヤーキャラクターに蹴飛ばされたりした時の挙動を担う。</p></blockquote>
+<p>&nbsp;</p>
+<p>まずは、空から落ちてゆく兵隊さんをインポートしましょう。Soldier Character Packは無料です。</p>
+<p><span id="more-172"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi2.png"><img class="alignnone size-full wp-image-176" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi2.png" alt="gomi2" width="983" height="552" /></a></p>
+<p>&nbsp;</p>
+<p>ヒエラルキービューにインポートしたsoldierをドラッグしシーンへ追加します。「soldierRagDoll」へ名前を変更しておきましょう。</p>
+<p>メニューバーの「GameObject」-「Create Other」からRadollを選択しラグドールウィザードを起動します。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi3.png"><img class="alignnone size-full wp-image-177" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi3.png" alt="gomi3" width="1583" height="1156" /></a></p>
+<p>&nbsp;</p>
+<p>ウィザードを使い、Soldierの各パーツをラグドールの部位と対応させていきます。下記を参考にして設定してください。ヒエラルキービューからのドラッグで設定することも可能です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi4.png"><img class="alignnone size-full wp-image-178" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi4.png" alt="gomi4" width="1227" height="889" /></a></p>
+<p>設定を完了したら「Create」をクリックします。正しく設定が完了しているとシーンビューでSoldierの表示に緑の枠が表示されると思います。ラグドールが正しく設定されています。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi5.png"><img class="alignnone size-full wp-image-179" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi5.png" alt="gomi5" width="583" height="677" /></a></p>
+<p>Soldierの下にPlaneを作って実行してみましょう。<br />
+重力に従っれSoldierが落下し、Planeに着地した瞬間に人形のように崩れ落ちるのを確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi7.png"><img class="alignnone size-full wp-image-180" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi7.png" alt="gomi7" width="1540" height="1114" /></a></p>
+<p>あとは兵隊さんをたくさんコピーして実行してみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi8.png"><img class="alignnone size-full wp-image-181" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/gomi8.png" alt="gomi8" width="1831" height="1065" /></a></p>
+<p>実行するとこんなかんじです。</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/woVQtdWgmIU?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>背景やテクスチャなどを貼ったらこんなかんじになります。</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/uUpbod0aE2k?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e3%80%8c%e8%a6%8b%e3%82%8d%e3%80%81%e4%ba%ba%e3%81%8c%e3%82%b4%e3%83%9f%e3%81%ae%e3%82%88%e3%81%86%e3%81%a0%e3%80%8d%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9%ef%bc%88ragdoll-with-unity%ef%bc%89/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>円柱の内側に繋ぎ目のないテクスチャを貼る（Unity+Blender）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/#comments</comments>
+		<pubDate>Sun, 09 Nov 2014 09:03:53 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Blender]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=142</guid>
+		<description><![CDATA[こんにちはfrom2001vrです。 3次元空間上の背景として円柱（Cylinder）や球（Sphere）の内側にテクスチャを貼り、その内側にカメラを置きたいというシナリオを実現します。最適なやり方を見つけるのに苦労した<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>こんにちはfrom2001vrです。</p>
+<p>3次元空間上の背景として円柱（Cylinder）や球（Sphere）の内側にテクスチャを貼り、その内側にカメラを置きたいというシナリオを実現します。最適なやり方を見つけるのに苦労したのでやり方を記録しておきます。Blender初めて使ったので苦労しました。。。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Preview.png"><img class="alignnone size-full wp-image-170" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Preview.png" alt="Preview" width="645" height="547" /></a></p>
+<p>まず、</p>
+<ul>
+<li>Unityで作るCylinderの内側にはテクスチャを貼れない</li>
+<li>Unityにはプリミティブを置く以外にモデルを手法が存在しない</li>
+<li>テクスチャは貼り方（Wrapping方法）を適切にしないと繋ぎ目がおかしくなる<br />
+凹凸のある3次元モデルにテキスチャを貼るためにはUVマッピングというものを使います。2次元のテクスチャを3次元に貼り付ける際にどのような配置で貼り付けるかを決めておく必要があります。</li>
+</ul>
+<blockquote><p>UVマッピングとは（<a href="http://www.dstorm.co.jp/dsproducts/lw9/tutorial/UVMapping01.html">参照元</a>）<br />
+UVマッピングは、平面の画像を不規則な形状のモデルに貼り付けるための方法です。 ご承知のとおり、オブジェクトに含まれるそれぞれの頂点は、X、Y、Zの空間座標を利用して決定されます。 UVマップではさらに、マップ上のどこへポイントを配置するかを決定するための、UとVの2つの座標を追加します。 これにより、あたかもポイントがそのテクスチャの位置に常に保持されているかのように、画像をオブジェクトに貼り付けることができます。</p></blockquote>
+<p>ということを理解した上で進んでいきましょう。</p>
+<p>今回はUnityだけでは実現することができないので、オープンソースの3Dモデリングソフトウェアの<a href="http://www.blender.org/">Blender</a>を利用します。</p>
+<p>では早速始めていきましょう。</p>
+<p><span id="more-142"></span></p>
+<p>まずは、ブレンダーを開き、Cylinderを追加します。この時にCap Fill TypeをNothingにして円柱の蓋を作成しないようにしましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder1.png"><img class="alignnone size-full wp-image-151" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder1.png" alt="Cylinder1" width="1395" height="998" /></a></p>
+<p>&nbsp;</p>
+<p>次に、見やすいように画面のレイアウトを変更しておきます。3Dビューの右上の角っこを引っ張って、そこにUV/Image Editorを表示しておきます。ここにはUV展開（UV Unwrap）されたメッシュが表示されます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder2.png"><img class="alignnone size-full wp-image-152" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder2.png" alt="Cylinder2" width="1395" height="998" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>今回、円柱の内側にテクスチャを貼りたいわけですが、普通に円柱を作成すると、メッシュが外側を向いて存在し、内側にはメッシュが存在しません。（円柱の内側にカメラを置くと、表面が透過して外が見える状況です。）<br />
+内側にテクスチャを貼るにはメッシュを外向きではなく内向きに扁壺すうる必要があります。</p>
+<p>モードを「Edit mode」に変更し、Aキーで全選択後、「Flip Direction」でメッシュの方向を内側に変更しましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder3.png"><img class="alignnone size-full wp-image-153" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder3.png" alt="Cylinder3" width="1395" height="998" /></a></p>
+<p>&nbsp;</p>
+<p>次に、円柱をUV展開します。（この処理を行わないとUnityにモデルをインポートした際にUnityがどこにどのようにテクスチャを貼っていいのかわからないためテクスチャを貼ることができません）<br />
+UV展開をうまく行わないとテクスチャを綺麗に貼ることができません。</p>
+<p>試行錯誤のすえ下記の方法にたどり着きました。</p>
+<p>まず円柱をUV展開する上での切り目（Seam）を決定します。（ここがキモ）<br />
+「辺選択モード」で円柱の高さ方向の線を右クリックし一つ選択します。<br />
+「Make Seam」をクリックし、選択した辺をSeamにします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder4.png"><img class="alignnone size-full wp-image-154" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder4.png" alt="Cylinder4" width="1395" height="998" /></a></p>
+<p>Unwrapをクリックし、円柱をUV展開します。下の画像のように円柱の側面が横一列に並んでいれば成功です。この展開方法ではテクスチャを並べた際に綺麗につなぎ目なく表示されます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder5.png"><img class="alignnone size-full wp-image-155" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder5.png" alt="Cylinder5" width="1395" height="998" /></a></p>
+<p>ここで作成した円柱を保存しましょう。（仮にCylinder.blendとして保存しましょう）</p>
+<p>&nbsp;</p>
+<p>では次に、貼り付けるテクスチャを作成しましょう。並べた時に繋ぎ目がないテクスチャを作成するソフトはいろいろありますが、今回は</p>
+<p><a href="http://www.stripegenerator.com/">Stripe Generator &#8211; ajax diagonal stripes background designer</a></p>
+<p>を利用てテストしてみましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Stripe.png"><img class="alignnone size-full wp-image-168" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Stripe.png" alt="Stripe" width="932" height="655" /></a></p>
+<p>設定を行い、ダウンロードをクリックすると画像ファイルがダウンロードできます。今回作成したファイルはこのような画像です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/stripe.png"><img class="alignnone size-full wp-image-169" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/stripe.png" alt="stripe" width="100" height="100" /></a></p>
+<p>&nbsp;</p>
+<p>作成した円柱のモデルファイルとテクスチャ画像ファイルをUnityにインポートします。ProjectビューのAssetsにドラッグすることでインポートできます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder7.png"><img class="alignnone size-full wp-image-157" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder7.png" alt="Cylinder7" width="1912" height="942" /></a></p>
+<p>&nbsp;</p>
+<p>次にヒエラルキービューにCylinderをドラッグしシーンに追加。Scaleを10にし、拡大しておきましょう。<br />
+そして、Inspectorビューにテクスチャをドラッグし追加します。Tilingの数字を変更することにより、敷き詰めるテクスチャの数を変えることができます。</p>
+<p>円柱の内側にテクスチャがつなぎ目なく表示されていることが確認できると思います。</p>
+<p>円柱は内側にしかメッシュが無いため、外側から円柱を見るとすけてみえます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder8.png"><img class="alignnone size-full wp-image-158" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Cylinder8.png" alt="Cylinder8" width="1914" height="793" /></a></p>
+<p>幾つかよく使う内側メッシュのモデルを予め用意しておけばテクスチャ自体はUnityで貼ることができるので便利だと思います。</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e5%86%86%e6%9f%b1%e3%81%ae%e5%86%85%e5%81%b4%e3%81%ab%e7%b9%8b%e3%81%8e%e7%9b%ae%e3%81%ae%e3%81%aa%e3%81%84%e3%83%86%e3%82%af%e3%82%b9%e3%83%81%e3%83%a3%e3%82%92%e8%b2%bc%e3%82%8b%ef%bc%88unityblend/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>デジタルで絵を描いてみた</title>
+		<link>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/</link>
+		<comments>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/#comments</comments>
+		<pubDate>Sat, 08 Nov 2014 09:04:54 +0000</pubDate>
+		<dc:creator><![CDATA[go05sato]]></dc:creator>
+				<category><![CDATA[その他]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=131</guid>
+		<description><![CDATA[こんにちは、ごーです。 ここ最近でOculusやKinect、LeapMotionなどのHMDやセンサーデバイスが比較的安価で一般の人でも容易に購入できるようになりましたね。 一昔前なら一部の研究者やかなりコアなエンジニ<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>こんにちは、ごーです。</p>
+<p>ここ最近でOculusやKinect、LeapMotionなどのHMDやセンサーデバイスが比較的安価で一般の人でも容易に購入できるようになりましたね。</p>
+<p>一昔前なら一部の研究者やかなりコアなエンジニアしか使えなかったようなものが手に入りやすくなったというのは素晴らしいことだと思います。</p>
+<p>私もOculusやKinectを使って「時代の進歩すげえ！」とか言いながら遊んでいるわけですが、今日は最先端のデバイスの紹介ではなく前からあったんだけど持って無かった、使ったことがなかったあるものを紹介します。</p>
+<p>&nbsp;</p>
+<p>これです↓</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/B156dhFCAAAW8Q8.jpg"><img class="alignnone size-medium wp-image-133" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/B156dhFCAAAW8Q8-300x225.jpg" alt="B156dhFCAAAW8Q8" width="300" height="225" /></a></p>
+<p>&nbsp;</p>
+<p>Wacomから出ているIntuos penという一番安いペンタブです。</p>
+<p>いままで何となく気になっていて、いつか買おうと思っていたのですが買わないで数年が経っていました。</p>
+<p>このたび周りの忙しい色々なことが一区切り着いたのでふと思い立ってAmazonで購入しました。</p>
+<p>&nbsp;</p>
+<p>これ、凄いです。</p>
+<p>いままで何か作る際に画像が必要になった時はイラレで簡単に図形組み合わて作ったり、フリー素材を使っていたんですけどこれがあれば思い描いたイメージをそのままアウトプットできます！素晴らしい！</p>
+<p>マウスじゃ実現できなかった紙に描いたようなタッチが実現できます。</p>
+<p>ちなみにドローイングソフトは「<a title="FireAlpaca" href="http://firealpaca.com/" target="_blank">FireAlpaca</a>」というものを使っています。</p>
+<p>MacでもWindowsでも使用できるフリーで使えるソフトです。</p>
+<p>&nbsp;</p>
+<p>1時間ほど手を動かしてみました。</p>
+<p>紙に描いてスマホのカメラで取り込んだこの絵が↓</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/IMG_2694.jpg"><img class="alignnone size-medium wp-image-135" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/IMG_2694-225x300.jpg" alt="IMG_2694" width="225" height="300" /></a></p>
+<p>&nbsp;</p>
+<p>ペンタブの力によって</p>
+<p>こうなります↓</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/シモン_1.jpg"><img class="alignnone size-medium wp-image-136" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/シモン_1-225x300.jpg" alt="シモン_1" width="225" height="300" /></a></p>
+<p>&nbsp;</p>
+<p>今回かかった費用</p>
+<p>ペンタブ(¥6,697) + ソフト(¥0) + 絵を描きたいという気持ち(¥0)</p>
+<p>つまりペンタブ代しかかかっていないのです！しかも1万円もかからない。</p>
+<p>これからはこんな素材がほしいな〜ってなったら自分で作りたいと思います。</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/%e3%81%9d%e3%81%ae%e4%bb%96/%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a7%e7%b5%b5%e3%82%92%e6%8f%8f%e3%81%84%e3%81%a6%e3%81%bf%e3%81%9f/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>バイノーラルサウンドで後ろの正面だーれだ(Unityアセット)</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e3%83%90%e3%82%a4%e3%83%8e%e3%83%bc%e3%83%a9%e3%83%ab%e3%82%b5%e3%82%a6%e3%83%b3%e3%83%89%e3%81%a7%e5%be%8c%e3%82%8d%e3%81%ae%e6%ad%a3%e9%9d%a2%e3%81%a0%e3%83%bc%e3%82%8c%e3%81%a0unity%e3%82%a2/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e3%83%90%e3%82%a4%e3%83%8e%e3%83%bc%e3%83%a9%e3%83%ab%e3%82%b5%e3%82%a6%e3%83%b3%e3%83%89%e3%81%a7%e5%be%8c%e3%82%8d%e3%81%ae%e6%ad%a3%e9%9d%a2%e3%81%a0%e3%83%bc%e3%82%8c%e3%81%a0unity%e3%82%a2/#comments</comments>
+		<pubDate>Fri, 07 Nov 2014 03:16:25 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=120</guid>
+		<description><![CDATA[バイノーラル録音技術というものがあります。ヘッドフォンやイヤフォンなどだけで、前後も含めた360度の音源の移動を再現することが出来る技術です。 &#160; バイノーラル録音 (引用元：Wikipedia) バイノーラル<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e3%83%90%e3%82%a4%e3%83%8e%e3%83%bc%e3%83%a9%e3%83%ab%e3%82%b5%e3%82%a6%e3%83%b3%e3%83%89%e3%81%a7%e5%be%8c%e3%82%8d%e3%81%ae%e6%ad%a3%e9%9d%a2%e3%81%a0%e3%83%bc%e3%82%8c%e3%81%a0unity%e3%82%a2/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>バイノーラル録音技術というものがあります。ヘッドフォンやイヤフォンなどだけで、前後も含めた360度の音源の移動を再現することが出来る技術です。</p>
+<p>&nbsp;</p>
+<blockquote><p>バイノーラル録音 (引用元：<a href="http://ja.wikipedia.org/wiki/%E3%83%90%E3%82%A4%E3%83%8E%E3%83%BC%E3%83%A9%E3%83%AB%E9%8C%B2%E9%9F%B3">Wikipedia</a>)</p>
+<p>バイノーラル録音（バイノーラルろくおん、 英語: Binaural recording）とはステレオ録音方式の一つで、人間の頭部の音響効果を再現するダミー・ヘッドやシミュレータなどを利用して、鼓膜に届く状態で音を記録することで、ステレオ・ヘッドフォンないしイヤフォン等で聴取すると、あたかもその場に居合わせたかのような臨場感を再現できる、という方式である。</p>
+<p>人間が音を聞くときには音源から左右の耳に直接届く音波だけでなく自分自身の耳たぶや体の各部によって複雑に回折・反射した音波も合わせて聞いていて、それらによって音源の位置などを知覚していると考えられる。これらの音波をすべてそのまま記録したものを左右の耳にステレオ・ヘッドフォンで聞かせれば、録音時と同じ音場を感じられるというのがバイノーラル録音の原理である。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/260px-Dummyhead.jpg"><img class="alignnone size-full wp-image-123" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/260px-Dummyhead.jpg" alt="260px-Dummyhead" width="260" height="173" /></a></p></blockquote>
+<p>UnityではSpatial Audioというアセットが販売されていて簡単にバイノーラルサウンドを実現することができます。<br />
+<a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Audio1.png"><img class="alignnone size-full wp-image-121" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Audio1.png" alt="Audio1" width="822" height="466" /></a></p>
+<p><span id="more-120"></span></p>
+<p>Unity Asset Storeでプラグインを購入しSpatialAudioDemoシーンを開いてみましょう。25ドルです。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Audio2.png"><img class="alignnone size-full wp-image-124" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Audio2.png" alt="Audio2" width="1211" height="746" /></a></p>
+<p>&nbsp;</p>
+<p>実行すると音源が中央に設置されたAudio Listenerの周りをくるくると回り出します。ヘッドフォンで聞くと音源が自分の周りを回っていることを体験できると思います。</p>
+<p>使い方は簡単で</p>
+<ul>
+<li>音源（Audio Sourceオブジェクト）にSpatialAudioSourceスクリプトを</li>
+<li>カメラなどAudio ListenerががあるオブジェクトにSpatialAudioListenerスクリプトを</li>
+</ul>
+<p>アタッチするだけです。</p>
+<p>あとは音源を動かせば、Spatial Audioプラグインが音をバイノーラルに変換して再生してくれますよ。</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Audio3.png"><img class="alignnone size-full wp-image-125" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/Audio3.png" alt="Audio3" width="972" height="669" /></a></p>
+<p>&nbsp;</p>
+<p>Oculusで360度見渡せる環境ができるようになったので、音源も360度対応することでより臨場感をもったものを作ることができるはずです。</p>
+<p>みなさん是非試してみてください。</p>
+<p>&nbsp;</p>
+<p><!--more--></p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e3%83%90%e3%82%a4%e3%83%8e%e3%83%bc%e3%83%a9%e3%83%ab%e3%82%b5%e3%82%a6%e3%83%b3%e3%83%89%e3%81%a7%e5%be%8c%e3%82%8d%e3%81%ae%e6%ad%a3%e9%9d%a2%e3%81%a0%e3%83%bc%e3%82%8c%e3%81%a0unity%e3%82%a2/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>あなただけのために見つめて歌ってくれるユニティちゃんCandy Rock Starライブの作り方 with Oculus</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/#comments</comments>
+		<pubDate>Thu, 06 Nov 2014 05:07:20 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Oculus]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=96</guid>
+		<description><![CDATA[ユニティちゃんのLiveプロジェクトが公開され、さわって遊んでUnityの楽しさを更に味わえるようになりました。 また、このLive 『Candy Rock Star』のデータを利用した動画・ゲームなどのコンテストが開催<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ.png"><img class="alignnone size-full wp-image-110" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ.png" alt="あなただけ" width="1121" height="650" /></a></p>
+<p>ユニティちゃんのLiveプロジェクトが公開され、さわって遊んでUnityの楽しさを更に味わえるようになりました。</p>
+<p>また、このLive 『Candy Rock Star』のデータを利用した動画・ゲームなどのコンテストが開催されています。</p>
+<p>特設サイトはこちら：　<a href="http://unity-chan.com/contents/event/director-cup/">ユニティちゃんディレクター杯｜UNITY-CHAN DIRECTOR CUP</a></p>
+<p><span id="more-96"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live1.png"><img class="alignnone size-full wp-image-97" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live1.png" alt="live1" width="1179" height="282" /></a></p>
+<p>&nbsp;</p>
+<p>さて、このLive、かなり迫力のあるプロジェクトなのですが、Oculusを使ってライブ会場の臨場感を味わいながら、ユニティちゃんがあなただけを見つめて歌ってくれるように改造してみましょう。しかも、あなたはステージ最前列かぶりつきでユニティちゃんを独占しちゃいます。</p>
+<p>参考にさせていただいたサイト。ありがとうございます。</p>
+<ul>
+<li><a href="http://tsubakit1.hateblo.jp/entry/2014/11/05/235140">ユニティちゃんライブ公開！とりあえず役立ちそうな情報とか、入手方法とかまとめてる：テラシュールブログ</a></li>
+<li><a href="http://dvorak.hatenablog.com/entry/2014/08/24/230302">Unityでキャラクターに見つめてもらう：銀の弾丸、はじめました</a></li>
+<li><a href="http://blogs.unity3d.com/2009/07/10/just-looking-around/">JUST LOOKING AROUND</a></li>
+</ul>
+<p>&nbsp;</p>
+<p>まずは、<a href="http://unity-chan.com/download/guideline.html">Unity-Chan公式サイトのダウンロードページから</a>『Candy Rock Star』のプロジェクトファイルをダウンロードしましょう。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live2.png"><img class="alignnone size-full wp-image-98" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live2.png" alt="live2" width="1022" height="729" /></a></p>
+<p>続いて、必要プラグインをダウンロードしてインポートしておきます。<br />
+必要なプラグインは下記の2つ。</p>
+<ul>
+<li><a href="https://developer.oculusvr.com/">Oculus SDK &#8211; Unity 4 Integration</a> (要アカウントログイン)</li>
+<li><a href="https://www.assetstore.unity3d.com/jp/#!/content/4">Head Look Controllerアセット(無料)</a></li>
+</ul>
+<p>&nbsp;</p>
+<p>これから修正を加える概要はこんなかんじです。</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live12.png"><img class="alignnone size-full wp-image-109" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live12.png" alt="live12" width="1897" height="776" /></a></p>
+<p>プロジェクトを開いて、Mainシーンを読み込んでもらえればわかるのですが、ヒエラルキービューにはユニティちゃんもステージも表示されません。これは、スクリプトから動的に各プレハブをインスタンス化しているためです。各オブジェクトを編集するためにはプレハブを編集し、変更をプレハブに適用する必要があります。（この概念がわかるとあとはスムーズに行くと思います）</p>
+<p>ユニティちゃんのプレハブ「CandyRockStar」を編集するために、新しいシーンを作成し、<br />
+プロジェクトビュー内の「Assets」-「UnityChan」-「Prefab」内のCandyRockStarをヒエラルキービューにドラッグします。<br />
+仮にこのシーンは「TempScene1」とでも名付け保存しておいてください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live4.png"><img class="alignnone size-full wp-image-100" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live4.png" alt="live4" width="1305" height="941" /></a></p>
+<p>&nbsp;</p>
+<p>では、CandyRockStarプレハブに修正を加えていきましょう。<br />
+まずは、ユニティちゃんの視点の先を変更するスクリプトをアタッチします。<br />
+ヒエラルキービュー内の「CandyRockStar」に対して、「Assets」-「Head Look Controller」-「Scripts」内の&#8217;Head Look Controller&#8217;スクリプトをアタッチし、下記を参考にプロパティの設定を行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live5.png"><img class="alignnone size-full wp-image-101" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live5.png" alt="live5" width="946" height="957" /></a></p>
+<p>次に、ユニティちゃんが見つめる先のターゲットを追加し、スクリプトをアタッチします。</p>
+<p>ヒエラルキービューでSphereを追加し、「Assets」-「Head Look Controller」-「Scripts」内の&#8217;CusorHitr&#8217;スクリプトをアタッチし、下記を参考にプロパティの設定を行います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live6.png"><img class="alignnone size-full wp-image-102" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live6.png" alt="live6" width="1346" height="757" /></a></p>
+<p>プロパティの設定が終わったら先ほど追加したSphereの名前を「LookupTarget」に変更してCandyRockStarの子オブジェクトになるように移動しましょう。これで、このLookupTargetはCandyRockStarプレハブの一部になります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live7.png"><img class="alignnone size-full wp-image-103" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live7.png" alt="live7" width="340" height="253" /></a></p>
+<p>&nbsp;</p>
+<p>実行して、SceneビューでLookup Targetを移動してみましょう。ユニティちゃんが踊りながらターゲットの方に顔を向けることを確認できると思います。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live9.png"><img class="alignnone size-full wp-image-105" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live9.png" alt="live9" width="555" height="356" /></a></p>
+<p>では、この変更がMainシーンにも反映されるようにしましょう。</p>
+<p>ヒエラルキービューでCandyRockStarを選択した状態で「GameObject」メニュー内の「Apply Changes To Prefab」を選択し、プレハブへの変更を適用します。これで、このプレハブを呼び出す全てのシーンにこのプレハブの変更が反映されるようになります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live8.png"><img class="alignnone size-full wp-image-104" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live8.png" alt="live8" width="451" height="427" /></a></p>
+<p>&nbsp;</p>
+<p>続いて、Oculusの設定に移ります。</p>
+<p>「Assets」-「Scenes」内のMainシーンを開きましょう。このシーンにはほとんど何も含まれていませんが、実行するとスクリプトから各プレハブがインスタンス化され表示されます。</p>
+<p>ヒエラルキービューにOculusカメラを追加しましょう。「Assets」-「OVR」-「Prefabs」内の&#8217;OVRCameraController&#8217;をヒエラルキービューにドラッグします。<br />
+追加後、下記を参考にプロパティを設定します。これだけでOculusでの利用が可能になります。</p>
+<p>&nbsp;</p>
+<p>追記2014/11/06<br />
+Oculus SDK 0.4.3からOVRCameraControllerの名称がOVRCameraRigに変更になりました。SDK 0.4.3以降を利用している方は読み替えてください。<br />
+ようてん<a href="https://twitter.com/youten_redo">@youten_redo</a> さんご指摘ありがとうございました。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live10.png"><img class="alignnone size-full wp-image-106" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live10.png" alt="live10" width="1346" height="828" /></a></p>
+<p>続いて、CandyRockStarに追加した視点の先「LookupTarget」の座標をOculusカメラの位置に移動するようにしましょう。<br />
+新しいスクリプトを作成しUpdate()関数内で座標の移動を行います。LookupTargetの座標はプレハブ内でユニティちゃんに対して相対的に設定されているためユニティちゃんが動くとそれに合わせてLookupTargetの位置も移動してしまいます。ですのでStart()内ではなくUpdate()関数内で毎回座標を変更してあげるようにしましょう。</p>
+<p>新しいC#スクリプトを「UpdateLookupTarget」という名前で作成します。作成したらOVRCameraControllerにアタッチします。</p>
+<p>&nbsp;</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live11.png"><img class="alignnone size-full wp-image-107" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/live11.png" alt="live11" width="1141" height="905" /></a></p>
+<p>UpdateLookupTargetスクリプトをダブルクリックし下記のように変更します。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+
+public class UpdateLookupTarget : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+		GameObject.Find ("LookupTarget").transform.position = transform.position;
+
+	}
+}</pre><p>&nbsp;</p>
+<p>これで完成。ユニティちゃんがずっとあなたを見つめ、あなただけのために歌ってくれます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ２.png"><img class="alignnone size-full wp-image-111" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/あなただけ２.png" alt="あなただけ２" width="1127" height="653" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div><img src="http://unity-chan.com/images/imageLicenseLogo.png" alt="ユニティちゃんライセンス" />このコンテンツは、『<a href="http://unity-chan.com/download/license.html" target="_blank">ユニティちゃんライセンス</a>』で提供されています</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93candy-rock-star-live-with-oculus/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

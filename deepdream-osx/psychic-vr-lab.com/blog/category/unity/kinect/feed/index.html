@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Psychic VRラボの殴り書き &#187; Kinect</title>
+	<atom:link href="http://psychic-vr-lab.com/blog/category/unity/kinect/feed/" rel="self" type="application/rss+xml" />
+	<link>http://psychic-vr-lab.com/blog</link>
+	<description>Unity, Oculus rift, Leap motion, Kinect技術メモ</description>
+	<lastBuildDate>Fri, 03 Jul 2015 00:39:36 +0000</lastBuildDate>
+	<language>ja</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1.5</generator>
+	<item>
+		<title>Kinect v2でスケルトン情報をオーバーレイ表示する方法(Unity)</title>
+		<link>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/#comments</comments>
+		<pubDate>Mon, 30 Mar 2015 13:51:34 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Kinect]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=412</guid>
+		<description><![CDATA[Unity上で、Kinect v2カメラを使って取得したカラー映像に、スケルトン（骨格情報）を重ねて表示する方法を紹介します。使いまわしやすいUnity用コードがネット上に見つからなかったので作成したので公開しておきます<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/002.gif"><img class="alignnone size-full wp-image-436" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/002.gif" alt="002" width="1500" height="1000" /></a></p>
+<p>Unity上で、Kinect v2カメラを使って取得したカラー映像に、スケルトン（骨格情報）を重ねて表示する方法を紹介します。使いまわしやすいUnity用コードがネット上に見つからなかったので作成したので公開しておきます。</p>
+<p>Kinect v2 with MS-SDKアセットには何かと便利な機能が揃っているので、このアセットをベースに開発を行うことにします。ただし、スケルトンをオーバーレイ表示する機能が存在しないため、その部分だけ自作して利用することにしました。</p>
+<p><span id="more-412"></span></p>
+<p><img class="alignnone size-full wp-image-413" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect.jpg" alt="kinect" width="600" height="450" /></p>
+<p>まずは、<a href="https://www.assetstore.unity3d.com/en/#!/content/18708" target="_blank">Kinect v2 with MS-SDKアセット（20ドル）</a>を購入しインポートします。</p>
+<p>スケルトンを描画する用のスクリプトを用意しましたので、新規にc#スクリプトを作成しコピペします。スクリプト名をKinectSkeletonOverlay_Psychic.csとしておきましょう。</p><pre class="crayon-plain-tag">using UnityEngine;
+using System.Collections;
+using System;
+using System.Collections.Generic;
+using Windows.Kinect;
+
+public class KinectSkeletonOverlay_Psychic : MonoBehaviour {
+
+    public GUITexture displayGui;      //スケルトン表示用
+
+    private Texture2D displayTexture;
+    private KinectInterop.BodyData bodyData;
+    private KinectInterop.SensorData sensorData = null;
+    private KinectSensor _sensor;
+
+
+	// Use this for initialization
+	void Start () {
+        _sensor = KinectSensor.GetDefault();
+        displayTexture = new Texture2D(1920,1080);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+        //Kinectマネージャーのインスタンスを取得
+        KinectManager manager = KinectManager.Instance;
+
+        //カラーマップ取得（カメラ撮影のカラー画像）
+        if (displayGui &amp;&amp; (displayGui.texture == null))
+        {
+            displayTexture = manager.GetUsersClrTex();
+        }
+
+        //センサーデータをDrawSkeleton2関数内で利用できるように取得しておく
+        sensorData = manager.GetSensorData();
+        //人数分ループ
+        for (int i = 0; i &lt; manager.GetUsersCount(); i++)
+        {
+            bodyData = manager.GetUserBodyData(manager.GetUserIdByIndex(i)); 
+            DrawSkeleton2(displayTexture, ref bodyData);
+            displayTexture.Apply();
+        }
+        displayGui.texture = displayTexture;
+	}
+
+
+    //指定のテクスチャにスケルトンを追加描画
+    private void DrawSkeleton2(Texture2D aTexture, ref KinectInterop.BodyData bodyData)
+    {
+     
+        //関節でループ
+        int jointsCount = sensorData.jointCount;
+        for (int i = 0; i &lt; jointsCount; i++)
+        {
+            int parent = (int)sensorData.sensorInterface.GetParentJoint((KinectInterop.JointType)i);
+
+            if (bodyData.joint[i].trackingState != KinectInterop.TrackingState.NotTracked &amp;&amp;
+               bodyData.joint[parent].trackingState != KinectInterop.TrackingState.NotTracked)
+            {
+
+                //3次元座標をカラーマップ座標に変換
+                //CamraSpacePointはメートル座標
+                //ColorSpacePointはカラーマップ(フルHD)座標
+                CameraSpacePoint posParent_cameraSpace = new CameraSpacePoint();
+                posParent_cameraSpace.X = bodyData.joint[parent].kinectPos.x;
+                posParent_cameraSpace.Y = bodyData.joint[parent].kinectPos.y;
+                posParent_cameraSpace.Z = bodyData.joint[parent].kinectPos.z;
+                ColorSpacePoint posParent_colorPoint = _sensor.CoordinateMapper.MapCameraPointToColorSpace(posParent_cameraSpace);
+                Vector2 posParent = new Vector2(posParent_colorPoint.X, posParent_colorPoint.Y);
+
+                CameraSpacePoint posJoint_cameraSpace = new CameraSpacePoint();
+                posJoint_cameraSpace.X = bodyData.joint[i].kinectPos.x;
+                posJoint_cameraSpace.Y = bodyData.joint[i].kinectPos.y;
+                posJoint_cameraSpace.Z = bodyData.joint[i].kinectPos.z;
+                ColorSpacePoint posJoint_colorPoint = _sensor.CoordinateMapper.MapCameraPointToColorSpace(posJoint_cameraSpace);
+                Vector2 posJoint = new Vector2(posJoint_colorPoint.X, posJoint_colorPoint.Y);
+
+
+                if (posParent != Vector2.zero &amp;&amp; posJoint != Vector2.zero)
+                {
+                    //関節情報が飛んでる場合には骨を描画せず
+                    if (float.IsInfinity(posParent.x)) { break; }
+                    if (float.IsInfinity(posParent.y)) { break; }
+                    if (float.IsInfinity(posJoint.x))  { break; }
+                    if (float.IsInfinity(posJoint.y))  { break; }
+
+                    //KinectInteropに用意されている機能を使い骨を描画
+                    KinectInterop.DrawLine(aTexture, (int)posParent.x, (int)posParent.y, (int)posJoint.x, (int)posJoint.y, Color.yellow);
+                }
+            }
+        }
+    }
+}</pre><p>余談ですが、Kinect v2 with MS-SDKアセットにはDrawSkeletonという関数が用意されています。この関数は良く出来ていて、Depth情報を元に人以外の背景を切り抜いてくれたりするんですが、Depth情報を元にしているため画角が512&#215;424サイズのテクスチャとしてしか取得できなかったり、背景切り抜きをオフに出来なかったりと、少し使い勝手が悪かったりします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect1.png"><img class="alignnone size-full wp-image-415" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect1.png" alt="kinect1" width="184" height="177" /></a></p>
+<p>メモ</p>
+<p>bodyData.joint[i].kinectPos.xで取得できる座標はメートル単位のデータなので、これをカラーマップ座標系（1920&#215;1080）に変換する必要がある。<br />
+変換に必要なMapCameraPointToColorSpace関数はKinect v2 with MS-SDKアセット内でラッパー関数が用意されていないので<br />
+using Windows.Kinect;でKinectのSDKを呼び出し<br />
+private KinectSensor _sensor;<br />
+_sensor = KinectSensor.GetDefault();<br />
+_sensor.CoordinateMapper.MapCameraPointToColorSpace()として利用する必要あり<br />
+このあたりの処理をきっちりやらないとボーンが実際の映像とずれたりします。</p>
+<p>続いて、下記を参考にシーンの準備をします。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i1.png"><img class="alignnone size-full wp-image-416" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i1.png" alt="kinect-i1" width="866" height="984" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i2.png"><img class="alignnone size-full wp-image-417" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i2.png" alt="kinect-i2" width="865" height="265" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i3.png"><img class="alignnone size-full wp-image-418" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i3.png" alt="kinect-i3" width="869" height="364" /></a></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i4.png"><img class="alignnone size-full wp-image-419" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect-i4.png" alt="kinect-i4" width="866" height="468" /></a></p>
+<p>&nbsp;</p>
+<p>実行するとこんな感じでカラーマップ（カラー映像）にスケルトンのボーンがオーバーレイ描画されます。<br />
+（散らかった部屋と、タイマー撮影の方法がわからず左手でPrintScreenを押してるのはご愛嬌）</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect2.png"><img class="alignnone size-full wp-image-420" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect2.png" alt="kinect2" width="1120" height="941" /></a></p>
+<p>・KinectSkeletonOverlay_Psychic.cs<br />
+・テスト用のシーン<br />
+・各種必要GameObject及び設定<br />
+をまとめたPackageを作成しておきましたので公開しておきます。<br />
+「Kinect v2withMS-SDKアセット」は含みませんので「Kinect v2withMS-SDKアセット」をインポートした後に下記パッケージをインポートして実行してください。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg"><img class="alignnone  wp-image-382" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/01/UnityIcon.jpg" alt="UnityIcon" width="24" height="16" /></a><a href="https://www.dropbox.com/sh/tfrxxzh1nyfi1ma/AACvVq379JH3v_9daYNfj6r9a?dl=1" target="_blank">KinectV2SkeletonOverlay.unitypackage</a></p>
+<p>&nbsp;</p>
+<p>ついでに、Kinect v2withMS-SDKを利用して、スケルトンの3次元情報をそのままUnityの3D空間で利用する際のハマりどころの解説をしておきます。</p>
+<p>Kinect v2withMS-SDKアセットは<a href="http://psychic-vr-lab.com/blog/unity/%E7%B6%9Akinect-v2%E3%81%A7%E3%83%A6%E3%83%8B%E3%83%86%E3%82%A3%E3%81%A1%E3%82%83%E3%82%93%E3%82%92%E5%8B%95%E3%81%8B%E3%81%99%EF%BC%88kinect-v2withms-sdk%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88/" target="_blank">[続]Kinect v2でユニティちゃんを動かす</a>で紹介したように、Kinectで取得した骨格情報をMechanimで利用することが簡単にできます。この機能は良く出来過ぎていて、下記の機能が実装されています。ホネホネ人間はCubemanといいます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect3.png"><img class="alignnone size-full wp-image-422" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect3.png" alt="kinect3" width="864" height="623" /></a></p>
+<p>これは、非常に便利で有意義な機能なのですが、Kinectが取得した3次元情報をそのまま利用せずに、人体を認識した瞬間の場所をoffset情報として相対的な座標計算に用いています。1人分の情報しか利用しない場合はいいのですが、ふたり以上の人物の情報を同時に扱う場合はには、二人の各関節の場所が絶対座標ではなく、offsetを元に相対的な座標であるため問題が発生します。具体的には二人が手を合わせてたとしても、それぞれ別のoffsetが聞いていて、Cubemanの手が合いません。</p>
+<p>CubemanController.csの163行目のoffset処理している箇所をコメントアウトすることでこの問題を回避することが可能です。</p><pre class="crayon-plain-tag">//CubemanController.cs
+//163行目
+//transform.position = initialPosOffset + (verticalMovement ? posPointMan : new Vector3(posPointMan.x, 0, posPointMan.z));
+transform.position =  (verticalMovement ? posPointMan : new Vector3(posPointMan.x, 0, posPointMan.z));</pre><p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect4.png"><img class="alignnone size-full wp-image-423" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2015/03/kinect4.png" alt="kinect4" width="512" height="389" /></a></p>
+<p>仲良く二人分のCubemanを表示することができるようになりました。</p>
+<p>ただし、この処理をはずすことで、Kinectカメラの高さがCubemanの垂直方向の位置に影響をおよぼすようになるため、足が地面にめり込んだり宙に浮いたりするようになりますので、調整が必要になります。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/kinect-v2%e3%81%a7%e3%82%b9%e3%82%b1%e3%83%ab%e3%83%88%e3%83%b3%e6%83%85%e5%a0%b1%e3%82%92%e3%82%aa%e3%83%bc%e3%83%90%e3%83%bc%e3%83%ac%e3%82%a4%e8%a1%a8%e7%a4%baunity/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>[続]Kinect v2でユニティちゃんを動かす（Kinect v2withMS-SDKアセット）</title>
+		<link>http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/</link>
+		<comments>http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/#comments</comments>
+		<pubDate>Sun, 02 Nov 2014 09:49:11 +0000</pubDate>
+		<dc:creator><![CDATA[from2001]]></dc:creator>
+				<category><![CDATA[Kinect]]></category>
+		<category><![CDATA[Unity]]></category>
+
+		<guid isPermaLink="false">http://psychic-vr-lab.com/blog/?p=58</guid>
+		<description><![CDATA[Kinect v2 withMS-SDKが大幅にバージョンアップし、Kinect v2で取得したモーションを簡単に人型モデルにアプライ出来るようになりました。ものすごく簡単です。 Kinect v2 withMS-SDK<span class="ellipsis">&#8230;</span><div class="read-more"><a href="http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/">続きを読む &#8250;</a></div><!-- end of .read-more -->]]></description>
+				<content:encoded><![CDATA[<p>Kinect v2 withMS-SDKが大幅にバージョンアップし、Kinect v2で取得したモーションを簡単に人型モデルにアプライ出来るようになりました。ものすごく簡単です。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/A1.png"><img class="alignnone size-full wp-image-59" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/A1.png" alt="A1" width="1911" height="877" /></a></p>
+<p>Kinect v2 withMS-SDKをアセットストアからインポートします。無料です。</p>
+<p><span id="more-58"></span></p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a2.png"><img class="alignnone size-full wp-image-60" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a2.png" alt="a2" width="819" height="427" /></a></p>
+<p>「Assets」-「AvatarsDemo」内のKinectAvatarsDemoシーンを開きます。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a3.png"><img class="alignnone size-full wp-image-61" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a3.png" alt="a3" width="1174" height="928" /></a></p>
+<p>実行してみましょう。骨人間（CubeMan）とモーションのアプライされたアバターが動きます。感動！！</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a4.png"><img class="alignnone size-full wp-image-62" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/a4.png" alt="a4" width="862" height="682" /></a></p>
+<p>では、次にこの動きをユニティーちゃんに適用してみます。<br />
+ユニティーちゃんモデルをプロジェクトにインポートします。<br />
+「KinectScripts」内のAvatarControllarを適用します。</p>
+<p>AnimatorのControllerがNoneに設定してください。ここにコントローラーが設定されていると動作しません。<br />
+Vertical Movementにチェックが入っていると縦方向の動きも適用でき、ジャンプできるようになります。</p>
+<p><a href="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/s5.png"><img class="alignnone size-full wp-image-63" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/s5.png" alt="s5" width="1381" height="982" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>ユニティーちゃんを180度回転させて完成！！簡単です。</p>
+<p><img class="alignnone size-full wp-image-64" src="http://psychic-vr-lab.com/blog/wp-content/uploads/2014/11/s6.png" alt="s6" width="1063" height="637" /></p>
+<p>&nbsp;</p>
+<p>キャラクターを追加して、背景も変更してみるとこんな感じ。</p>
+<p>ユニティーちゃんとニコニコ立体ちゃんです。40代のオッサンがおどってもこんなにかわいくなるよ。</p>
+<p>&nbsp;</p>
+<p><span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='605' height='371' src='http://www.youtube.com/embed/VdkQCWYWyaM?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://psychic-vr-lab.com/blog/unity/%e7%b6%9akinect-v2%e3%81%a7%e3%83%a6%e3%83%8b%e3%83%86%e3%82%a3%e3%81%a1%e3%82%83%e3%82%93%e3%82%92%e5%8b%95%e3%81%8b%e3%81%99%ef%bc%88kinect-v2withms-sdk%e3%82%a2%e3%82%bb%e3%83%83%e3%83%88/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
