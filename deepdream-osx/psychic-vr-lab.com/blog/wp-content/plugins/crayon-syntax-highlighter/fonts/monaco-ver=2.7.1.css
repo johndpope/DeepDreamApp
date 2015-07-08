@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'MonacoRegular';
-    src: url('monaco/monaco-webfont.eot');
-    src: url('monaco/monaco-webfont-.eot#iefix') format('embedded-opentype'),
-         url('monaco/monaco-webfont.woff') format('woff'),
-         url('monaco/monaco-webfont.ttf') format('truetype'),
-         url('monaco/monaco-webfont.svg#MonacoRegular') format('svg');
+    src: url('http://psychic-vr-lab.com/blog/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco/monaco-webfont.eot');
+    src: url('http://psychic-vr-lab.com/blog/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco/monaco-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://psychic-vr-lab.com/blog/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco/monaco-webfont.woff') format('woff'),
+         url('http://psychic-vr-lab.com/blog/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco/monaco-webfont.ttf') format('truetype'),
+         url('http://psychic-vr-lab.com/blog/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco/monaco-webfont.svg#MonacoRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }

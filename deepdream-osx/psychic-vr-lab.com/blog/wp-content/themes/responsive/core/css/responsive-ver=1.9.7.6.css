@@ -206,12 +206,12 @@
 		width: 23px;
 		height: 30px;
 		margin-left: -30px;
-		background: url("../images/select-icons.png") 0 5px no-repeat;
+		background: url("http://psychic-vr-lab.com/blog/wp-content/themes/responsive/core/images/select-icons.png") 0 5px no-repeat;
 		cursor: pointer;
 	}
 
 	.js .main-nav a#responsive_menu_button.responsive-toggle-open {
-		background: url("../images/select-icons.png") 0 -46px no-repeat;
+		background: url("http://psychic-vr-lab.com/blog/wp-content/themes/responsive/core/images/select-icons.png") 0 -46px no-repeat;
 	}
 
 	.top-menu,
