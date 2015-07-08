@@ -265,7 +265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$1 = $pwd\n\nINDEX=`ls -1 $1 | sed \"s/^.*/      <li\\>\\<a\\ href=\\\"&\\\"\\>&\\<\\\\/a\\>\\<\\\\/li\\>/\"`\necho \"<html>\n<head><title>Index of $1</title></head>\n<body>\n<h2>Index of $1</h2>\n<hr>\n<ui>\n$INDEX\n<ui>\n</body>\n</html>\"";
+			shellScript = "#! /bin/sh\n# Filename: imggallery.sh\n# Version: 0.1\n# Date: Thu Feb  12 21:21:28 PST 2009\n# Author: Ian MacGregor (aka ardchoille)\n# License: GPL\n# This script creates a web gallery from specified images\n\necho \"<html>\" > index.html\necho \"<head>\" >> index.html\necho \"<title>My Images</title>\" >> index.html\necho \"</head>\" >> index.html\necho \"<body>\" >> index.html\necho \"<h1> My Images</h1>\" >> index.html\n\nfor img in $PWD/\\*.png ; do\necho $img\nconvert -scale 120 $img thumb-$img\nmogrify -scale 640 $img\necho \"<a href=\\\"$img\\\"><img src=\\\"$img\\\"></a>\" >> index.html\ndone\n\necho \"</body>\" >>index.html\necho \"</html>\" >>index.html\n";
 		};
 		70BD687218FFB1A300A1EFCF /* Copy www directory */ = {
 			isa = PBXShellScriptBuildPhase;
