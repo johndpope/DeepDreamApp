@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'journalregular';
-    src: url('http://psychic-vr-lab.com/blog/wp-content/plugins/add-to-feedly/fonts/journal-webfont.eot');
-    src: url('http://psychic-vr-lab.com/blog/wp-content/plugins/add-to-feedly/fonts/journal-webfont.eot?#iefix') format('embedded-opentype'),
-         url('http://psychic-vr-lab.com/blog/wp-content/plugins/add-to-feedly/fonts/journal-webfont.woff') format('woff'),
-         url('http://psychic-vr-lab.com/blog/wp-content/plugins/add-to-feedly/fonts/journal-webfont.ttf') format('truetype'),
-         url('http://psychic-vr-lab.com/blog/wp-content/plugins/add-to-feedly/fonts/journal-webfont.svg#journalregular') format('svg');
+    src: url('fonts/journal-webfont.eot');
+    src: url('fonts/journal-webfont-.eot#iefix') format('embedded-opentype'),
+         url('fonts/journal-webfont.woff') format('woff'),
+         url('fonts/journal-webfont.ttf') format('truetype'),
+         url('fonts/journal-webfont.svg#journalregular') format('svg');
     font-weight: normal;
     font-style: normal;
 

@@ -180,6 +180,7 @@
 			buildConfigurationList = 70BD685418FFB02D00A1EFCF /* Build configuration list for PBXNativeTarget "deepdream-osx" */;
 			buildPhases = (
 				70BD687218FFB1A300A1EFCF /* Copy www directory */,
+				487E79A21B4DD4FD00589C8D /* ShellScript */,
 				70BD681F18FFB02D00A1EFCF /* Sources */,
 				70BD682018FFB02D00A1EFCF /* Frameworks */,
 				70BD682118FFB02D00A1EFCF /* Resources */,
@@ -253,6 +254,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		487E79A21B4DD4FD00589C8D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$1 = $pwd\n\nINDEX=`ls -1 $1 | sed \"s/^.*/      <li\\>\\<a\\ href=\\\"&\\\"\\>&\\<\\\\/a\\>\\<\\\\/li\\>/\"`\necho \"<html>\n<head><title>Index of $1</title></head>\n<body>\n<h2>Index of $1</h2>\n<hr>\n<ui>\n$INDEX\n<ui>\n</body>\n</html>\"";
+		};
 		70BD687218FFB1A300A1EFCF /* Copy www directory */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
